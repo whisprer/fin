@@ -1,0 +1,118 @@
+// src/engine.rs
+
+use crate::tokenizer::PrimeTokenizer;
+use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+use crate::entropy::shannon_entropy;
+
+use std::fs;
+use std::path::Path;
+use std::io;
+
+/// Represents a processed document in the engine's index.
+struct IndexedDocument {
+    title: String,
+    text: String,
+    vector: PrimeVector,
+    entropy: f64,
+}
+
+/// Represents a search result with scoring details and a snippet.
+pub struct SearchResult {
+    pub title: String,
+    pub resonance: f64,
+    pub delta_entropy: f64,
+    pub score: f64,
+    pub snippet: String,
+}
+
+/// The main search engine struct that manages documents and performs searches.
+pub struct ResonantEngine {
+    tokenizer: PrimeTokenizer,
+    docs: Vec<IndexedDocument>,
+    entropy_weight: f64, // Weight for the entropy difference in the score
+}
+
+impl ResonantEngine {
+    /// Creates a new `ResonantEngine`.
+    pub fn new() -> Self {
+        ResonantEngine {
+            tokenizer: PrimeTokenizer::new(),
+            docs: Vec::new(),
+            entropy_weight: 0.1, // Default weight based on the Python code
+        }
+    }
+
+    /// Adds a single document to the engine's index.
+    fn add_document(&mut self, title: String, text: String) {
+        let tokens = self.tokenizer.tokenize(&text);
+        let vec = build_vector(&tokens);
+        let entropy = shannon_entropy(&tokens);
+
+        self.docs.push(IndexedDocument {
+            title,
+            text,
+            vector: vec,
+            entropy,
+        });
+    }
+
+    /// Loads and indexes all .txt files from a directory.
+    /// Returns a Result indicating success or an I/O error.
+    pub fn load_directory<P: AsRef<Path>>(&mut self, folder: P) -> io::Result<()> {
+        for entry in fs::read_dir(folder)? {
+            let entry = entry?;
+            let path = entry.path();
+
+            if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("txt") {
+                let text = fs::read_to_string(&path)?;
+                let title = path.file_stem()
+                                .and_then(|s| s.to_str())
+                                .unwrap_or("unknown")
+                                .to_string();
+
+                self.add_document(title, text);
+            }
+        }
+        Ok(())
+    }
+
+    /// Performs a search query against the indexed documents.
+    /// Returns a vector of `SearchResult`s, sorted by score in descending order.
+    pub fn search(&mut self, query: &str, top_k: usize) -> Vec<SearchResult> {
+        let query_tokens = self.tokenizer.tokenize(query);
+        let query_vec = build_vector(&query_tokens);
+        let query_entropy = shannon_entropy(&query_tokens);
+
+        let mut results: Vec<SearchResult> = self.docs.iter().map(|doc| {
+            let resonance = dot_product(&query_vec, &doc.vector);
+            let delta_entropy = (doc.entropy - query_entropy).abs();
+            let score = resonance - delta_entropy * self.entropy_weight; // Score calculation
+
+            // Generate snippet
+            // Take up to 200 characters to avoid indexing issues with chars() and then trim
+            let snippet_chars: String = doc.text.chars().take(200).collect();
+            let snippet = snippet_chars.trim().replace('\n', " ") + "..."; // Corrected replace
+
+            SearchResult {
+                title: doc.title.clone(),
+                resonance,
+                delta_entropy,
+                score,
+                snippet,
+            }
+        }).collect();
+
+        // Sort results by score in descending order
+        results.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
+
+        // Return top_k results
+        results.into_iter().take(top_k).collect()
+    }
+
+    // Method to set the entropy weight, if needed
+    pub fn set_entropy_weight(&mut self, weight: f64) {
+        self.entropy_weight = weight;
+    }
+}
+
+// Note: In a real project, you would add tests here.

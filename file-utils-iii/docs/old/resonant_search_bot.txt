@@ -1,0 +1,6 @@
+APP_ID: 1367506398459723856
+
+TOKEN: 835de7e2823e39a2e6ef4fd5bee0837d9f0fd8aa3ed412570f61663f3b9006cc
+
+
+You should now be able to copy these into the correct files in your project directory (resonant_search_bot), run cargo build, set up your environment variables (DISCORD_TOKEN, RESONANT_DATA_DIR), invite the bot, and run the executable! Good luck, husklyfren!

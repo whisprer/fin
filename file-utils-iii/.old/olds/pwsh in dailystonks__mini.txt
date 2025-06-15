@@ -1,0 +1,225 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+ phine  d:
+ D:\  cd code/repos/github_desktop/dilaystonks_mini/
+cd : Cannot find path 'D:\code\repos\github_desktop\dilaystonks_mini\' because it does not exist.
+At line:1 char:1
++ cd code/repos/github_desktop/dilaystonks_mini/
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\code\repos\g...laystonks_mini\:String) [Set-Location], ItemNotFoundE
+   xception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+
+ D:\  cd code/repos/github_desktop/
+ github_desktop  /dailystonks_stonks/
+/dailystonks_stonks/ : The term '/dailystonks_stonks/' is not recognized as the name of a cmdlet, function, script
+file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct
+and try again.
+At line:1 char:1
++ /dailystonks_stonks/
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (/dailystonks_stonks/:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  dailystonks_stonks/
+dailystonks_stonks/ : The term 'dailystonks_stonks/' is not recognized as the name of a cmdlet, function, script file,
+or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and
+try again.
+At line:1 char:1
++ dailystonks_stonks/
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dailystonks_stonks/:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  dailystonks_mini/
+dailystonks_mini/ : The term 'dailystonks_mini/' is not recognized as the name of a cmdlet, function, script file, or
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ dailystonks_mini/
++ ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dailystonks_mini/:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  dir
+
+
+    Directory: D:\code\repos\github_desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        25/03/2025     07:44                -GotGirl_frontend-nextjs
+d-----        24/03/2025     01:50                -GotGirl_nft_marketplace
+dar---        26/03/2025     02:34                ai_compare-or-compere
+dar---        24/03/2025     05:34                amphichiral_cas_compact
+dar---        15/04/2025     14:23                analoglogic.blog
+dar---        12/04/2025     23:03                analog_NAND_sim
+dar---        24/03/2025     05:34                ascencion
+dar---        24/03/2025     05:33                a_book_i_started_writing
+dar---        24/03/2025     05:33                a_screenplay_upon_loss
+dar---        24/03/2025     05:33                a_way_to_augment_ai
+dar---        12/04/2025     22:45                bernoulli_discrepancy_spotter
+dar---        26/03/2025     02:34                bifurcating_fun-ooooooooh
+dar---        26/03/2025     02:34                binary_entropy_predictor
+dar---        25/03/2025     02:06                blackhattery_iii
+dar---        04/04/2025     14:45                btc_reports
+dar---        26/03/2025     06:22                caca
+dar---        23/04/2025     13:36                CFS9K
+dar---        26/03/2025     02:34                computrons_-_how_they_work
+dar---        26/03/2025     02:34                conway-s_game_of_life
+dar---        26/03/2025     02:34                conway-s_music_of_life
+dar---        25/03/2025     18:13                Custom_Stock_Screener
+d-----        03/05/2025     23:10                DailyStonks__mini
+dar---        03/05/2025     15:16                daily_stonk_market_report
+dar---        03/05/2025     11:29                Daytrading_Notes_and_Writitngs
+dar---        26/03/2025     02:34                dnm_esplained_finally
+dar---        04/04/2025     14:46                fonts
+dar---        26/03/2025     02:34                frequency_analyzer_plugin
+dar---        26/03/2025     02:34                frogKlan
+dar---        24/03/2025     05:34                g-petey
+dar---        26/03/2025     02:34                general_gpt_writings
+dar---        17/04/2025     18:23                GhostMode_Vanisher
+dar---        26/03/2025     02:34                glyph_lang_patch_system
+dar---        26/03/2025     02:34                hi-speed_stream_processing_for_ai_mini_devices
+dar---        02/04/2025     05:11                i-m_in_your_browser_and_it-s_not_safe
+dar---        26/03/2025     02:34                Investment_and_Algorithmic_Trading_Notebooks
+dar---        26/03/2025     02:34                it-s_not_my_brain
+dar---        26/03/2025     02:34                i_rly_want_this_to_work_more_than_anything
+dar---        23/04/2025     13:35                kdp
+dar---        24/03/2025     05:34                Lenia
+dar---        26/03/2025     06:37                lobsterpot
+d-----        26/03/2025     02:34                lookyloo
+dar---        26/03/2025     02:34                mag_oub
+dar---        26/03/2025     02:34                math_fucker
+dar---        27/04/2025     12:01                math_text_book_for_ai_learners
+dar---        26/03/2025     02:35                mayan_calendar
+dar---        01/04/2025     09:05                Medium-Posts
+dar---        26/03/2025     02:31                melody_finder
+dar---        17/04/2025     17:43                my_arts
+dar---        26/03/2025     02:31                my_empyrion_gretest_works
+dar---        26/03/2025     02:31                my_white_paper
+dar---        26/03/2025     02:31                nat_nums
+d-----        28/04/2025     02:03                naughty_discorb_bot
+dar---        26/03/2025     02:32                nn_visual
+dar---        26/03/2025     02:32                once_n_for_all_documented
+d-----        01/04/2025     12:38                out_of_focus_deblur
+dar---        27/04/2025     12:29                pacman
+dar---        26/03/2025     02:32                PadBuster
+dar---        26/03/2025     02:32                patentable_LLM_idea
+dar---        26/03/2025     02:32                petey-sim
+dar---        26/03/2025     02:32                primes_compare
+d-----        02/05/2025     12:01                proc-wolf
+dar---        26/03/2025     02:32                reading
+d-----        01/05/2025     15:14                resonant_search
+dar---        26/03/2025     02:32                reversing_differential_encryption
+d-----        01/04/2025     12:15                RNG
+d-----        24/03/2025     01:51                RTClib
+dar---        26/03/2025     02:32                rusty_socjaw
+dar---        26/03/2025     02:32                simple_life
+d-----        03/05/2025     19:52                snaeksy_cli_mails
+dar---        26/04/2025     19:16                spong
+dar---        26/03/2025     02:32                swarm_sockjaw
+dar---        02/04/2025     03:53                the_bakup
+dar---        26/03/2025     02:32                the_elusive_laura_project
+dar---        26/03/2025     02:32                trigrams
+dar---        12/04/2025     18:46                type-heed
+d-----        16/04/2025     18:03                unexpected_whitehattery
+dar---        17/04/2025     17:39                universal
+dar---        26/03/2025     02:33                universal_rng_lib
+d-----        02/05/2025     12:08                useful_github_things
+dar---        26/03/2025     02:33                viewbot_supreme
+d-----        28/04/2025     02:00                webhook_thief_of_discbad
+d-----        27/04/2025     12:49                webspooder
+dar---        15/04/2025     06:33                whisprer
+dar---        12/04/2025     18:49                wofl-s_blackhattery_stash
+dar---        24/03/2025     05:34                wofl-s_markov_bot
+d-----        15/04/2025     19:10                woflang2
+dar---        26/03/2025     06:46                woflchess
+dar---        26/03/2025     02:34                woflcrypt
+dar---        17/04/2025     17:27                woflcryptultimate
+dar---        24/03/2025     05:34                woflparse
+dar---        04/04/2025     14:45                wordlist.rb
+dar---        24/03/2025     05:33                yfinance_guide_and_sample_code
+dar---        02/04/2025     07:10                you_didn-t_get_it_from_me
+-a----        19/04/2025     23:00           7168 CC0_LICENSE.md
+-a----        02/05/2025     12:00           2404 HYBRID_LICENCE.md
+-a----        27/04/2025     12:55           1137 MIT_LICENCE.md
+-a----        17/04/2025     18:38           3131 whisprer.md
+-a----        15/04/2025     18:51     1031519182 woflang2.zip
+
+
+ github_desktop  dailystonbks__mini
+dailystonbks__mini : The term 'dailystonbks__mini' is not recognized as the name of a cmdlet, function, script file,
+or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and
+try again.
+At line:1 char:1
++ dailystonbks__mini
++ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dailystonbks__mini:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  dailystonks__mini
+dailystonks__mini : The term 'dailystonks__mini' is not recognized as the name of a cmdlet, function, script file, or
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ dailystonks__mini
++ ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dailystonks__mini:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  cd dailystonks__mini
+ dailystonks__mini  dir
+
+
+    Directory: D:\code\repos\github_desktop\dailystonks__mini
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        03/05/2025     22:26                build
+d-----        03/05/2025     22:26                docs
+d-----        03/05/2025     22:26                src
+d-----        03/05/2025     22:26                temp
+-a----        03/05/2025     22:25             66 .gitattributes
+-a----        03/05/2025     22:25           3238 .gitignore
+-a----        03/05/2025     22:46           2502 DailyStonks_mini.py
+-a----        03/05/2025     23:10          12612 DailyStonks_mini_fin.py
+-a----        03/05/2025     22:45           2507 err_code.py1
+-a----        03/05/2025     22:25           1086 LICENSE
+-a----        03/05/2025     22:25             68 README.md
+-a----        03/05/2025     22:56            890 READMEadd.md
+-a----        03/05/2025     22:47             67 usage_examples.ps1
+
+
+ dailystonks__mini  cd dailystonks__mini
+cd : Cannot find path 'D:\code\repos\github_desktop\dailystonks__mini\dailystonks__mini' because it does not exist.
+At line:1 char:1
++ cd dailystonks__mini
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\code\repos\g...ilystonks__mini:String) [Set-Location], ItemNotFoundE
+   xception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+
+ dailystonks__mini  python stonkplot.py AAPL
+C:\Program Files\Python312\python.exe: can't open file 'D:\\code\\repos\\github_desktop\\dailystonks__mini\\stonkplot.py': [Errno 2] No such file or directory
+ dailystonks__mini  python dailystonks_mini.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\dailystonks_mini.py", line 70, in <module>
+    script_path.write_text(script_code)
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1047, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '\\mnt\\data\\stonkplot.py'
+ dailystonks__mini  ^C
+ dailystonks__mini  ^C
+ dailystonks__mini  ^C
+ dailystonks__mini  ^C
+ phine   dailystonks__mini  main ≢  ?5                                                 in pwsh at 23:16:52

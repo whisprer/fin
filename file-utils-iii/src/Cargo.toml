@@ -1,0 +1,21 @@
+[package]
+name = "resonant_search"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+regex = "1.9.6"
+primal = "0.3.1"
+scraper = "0.17.1"
+reqwest = { version = "0.12", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+url = "2.5.0"
+futures = "0.3.30"
+nalgebra = "0.32.3"
+num-complex = "0.4.4"
+rand = "0.8.5"
+flate2 = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+csv = "1.2"
+ctrlc = "3.4"

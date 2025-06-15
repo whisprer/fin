@@ -4,11 +4,11 @@
 
 param(
     [string]$SourceDir = ".",
-    [string]$OutputDir = ".\dist",
-    [string]$IconPath = ".\proc-wolf.ico",
+    [string]$OutputDir = ".\file-utils-ii",
+    [string]$IconPath = ".\file-utils-ii.ico",
     [string]$Version = "3.0.0.0",
-    [string]$Company = "RYO Modular",
-    [string]$Product = "proc-wolf Process Monitor",
+    [string]$Company = "whispr",
+    [string]$Product = "file-utils-ii Process Monitor",
     [switch]$SkipArchive,
     [switch]$SkipInstaller,
     [switch]$SkipExe,
@@ -19,31 +19,31 @@ param(
 )
 
 # Color output functions
-function Write-Success { param($Message) Write-Host "✓ $Message" -ForegroundColor Green }
-function Write-Error { param($Message) Write-Host "✗ $Message" -ForegroundColor Red }
-function Write-Warning { param($Message) Write-Host "⚠ $Message" -ForegroundColor Yellow }
-function Write-Info { param($Message) Write-Host "ℹ $Message" -ForegroundColor Cyan }
-function Write-Step { param($Message) Write-Host "➤ $Message" -ForegroundColor Magenta }
+function Write-Success { param($Message) Write-Host ":D $Message" -ForegroundColor Green }
+function Write-Error { param($Message) Write-Host "D: $Message" -ForegroundColor Red }
+function Write-Warning { param($Message) Write-Host ":( $Message" -ForegroundColor Yellow }
+function Write-Info { param($Message) Write-Host ":/ $Message" -ForegroundColor Cyan }
+function Write-Step { param($Message) Write-Host ":) $Message" -ForegroundColor Magenta }
 function Write-Phase { param($Message) Write-Host "`n$('='*60)" -ForegroundColor Blue; Write-Host "PHASE: $Message" -ForegroundColor Blue; Write-Host "$('='*60)" -ForegroundColor Blue }
 
 # Build configuration
 $ErrorActionPreference = "Stop"
 $BuildConfig = @{
-    Name = "proc-wolf Complete Build Pipeline"
+    Name = "file-utils-ii Complete Build Pipeline"
     Version = "3.0"
     BuildDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     StartTime = Get-Date
     Steps = @{
-        Archive = @{ Name = "Archive Creation"; Script = "Build-ProcWolfArchive.ps1"; Status = "Pending" }
-        Installer = @{ Name = "Installer Generation"; Script = "Build-ProcWolfInstaller.ps1"; Status = "Pending" }
-        Executable = @{ Name = "EXE Conversion"; Script = "Convert-ProcWolfToExe.ps1"; Status = "Pending" }
+        Archive = @{ Name = "Archive Creation"; Script = "Build-fileutilsiiArchive.ps1"; Status = "Pending" }
+        Installer = @{ Name = "Installer Generation"; Script = "Build-fileutilsiiInstaller.ps1"; Status = "Pending" }
+        Executable = @{ Name = "EXE Conversion"; Script = "Convert-fileutilsii2Exe.ps1"; Status = "Pending" }
     }
     Files = @{
-        Archive = "proc-wolf-files.zip"
-        Installer = "proc-wolf-installer.ps1"
-        Executable = "proc-wolf-installer.exe"
-        Checksums = "proc-wolf-installer.checksums.txt"
-        Guide = "INSTALLATION-GUIDE.md"
+        Archive = "file-utils-ii-files.zip"
+        Installer = "file-utils-ii-installer.ps1"
+        Executable = "file-utils-ii-installer.exe"
+        Checksums = "file-utils-ii-installer.checksums.txt"
+        Guide = "INSTALLATION_GUIDE"
     }
 }
 
@@ -62,9 +62,9 @@ function Test-BuildEnvironment {
     
     # Check for required build scripts
     $requiredScripts = @(
-        "Build-ProcWolfArchive.ps1",
-        "Build-ProcWolfInstaller.ps1", 
-        "Convert-ProcWolfToExe.ps1"
+        "Build-fileutilsiiArchive.ps1",
+        "Build-fileutilsiiInstaller.ps1", 
+        "Convert-fileutils2Exe.ps1"
     )
     
     foreach ($script in $requiredScripts) {
@@ -81,14 +81,14 @@ function Test-BuildEnvironment {
     } else {
         Write-Success "Source directory: $SourceDir"
         
-        # Check for proc-wolf files
+        # Check for file-utils-ii files
         $procWolfFiles = @(
-            "ProcWolf.exe",
-            "ProcWolfCLI.exe",
-            "ProcWolfService.exe",
+            "file-utils-ii.exe",
+            "file-utils-ii-CLI.exe",
+            "file-utils-ii-svc.exe",
             "install.bat",
             "uninstall.bat",
-            "README.txt"
+            "README"
         )
         
         $foundFiles = 0
@@ -284,7 +284,7 @@ function Invoke-ArchiveStep {
         Force = $Force
     }
     
-    return Invoke-BuildStep -StepName "Archive" -ScriptPath ".\Build-ProcWolfArchive.ps1" -Parameters $params
+    return Invoke-BuildStep -StepName "Archive" -ScriptPath ".\Build-file-utils-ii-Archive.ps1" -Parameters $params
 }
 
 function Invoke-InstallerStep {
@@ -314,7 +314,7 @@ function Invoke-InstallerStep {
         Force = $Force
     }
     
-    return Invoke-BuildStep -StepName "Installer" -ScriptPath ".\Build-ProcWolfInstaller.ps1" -Parameters $params
+    return Invoke-BuildStep -StepName "Installer" -ScriptPath ".\Build-file-utils-ii-Installer.ps1" -Parameters $params
 }
 
 function Invoke-ExecutableStep {
@@ -352,7 +352,7 @@ function Invoke-ExecutableStep {
         $params.IconPath = $IconPath
     }
     
-    return Invoke-BuildStep -StepName "Executable" -ScriptPath ".\Convert-ProcWolfToExe.ps1" -Parameters $params
+    return Invoke-BuildStep -StepName "Executable" -ScriptPath ".\convert-file-utils-ii-2Exe.ps1" -Parameters $params
 }
 
 function Test-BuildResults {
@@ -387,14 +387,14 @@ function Test-BuildResults {
         Write-Step "Testing executable..."
         try {
             # Test basic execution (version check)
-            $testOutput = & $exePath -Extract -InstallPath "$env:TEMP\proc-wolf-test" -Quiet 2>&1
+            $testOutput = & $exePath -Extract -InstallPath "$env:TEMP\file-utils-ii-test" -Quiet 2>&1
             
             if (Test-Path "$env:TEMP\proc-wolf-test") {
-                $extractedFiles = Get-ChildItem "$env:TEMP\proc-wolf-test" -File
+                $extractedFiles = Get-ChildItem "$env:TEMP\file-utils-ii-test" -File
                 Write-Success "Executable test passed - extracted $($extractedFiles.Count) files"
                 
                 # Clean up test extraction
-                Remove-Item "$env:TEMP\proc-wolf-test" -Recurse -Force -ErrorAction SilentlyContinue
+                Remove-Item "$env:TEMP\file-utils-ii-test" -Recurse -Force -ErrorAction SilentlyContinue
             } else {
                 Write-Warning "Executable test: extraction location not found"
             }
@@ -412,7 +412,7 @@ function Write-BuildSummary {
     $buildDuration = (Get-Date) - $BuildConfig.StartTime
     
     Write-Host "`n" + "="*80 -ForegroundColor Cyan
-    Write-Host "PROC-WOLF COMPLETE BUILD SUMMARY" -ForegroundColor Cyan
+    Write-Host "FILE-UTILS-ii COMPLETE BUILD SUMMARY" -ForegroundColor Cyan
     Write-Host "="*80 -ForegroundColor Cyan
     
     Write-Host "`nBuild Information:" -ForegroundColor Yellow
@@ -480,7 +480,7 @@ function Write-BuildSummary {
 
 # Main execution
 try {
-    Write-Host "PROC-WOLF COMPLETE BUILD PIPELINE v$($BuildConfig.Version)" -ForegroundColor Cyan
+    Write-Host "FILE-UTILS-ii COMPLETE BUILD PIPELINE v$($BuildConfig.Version)" -ForegroundColor Cyan
     Write-Host "="*60 -ForegroundColor Cyan
     Write-Host "Building self-extracting installer from source files" -ForegroundColor Cyan
     Write-Host "Started: $($BuildConfig.BuildDate)" -ForegroundColor Cyan

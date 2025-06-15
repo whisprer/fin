@@ -1,0 +1,57 @@
+// src/main.rs
+
+// Declare the modules
+mod tokenizer;
+mod entropy;
+mod prime_hilbert;
+mod engine;
+
+use engine::ResonantEngine;
+use std::io;
+
+fn main() {
+    println!("Initializing Resonant Search Engine...");
+    let mut engine = ResonantEngine::new();
+
+    println!("Loading documents from 'data/'...");
+    // Load documents from the 'data' directory.
+    // We use expect() here for simplicity in this demo,
+    // but in a real application, you'd want more robust error handling.
+    if let Err(e) = engine.load_directory("data") {
+        eprintln!("Error loading directory: {}", e);
+        // Exit if we can't load documents, as there's nothing to search
+        return;
+    }
+    println!("Documents loaded.");
+
+    println!("\nEnter your resonant query:");
+
+    // Get query from user
+    let mut query = String::new();
+    io::stdin().read_line(&mut query)
+        .expect("Failed to read line");
+    let query = query.trim(); // Remove leading/trailing whitespace
+
+    if query.is_empty() {
+        println!("Query is empty. Exiting.");
+        return;
+    }
+
+    println!("\nSearching for resonant matches...");
+    // Perform search (defaulting to top 3 results)
+    let results = engine.search(query, 3);
+
+    println!("\nTop Resonant Matches:");
+    if results.is_empty() {
+        println!("No results found.");
+    } else {
+        for (idx, r) in results.iter().enumerate() {
+            println!("[{}] {}", idx + 1, r.title);
+            println!("    Resonance:      {:.4}", r.resonance);
+            println!("    Δ Entropy:      {:.4}", r.delta_entropy);
+            println!("    Combined Score: {:.4}", r.score);
+            println!("    Preview:        {}", r.snippet);
+            println!(); // Add an empty line between results for readability
+        }
+    }
+}

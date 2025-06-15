@@ -1,0 +1,605 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+ phine  d:
+ D:\  cd code/repos/github_desktop/dilaystonks_mini/
+cd : Cannot find path 'D:\code\repos\github_desktop\dilaystonks_mini\' because it does not exist.
+At line:1 char:1
++ cd code/repos/github_desktop/dilaystonks_mini/
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\code\repos\g...laystonks_mini\:String) [Set-Location], ItemNotFoundE
+   xception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+
+ D:\  cd code/repos/github_desktop/
+ github_desktop  /dailystonks_stonks/
+/dailystonks_stonks/ : The term '/dailystonks_stonks/' is not recognized as the name of a cmdlet, function, script
+file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct
+and try again.
+At line:1 char:1
++ /dailystonks_stonks/
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (/dailystonks_stonks/:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  dailystonks_stonks/
+dailystonks_stonks/ : The term 'dailystonks_stonks/' is not recognized as the name of a cmdlet, function, script file,
+or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and
+try again.
+At line:1 char:1
++ dailystonks_stonks/
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dailystonks_stonks/:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  dailystonks_mini/
+dailystonks_mini/ : The term 'dailystonks_mini/' is not recognized as the name of a cmdlet, function, script file, or
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ dailystonks_mini/
++ ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dailystonks_mini/:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  dir
+
+
+    Directory: D:\code\repos\github_desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        25/03/2025     07:44                -GotGirl_frontend-nextjs
+d-----        24/03/2025     01:50                -GotGirl_nft_marketplace
+dar---        26/03/2025     02:34                ai_compare-or-compere
+dar---        24/03/2025     05:34                amphichiral_cas_compact
+dar---        15/04/2025     14:23                analoglogic.blog
+dar---        12/04/2025     23:03                analog_NAND_sim
+dar---        24/03/2025     05:34                ascencion
+dar---        24/03/2025     05:33                a_book_i_started_writing
+dar---        24/03/2025     05:33                a_screenplay_upon_loss
+dar---        24/03/2025     05:33                a_way_to_augment_ai
+dar---        12/04/2025     22:45                bernoulli_discrepancy_spotter
+dar---        26/03/2025     02:34                bifurcating_fun-ooooooooh
+dar---        26/03/2025     02:34                binary_entropy_predictor
+dar---        25/03/2025     02:06                blackhattery_iii
+dar---        04/04/2025     14:45                btc_reports
+dar---        26/03/2025     06:22                caca
+dar---        23/04/2025     13:36                CFS9K
+dar---        26/03/2025     02:34                computrons_-_how_they_work
+dar---        26/03/2025     02:34                conway-s_game_of_life
+dar---        26/03/2025     02:34                conway-s_music_of_life
+dar---        25/03/2025     18:13                Custom_Stock_Screener
+d-----        03/05/2025     23:10                DailyStonks__mini
+dar---        03/05/2025     15:16                daily_stonk_market_report
+dar---        03/05/2025     11:29                Daytrading_Notes_and_Writitngs
+dar---        26/03/2025     02:34                dnm_esplained_finally
+dar---        04/04/2025     14:46                fonts
+dar---        26/03/2025     02:34                frequency_analyzer_plugin
+dar---        26/03/2025     02:34                frogKlan
+dar---        24/03/2025     05:34                g-petey
+dar---        26/03/2025     02:34                general_gpt_writings
+dar---        17/04/2025     18:23                GhostMode_Vanisher
+dar---        26/03/2025     02:34                glyph_lang_patch_system
+dar---        26/03/2025     02:34                hi-speed_stream_processing_for_ai_mini_devices
+dar---        02/04/2025     05:11                i-m_in_your_browser_and_it-s_not_safe
+dar---        26/03/2025     02:34                Investment_and_Algorithmic_Trading_Notebooks
+dar---        26/03/2025     02:34                it-s_not_my_brain
+dar---        26/03/2025     02:34                i_rly_want_this_to_work_more_than_anything
+dar---        23/04/2025     13:35                kdp
+dar---        24/03/2025     05:34                Lenia
+dar---        26/03/2025     06:37                lobsterpot
+d-----        26/03/2025     02:34                lookyloo
+dar---        26/03/2025     02:34                mag_oub
+dar---        26/03/2025     02:34                math_fucker
+dar---        27/04/2025     12:01                math_text_book_for_ai_learners
+dar---        26/03/2025     02:35                mayan_calendar
+dar---        01/04/2025     09:05                Medium-Posts
+dar---        26/03/2025     02:31                melody_finder
+dar---        17/04/2025     17:43                my_arts
+dar---        26/03/2025     02:31                my_empyrion_gretest_works
+dar---        26/03/2025     02:31                my_white_paper
+dar---        26/03/2025     02:31                nat_nums
+d-----        28/04/2025     02:03                naughty_discorb_bot
+dar---        26/03/2025     02:32                nn_visual
+dar---        26/03/2025     02:32                once_n_for_all_documented
+d-----        01/04/2025     12:38                out_of_focus_deblur
+dar---        27/04/2025     12:29                pacman
+dar---        26/03/2025     02:32                PadBuster
+dar---        26/03/2025     02:32                patentable_LLM_idea
+dar---        26/03/2025     02:32                petey-sim
+dar---        26/03/2025     02:32                primes_compare
+d-----        02/05/2025     12:01                proc-wolf
+dar---        26/03/2025     02:32                reading
+d-----        01/05/2025     15:14                resonant_search
+dar---        26/03/2025     02:32                reversing_differential_encryption
+d-----        01/04/2025     12:15                RNG
+d-----        24/03/2025     01:51                RTClib
+dar---        26/03/2025     02:32                rusty_socjaw
+dar---        26/03/2025     02:32                simple_life
+d-----        03/05/2025     19:52                snaeksy_cli_mails
+dar---        26/04/2025     19:16                spong
+dar---        26/03/2025     02:32                swarm_sockjaw
+dar---        02/04/2025     03:53                the_bakup
+dar---        26/03/2025     02:32                the_elusive_laura_project
+dar---        26/03/2025     02:32                trigrams
+dar---        12/04/2025     18:46                type-heed
+d-----        16/04/2025     18:03                unexpected_whitehattery
+dar---        17/04/2025     17:39                universal
+dar---        26/03/2025     02:33                universal_rng_lib
+d-----        02/05/2025     12:08                useful_github_things
+dar---        26/03/2025     02:33                viewbot_supreme
+d-----        28/04/2025     02:00                webhook_thief_of_discbad
+d-----        27/04/2025     12:49                webspooder
+dar---        15/04/2025     06:33                whisprer
+dar---        12/04/2025     18:49                wofl-s_blackhattery_stash
+dar---        24/03/2025     05:34                wofl-s_markov_bot
+d-----        15/04/2025     19:10                woflang2
+dar---        26/03/2025     06:46                woflchess
+dar---        26/03/2025     02:34                woflcrypt
+dar---        17/04/2025     17:27                woflcryptultimate
+dar---        24/03/2025     05:34                woflparse
+dar---        04/04/2025     14:45                wordlist.rb
+dar---        24/03/2025     05:33                yfinance_guide_and_sample_code
+dar---        02/04/2025     07:10                you_didn-t_get_it_from_me
+-a----        19/04/2025     23:00           7168 CC0_LICENSE.md
+-a----        02/05/2025     12:00           2404 HYBRID_LICENCE.md
+-a----        27/04/2025     12:55           1137 MIT_LICENCE.md
+-a----        17/04/2025     18:38           3131 whisprer.md
+-a----        15/04/2025     18:51     1031519182 woflang2.zip
+
+
+ github_desktop  dailystonbks__mini
+dailystonbks__mini : The term 'dailystonbks__mini' is not recognized as the name of a cmdlet, function, script file,
+or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and
+try again.
+At line:1 char:1
++ dailystonbks__mini
++ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dailystonbks__mini:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  dailystonks__mini
+dailystonks__mini : The term 'dailystonks__mini' is not recognized as the name of a cmdlet, function, script file, or
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ dailystonks__mini
++ ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (dailystonks__mini:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ github_desktop  cd dailystonks__mini
+ dailystonks__mini  dir
+
+
+    Directory: D:\code\repos\github_desktop\dailystonks__mini
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        03/05/2025     22:26                build
+d-----        03/05/2025     22:26                docs
+d-----        03/05/2025     22:26                src
+d-----        03/05/2025     22:26                temp
+-a----        03/05/2025     22:25             66 .gitattributes
+-a----        03/05/2025     22:25           3238 .gitignore
+-a----        03/05/2025     22:46           2502 DailyStonks_mini.py
+-a----        03/05/2025     23:10          12612 DailyStonks_mini_fin.py
+-a----        03/05/2025     22:45           2507 err_code.py1
+-a----        03/05/2025     22:25           1086 LICENSE
+-a----        03/05/2025     22:25             68 README.md
+-a----        03/05/2025     22:56            890 READMEadd.md
+-a----        03/05/2025     22:47             67 usage_examples.ps1
+
+
+ dailystonks__mini  cd dailystonks__mini
+cd : Cannot find path 'D:\code\repos\github_desktop\dailystonks__mini\dailystonks__mini' because it does not exist.
+At line:1 char:1
++ cd dailystonks__mini
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\code\repos\g...ilystonks__mini:String) [Set-Location], ItemNotFoundE
+   xception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+
+ dailystonks__mini  python stonkplot.py AAPL
+C:\Program Files\Python312\python.exe: can't open file 'D:\\code\\repos\\github_desktop\\dailystonks__mini\\stonkplot.py': [Errno 2] No such file or directory
+ dailystonks__mini  python dailystonks_mini.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\dailystonks_mini.py", line 70, in <module>
+    script_path.write_text(script_code)
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1047, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '\\mnt\\data\\stonkplot.py'
+ dailystonks__mini  ^C
+ dailystonks__mini  ^C
+ dailystonks__mini  ^C
+ dailystonks__mini  ^C
+ dailystonks__mini  python dailystonks_mini.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\dailystonks_mini.py", line 70, in <module>
+    script_path.write_text(script_code)
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1047, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '\\mnt\\data\\stonkplot.py'
+ dailystonks__mini  python dailystonks_mini.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\dailystonks_mini.py", line 70, in <module>
+    script_path.write_text(script_code)
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1047, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '\\mnt\\data\\stonkplot.py'
+ dailystonks__mini  python dailystonks_mini.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\dailystonks_mini.py", line 70, in <module>
+    script_path.write_text(script_code)
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1047, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '\\mnt\\data\\stonkplot.py'
+ dailystonks__mini  python dailystonks_mini_fin.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\dailystonks_mini_fin.py", line 27, in <module>
+    from sklearn.linear_model import Ridge
+ModuleNotFoundError: No module named 'sklearn'
+ dailystonks__mini  python dailystonks_mini_fin.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\dailystonks_mini_fin.py", line 27, in <module>
+    from sklearn.linear_model import Ridge
+ModuleNotFoundError: No module named 'sklearn'
+ dailystonks__mini  cd venv
+cd : Cannot find path 'D:\code\repos\github_desktop\dailystonks__mini\venv' because it does not exist.
+At line:1 char:1
++ cd venv
++ ~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\code\repos\g...onks__mini\venv:String) [Set-Location], ItemNotFoundE
+   xception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+
+ dailystonks__mini  cd build
+ build  cd venv
+ venv 
+ venv  python dailystonks_mini_fin.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\build\venv\dailystonks_mini_fin.py", line 27, in <module>
+    from sklearn.linear_model import Ridge
+ModuleNotFoundError: No module named 'sklearn'
+ venv  dir
+
+
+    Directory: D:\code\repos\github_desktop\dailystonks__mini\build\venv
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        03/05/2025     23:36                xxx
+-a----        03/05/2025     23:34          12572 DailyStonks_mini_fin.py
+-a----        04/05/2025     00:06            121 requirements.txt
+
+
+ venv  cd xxx
+ xxx  python dailystonks_mini_fin.py AAPL
+Traceback (most recent call last):
+  File "D:\code\repos\github_desktop\dailystonks__mini\build\venv\xxx\dailystonks_mini_fin.py", line 27, in <module>
+    from sklearn.linear_model import Ridge
+ModuleNotFoundError: No module named 'sklearn'
+ xxx  cd..
+ venv  cd..
+ build  dir
+
+
+    Directory: D:\code\repos\github_desktop\dailystonks__mini\build
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        04/05/2025     00:23                venv
+
+
+ build  cd venv
+ venv  pip install -r requirements.txt
+Requirement already satisfied: matplotlib>=3.5.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from-r requirements.txt (line 7)) (3.10.1)
+Requirement already satisfied: numpy>=1.20.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from -r requirements.txt (line 8)) (2.2.4)
+Requirement already satisfied: yfinance>=0.2.12 in c:\users\phine\appdata\roaming\python\python312\site-packages (from -r requirements.txt (line 9)) (0.2.57)
+Collecting scikit-learn>=1.0.0 (from -r requirements.txt (line 10))
+  Downloading scikit_learn-1.6.1-cp312-cp312-win_amd64.whl.metadata (15 kB)
+Requirement already satisfied: contourpy>=1.0.1 in c:\users\phine\appdata\roaming\python\python312\site-packages (from matplotlib>=3.5.0->-r requirements.txt (line 7)) (1.3.2)
+Requirement already satisfied: cycler>=0.10 in c:\users\phine\appdata\roaming\python\python312\site-packages (from matplotlib>=3.5.0->-r requirements.txt (line 7)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (frommatplotlib>=3.5.0->-r requirements.txt (line 7)) (4.57.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in c:\users\phine\appdata\roaming\python\python312\site-packages (frommatplotlib>=3.5.0->-r requirements.txt (line 7)) (1.4.8)
+Requirement already satisfied: packaging>=20.0 in c:\program files\python312\lib\site-packages (from matplotlib>=3.5.0->-r requirements.txt (line 7)) (25.0)
+Requirement already satisfied: pillow>=8 in c:\program files\python312\lib\site-packages (from matplotlib>=3.5.0->-r requirements.txt (line 7)) (11.2.1)
+Requirement already satisfied: pyparsing>=2.3.1 in c:\users\phine\appdata\roaming\python\python312\site-packages (from matplotlib>=3.5.0->-r requirements.txt (line 7)) (3.2.3)
+Requirement already satisfied: python-dateutil>=2.7 in c:\users\phine\appdata\roaming\python\python312\site-packages (from matplotlib>=3.5.0->-r requirements.txt (line 7)) (2.9.0.post0)
+Requirement already satisfied: pandas>=1.3.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from yfinance>=0.2.12->-r requirements.txt (line 9)) (2.2.3)
+Requirement already satisfied: requests>=2.31 in c:\users\phine\appdata\roaming\python\python312\site-packages (from yfinance>=0.2.12->-r requirements.txt (line 9)) (2.32.3)
+Requirement already satisfied: multitasking>=0.0.7 in c:\users\phine\appdata\roaming\python\python312\site-packages (from yfinance>=0.2.12->-r requirements.txt (line 9)) (0.0.11)
+Requirement already satisfied: platformdirs>=2.0.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from yfinance>=0.2.12->-r requirements.txt (line 9)) (4.3.7)
+Requirement already satisfied: pytz>=2022.5 in c:\users\phine\appdata\roaming\python\python312\site-packages (from yfinance>=0.2.12->-r requirements.txt (line 9)) (2025.2)
+Requirement already satisfied: frozendict>=2.3.4 in c:\users\phine\appdata\roaming\python\python312\site-packages (fromyfinance>=0.2.12->-r requirements.txt (line 9)) (2.4.6)
+Requirement already satisfied: peewee>=3.16.2 in c:\users\phine\appdata\roaming\python\python312\site-packages (from yfinance>=0.2.12->-r requirements.txt (line 9)) (3.18.1)
+Requirement already satisfied: beautifulsoup4>=4.11.1 in c:\users\phine\appdata\roaming\python\python312\site-packages (from yfinance>=0.2.12->-r requirements.txt (line 9)) (4.13.4)
+Requirement already satisfied: scipy>=1.6.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from scikit-learn>=1.0.0->-r requirements.txt (line 10)) (1.15.2)
+Collecting joblib>=1.2.0 (from scikit-learn>=1.0.0->-r requirements.txt (line 10))
+  Downloading joblib-1.5.0-py3-none-any.whl.metadata (5.6 kB)
+Collecting threadpoolctl>=3.1.0 (from scikit-learn>=1.0.0->-r requirements.txt (line 10))
+  Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Requirement already satisfied: soupsieve>1.2 in c:\users\phine\appdata\roaming\python\python312\site-packages (from beautifulsoup4>=4.11.1->yfinance>=0.2.12->-r requirements.txt (line 9)) (2.7)
+Requirement already satisfied: typing-extensions>=4.0.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from beautifulsoup4>=4.11.1->yfinance>=0.2.12->-r requirements.txt (line 9)) (4.13.2)
+Requirement already satisfied: tzdata>=2022.7 in c:\users\phine\appdata\roaming\python\python312\site-packages (from pandas>=1.3.0->yfinance>=0.2.12->-r requirements.txt (line 9)) (2025.2)
+Requirement already satisfied: six>=1.5 in c:\program files\python312\lib\site-packages (from python-dateutil>=2.7->matplotlib>=3.5.0->-r requirements.txt (line 7)) (1.17.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in c:\users\phine\appdata\roaming\python\python312\site-packages (from requests>=2.31->yfinance>=0.2.12->-r requirements.txt (line 9)) (3.4.1)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\phine\appdata\roaming\python\python312\site-packages (from requests>=2.31->yfinance>=0.2.12->-r requirements.txt (line 9)) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\users\phine\appdata\roaming\python\python312\site-packages (from requests>=2.31->yfinance>=0.2.12->-r requirements.txt (line 9)) (2.4.0)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\phine\appdata\roaming\python\python312\site-packages (from requests>=2.31->yfinance>=0.2.12->-r requirements.txt (line 9)) (2025.4.26)
+Downloading scikit_learn-1.6.1-cp312-cp312-win_amd64.whl (11.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 6.6 MB/s eta 0:00:00
+Downloading joblib-1.5.0-py3-none-any.whl (307 kB)
+Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Installing collected packages: threadpoolctl, joblib, scikit-learn
+Successfully installed joblib-1.5.0 scikit-learn-1.6.1 threadpoolctl-3.6.0
+
+[notice] A new release of pip is available: 24.3.1 -> 25.1.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+ venv  python.exe -m pip install --upgrade pip
+Requirement already satisfied: pip in c:\program files\python312\lib\site-packages (24.3.1)
+Collecting pip
+  Using cached pip-25.1.1-py3-none-any.whl.metadata (3.6 kB)
+Using cached pip-25.1.1-py3-none-any.whl (1.8 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 24.3.1
+    Uninstalling pip-24.3.1:
+      Successfully uninstalled pip-24.3.1
+Successfully installed pip-25.1.1
+ venv  cd xxx
+ xxx  python dailystonks_mini_fin.py AAPL
+stonkplot.py - Elegant Stock Visualization Tool
+YF.download() has changed argument auto_adjust default to True
+
+1 Failed download:
+['AAPL']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+Error: Failed to fetch data for AAPL: No data found for ticker AAPL
+ xxx  python dailystonks_mini_fin.py TSLA
+stonkplot.py - Elegant Stock Visualization Tool
+YF.download() has changed argument auto_adjust default to True
+
+1 Failed download:
+['TSLA']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+Error: Failed to fetch data for TSLA: No data found for ticker TSLA
+ xxx  pip install -r requirements.txt
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+ xxx  cd..
+ venv  pip install -r requirements.txt
+ERROR: Invalid requirement: 'Python 3.7+': Expected end or semicolon (after name and no valid version specifier)
+    Python 3.7+
+           ^ (from line 1 of requirements.txt)
+ venv  pip install -r requirements.txt
+ERROR: Invalid requirement: 'Python: 3.7+': Expected end or semicolon (after name and no valid version specifier)
+    Python: 3.7+
+          ^ (from line 1 of requirements.txt)
+ venv  pip install -r requirements.txt
+ERROR: Exception:
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\markers.py", line 280, in __init__
+    self._markers = _normalize_extra_values(_parse_marker(marker))
+                                            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 253, in parse_marker
+    return _parse_full_marker(Tokenizer(source, rules=DEFAULT_RULES))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 257, in _parse_full_marker
+    retval = _parse_marker(tokenizer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 266, in _parse_marker
+    expression = [_parse_marker_atom(tokenizer)]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 291, in _parse_marker_atom
+    marker = _parse_marker_item(tokenizer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 301, in _parse_marker_item
+    marker_var_left = _parse_marker_var(tokenizer)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 319, in _parse_marker_var
+    tokenizer.raise_syntax_error(
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_tokenizer.py", line 168, in raise_syntax_error
+    raise ParserSyntaxError(
+pip._vendor.packaging._tokenizer.ParserSyntaxError: Expected a marker variable or quoted string
+    3.7+
+    ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\base_command.py", line 105, in _run_wrapper
+    status = _inner_run()
+             ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\base_command.py", line 96, in _inner_run
+    return self.run(options, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\req_command.py", line 68, in wrapper
+    return func(self, options, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\commands\install.py", line 351, in run
+    reqs = self.get_requirements(args, options, finder, session)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\req_command.py", line 271, in get_requirements
+    req_to_add = install_req_from_parsed_requirement(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 480, in install_req_from_parsed_requirement
+    req = install_req_from_line(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 405, in install_req_from_line
+    parts = parse_req_from_line(name, line_source)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 318, in parse_req_from_line
+    markers = Marker(markers_as_string)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\markers.py", line 298, in __init__
+    raise InvalidMarker(str(e)) from e
+pip._vendor.packaging.markers.InvalidMarker: Expected a marker variable or quoted string
+    3.7+
+    ^
+ venv  pip install -r requirements.txt
+ERROR: Exception:
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\markers.py", line 280, in __init__
+    self._markers = _normalize_extra_values(_parse_marker(marker))
+                                            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 253, in parse_marker
+    return _parse_full_marker(Tokenizer(source, rules=DEFAULT_RULES))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 257, in _parse_full_marker
+    retval = _parse_marker(tokenizer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 266, in _parse_marker
+    expression = [_parse_marker_atom(tokenizer)]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 291, in _parse_marker_atom
+    marker = _parse_marker_item(tokenizer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 301, in _parse_marker_item
+    marker_var_left = _parse_marker_var(tokenizer)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 319, in _parse_marker_var
+    tokenizer.raise_syntax_error(
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_tokenizer.py", line 168, in raise_syntax_error
+    raise ParserSyntaxError(
+pip._vendor.packaging._tokenizer.ParserSyntaxError: Expected a marker variable or quoted string
+    3.6
+    ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\base_command.py", line 105, in _run_wrapper
+    status = _inner_run()
+             ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\base_command.py", line 96, in _inner_run
+    return self.run(options, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\req_command.py", line 68, in wrapper
+    return func(self, options, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\commands\install.py", line 351, in run
+    reqs = self.get_requirements(args, options, finder, session)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\req_command.py", line 271, in get_requirements
+    req_to_add = install_req_from_parsed_requirement(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 480, in install_req_from_parsed_requirement
+    req = install_req_from_line(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 405, in install_req_from_line
+    parts = parse_req_from_line(name, line_source)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 318, in parse_req_from_line
+    markers = Marker(markers_as_string)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\markers.py", line 298, in __init__
+    raise InvalidMarker(str(e)) from e
+pip._vendor.packaging.markers.InvalidMarker: Expected a marker variable or quoted string
+    3.6
+    ^
+ venv  pip install -r requirements.txt
+ERROR: Exception:
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\markers.py", line 280, in __init__
+    self._markers = _normalize_extra_values(_parse_marker(marker))
+                                            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 253, in parse_marker
+    return _parse_full_marker(Tokenizer(source, rules=DEFAULT_RULES))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 257, in _parse_full_marker
+    retval = _parse_marker(tokenizer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 266, in _parse_marker
+    expression = [_parse_marker_atom(tokenizer)]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 291, in _parse_marker_atom
+    marker = _parse_marker_item(tokenizer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 303, in _parse_marker_item
+    marker_op = _parse_marker_op(tokenizer)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_parser.py", line 351, in _parse_marker_op
+    return tokenizer.raise_syntax_error(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\_tokenizer.py", line 168, in raise_syntax_error
+    raise ParserSyntaxError(
+pip._vendor.packaging._tokenizer.ParserSyntaxError: Expected marker operator, one of <=, <, !=, ==, >=, >, ~=, ===, in,not in
+    "3.6"
+         ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\base_command.py", line 105, in _run_wrapper
+    status = _inner_run()
+             ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\base_command.py", line 96, in _inner_run
+    return self.run(options, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\req_command.py", line 68, in wrapper
+    return func(self, options, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\commands\install.py", line 351, in run
+    reqs = self.get_requirements(args, options, finder, session)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\cli\req_command.py", line 271, in get_requirements
+    req_to_add = install_req_from_parsed_requirement(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 480, in install_req_from_parsed_requirement
+    req = install_req_from_line(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 405, in install_req_from_line
+    parts = parse_req_from_line(name, line_source)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_internal\req\constructors.py", line 318, in parse_req_from_line
+    markers = Marker(markers_as_string)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\pip\_vendor\packaging\markers.py", line 298, in __init__
+    raise InvalidMarker(str(e)) from e
+pip._vendor.packaging.markers.InvalidMarker: Expected marker operator, one of <=, <, !=, ==, >=, >, ~=, ===, in, not in
+    "3.6"
+         ^
+ venv  pip install -r requirements.txt
+ERROR: Could not find a version that satisfies the requirement Python>=3.6 (from versions: none)
+ERROR: No matching distribution found for Python>=3.6
+ venv  pip install -r requirements.txt
+Requirement already satisfied: matplotlib>=3.5.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from-r requirements.txt (line 1)) (3.10.1)
+Requirement already satisfied: numpy>=1.20.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from -r requirements.txt (line 2)) (2.2.4)
+Requirement already satisfied: yfinance>=0.2.12 in c:\users\phine\appdata\roaming\python\python312\site-packages (from -r requirements.txt (line 3)) (0.2.57)
+Requirement already satisfied: scikit-learn>=1.0.0 in c:\program files\python312\lib\site-packages (from -r requirements.txt (line 4)) (1.6.1)
+ERROR: Could not find a version that satisfies the requirement Python>=3.6 (from versions: none)
+ERROR: No matching distribution found for Python>=3.6
+ venv  ^C
+ venv  pip install -r requirements.txt
+ERROR: Invalid requirement: 'Python>=3.7+': Expected end or semicolon (after version specifier)
+    Python>=3.7+
+          ~~~~~^ (from line 5 of requirements.txt)
+ venv  pip install -r requirements.txt
+Requirement already satisfied: matplotlib>=3.5.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from-r requirements.txt (line 1)) (3.10.1)
+Requirement already satisfied: numpy>=1.20.0 in c:\users\phine\appdata\roaming\python\python312\site-packages (from -r requirements.txt (line 2)) (2.2.4)
+Requirement already satisfied: yfinance>=0.2.12 in c:\users\phine\appdata\roaming\python\python312\site-packages (from -r requirements.txt (line 3)) (0.2.57)
+Requirement already satisfied: scikit-learn>=1.0.0 in c:\program files\python312\lib\site-packages (from -r requirements.txt (line 4)) (1.6.1)
+ERROR: Could not find a version that satisfies the requirement Python>=3.7 (from versions: none)
+ERROR: No matching distribution found for Python>=3.7
+ phine   venv   main ≡                                                                  in pwsh at 00:36:15

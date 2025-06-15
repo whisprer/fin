@@ -1,0 +1,76 @@
+[package]
+name = "quantum_local_search"
+version = "0.2.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "Quantum Resonant Local Filesystem Search Engine - The closest thing to mindreading for files"
+license = "MIT"
+
+[dependencies]
+# Core quantum search dependencies
+regex = "1.9.6"
+primal = "0.3.1"
+nalgebra = "0.32.3"
+num-complex = "0.4.4"
+rand = "0.8.5"
+
+# Async runtime and utilities
+tokio = { version = "1.35", features = ["full"] }
+futures = "0.3.30"
+
+# Serialization and compression
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bincode = "1.3"
+flate2 = "1.0"
+
+# File system operations
+walkdir = "2.4"
+notify = "6.1"
+dirs = "5.0"
+
+# CLI and terminal enhancements
+termion = "2.0"
+ctrlc = "3.4"
+
+# Text processing and search
+unicode-normalization = "0.1"
+unicode-segmentation = "1.10"
+
+# Optional: Web crawling (if you want to keep the original functionality)
+scraper = "0.17.1"
+reqwest = { version = "0.12", features = ["json"], optional = true }
+url = "2.5.0"
+csv = "1.2"
+
+# Performance monitoring
+rayon = "1.8"
+
+# Optional document parsing
+pdf = { version = "0.8", optional = true }
+docx = { version = "0.4", optional = true }
+zip = { version = "0.6", optional = true }
+
+[features]
+default = ["filesystem-only"]
+filesystem-only = []
+web-crawling = ["reqwest"]
+document-parsing = ["pdf", "docx", "zip"]
+full = ["web-crawling", "document-parsing"]
+
+[[bin]]
+name = "quantum-search"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.dev]
+opt-level = 1
+
+# Optional: Add metadata for packaging
+[package.metadata.docs.rs]
+features = ["full"]

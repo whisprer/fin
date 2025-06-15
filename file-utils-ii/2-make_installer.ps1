@@ -1,30 +1,30 @@
-# Build-ProcWolfInstaller.ps1
+# 2-make-installer.ps1
 # Creates self-extracting PowerShell installer with embedded archive
-# Part 2 of the proc-wolf self-extracting installer build process
+# Part 2 of the file-utils-ii self-extracting installer build process
 
 param(
-    [string]$ArchivePath = ".\dist\proc-wolf-files.zip",
+    [string]$ArchivePath = ".\dist\file-utils-ii-files.7z",
     [string]$OutputDir = ".\dist",
-    [string]$OutputName = "proc-wolf-installer.ps1",
+    [string]$OutputName = "file-utils-installer.ps1",
     [switch]$Verbose,
     [switch]$Force
 )
 
 # Color output functions
-function Write-Success { param($Message) Write-Host "✓ $Message" -ForegroundColor Green }
-function Write-Error { param($Message) Write-Host "✗ $Message" -ForegroundColor Red }
-function Write-Warning { param($Message) Write-Host "⚠ $Message" -ForegroundColor Yellow }
-function Write-Info { param($Message) Write-Host "ℹ $Message" -ForegroundColor Cyan }
-function Write-Step { param($Message) Write-Host "➤ $Message" -ForegroundColor Magenta }
+function Write-Success { param($Message) Write-Host ":D $Message" -ForegroundColor Green }
+function Write-Error { param($Message) Write-Host "D: $Message" -ForegroundColor Red }
+function Write-Warning { param($Message) Write-Hos ">: $Message" -ForegroundColor Yellow }
+function Write-Info { param($Message) Write-Host ":) $Message" -ForegroundColor Cyan }
+function Write-Step { param($Message) Write-Host ":@$%& $Message" -ForegroundColor Magenta }
 
 # Configuration
 $ErrorActionPreference = "Stop"
 $InstallerConfig = @{
-    Name = "proc-wolf Self-Extracting Installer"
+    Name = "file-utils-ii Self-Extracting Installer"
     Version = "3.0"
     BuildDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     DefaultInstallPath = "C:\Program Files\proc-wolf"
-    ServiceName = "ProcWolfService"
+    ServiceName = "file-utils-ii Service"
 }
 
 function Test-Prerequisites {
@@ -33,7 +33,7 @@ function Test-Prerequisites {
     # Check if archive exists
     if (-not (Test-Path $ArchivePath)) {
         Write-Error "Archive not found: $ArchivePath"
-        Write-Info "Run Build-ProcWolfArchive.ps1 first to create the archive"
+        Write-Info "Run Build-fileutilsiiArchive.ps1 first to create the archive"
         return $false
     }
     
@@ -73,9 +73,9 @@ function New-InstallerScript {
     Write-Step "Creating installer script..."
     
     $installerScript = @"
-# proc-wolf Self-Extracting Installer v$($InstallerConfig.Version)
+# file-utils-ii Self-Extracting Installer v$($InstallerConfig.Version)
 # Generated: $($InstallerConfig.BuildDate)
-# This script contains an embedded ZIP archive with all proc-wolf files
+# This script contains an embedded 7z archive with all file-utils-ii files
 
 #Requires -RunAsAdministrator
 
@@ -88,11 +88,11 @@ param(
 )
 
 # Color output functions
-function Write-Success { param(`$Message) if (-not `$Quiet) { Write-Host "✓ `$Message" -ForegroundColor Green } }
-function Write-Error { param(`$Message) Write-Host "✗ `$Message" -ForegroundColor Red }
-function Write-Warning { param(`$Message) if (-not `$Quiet) { Write-Host "⚠ `$Message" -ForegroundColor Yellow } }
-function Write-Info { param(`$Message) if (-not `$Quiet) { Write-Host "ℹ `$Message" -ForegroundColor Cyan } }
-function Write-Step { param(`$Message) if (-not `$Quiet) { Write-Host "➤ `$Message" -ForegroundColor Magenta } }
+function Write-Success { param(`$Message) if (-not `$Quiet) { Write-Host ":D `$Message" -ForegroundColor Green } }
+function Write-Error { param(`$Message) Write-Host "D: `$Message" -ForegroundColor Red }
+function Write-Warning { param(`$Message) if (-not `$Quiet) { Write-Host ":/ `$Message" -ForegroundColor Yellow } }
+function Write-Info { param(`$Message) if (-not `$Quiet) { Write-Host ":) `$Message" -ForegroundColor Cyan } }
+function Write-Step { param(`$Message) if (-not `$Quiet) { Write-Host "UGH `$Message" -ForegroundColor Magenta } }
 
 function Test-Administrator {
     `$currentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -105,7 +105,7 @@ function Stop-ExistingService {
         `$service = Get-Service -Name "$($InstallerConfig.ServiceName)" -ErrorAction SilentlyContinue
         if (`$service) {
             if (`$service.Status -eq "Running") {
-                Write-Step "Stopping existing proc-wolf service..."
+                Write-Step "Stopping existing file-utils-ii service..."
                 Stop-Service -Name "$($InstallerConfig.ServiceName)" -Force -ErrorAction Stop
                 Write-Success "Service stopped"
             }
@@ -135,21 +135,21 @@ $Base64Archive
     
     try {
         # Decode Base64 and save to temp file
-        `$tempZip = [System.IO.Path]::GetTempFileName() + ".zip"
+        `$temp7z = [System.IO.Path]::GetTempFileName() + ".7z"
         `$bytes = [System.Convert]::FromBase64String(`$archiveData)
-        [System.IO.File]::WriteAllBytes(`$tempZip, `$bytes)
+        [System.IO.File]::WriteAllBytes(`$temp7z, `$bytes)
         
-        Write-Info "Temporary archive: `$tempZip ($([math]::Round(`$bytes.Length/1MB, 2)) MB)"
+        Write-Info "Temporary archive: `$temp7z ($([math]::Round(`$bytes.Length/1MB, 2)) MB)"
         
         # Extract archive
         if (-not (Test-Path `$DestinationPath)) {
             New-Item -ItemType Directory -Path `$DestinationPath -Force | Out-Null
         }
         
-        Expand-Archive -Path `$tempZip -DestinationPath `$DestinationPath -Force
+        Expand-Archive -Path `$temp7z -DestinationPath `$DestinationPath -Force
         
         # Clean up temp file
-        Remove-Item `$tempZip -Force
+        Remove-Item `$temp7z -Force
         
         # Verify extraction
         `$extractedFiles = Get-ChildItem `$DestinationPath -File | Measure-Object
@@ -173,9 +173,9 @@ function Install-ProcWolfService {
         return `$true
     }
     
-    Write-Step "Installing proc-wolf service..."
+    Write-Step "Installing file-utils-ii service..."
     
-    `$serviceExe = Join-Path `$InstallPath "ProcWolfService.exe"
+    `$serviceExe = Join-Path `$InstallPath "file-utils-iiService.exe"
     if (-not (Test-Path `$serviceExe)) {
         Write-Error "Service executable not found: `$serviceExe"
         return `$false
@@ -223,8 +223,8 @@ function Set-FilePermissions {
 function Write-InstallationSummary {
     param(`$InstallPath, `$ServiceInstalled)
     
-    Write-Host "`n" + "="*60 -ForegroundColor Cyan
-    Write-Host "PROC-WOLF INSTALLATION COMPLETE" -ForegroundColor Cyan
+    Write-Host "`n" FILE-Utils-ii "="*60 -ForegroundColor Cyan
+    Write-Host "FILE- INSTALLATION COMPLETE" -ForegroundColor Cyan
     Write-Host "="*60 -ForegroundColor Cyan
     
     Write-Host "`nInstallation Details:" -ForegroundColor Yellow
@@ -251,13 +251,13 @@ function Write-InstallationSummary {
     }
     
     Write-Host "`nUsage:" -ForegroundColor Green
-    Write-Host "  Background Monitor: `"`$InstallPath\ProcWolf.exe`""
-    Write-Host "  Command Line: `"`$InstallPath\ProcWolfCLI.exe`""
+    Write-Host "  Background Monitor: `"`$InstallPath\fileiiutils.exe`""
+    Write-Host "  Command Line: `"`$InstallPath\fileutilsiiCLI.exe`""
     Write-Host "  Service Control: services.msc (look for '$($InstallerConfig.ServiceName)')"
     
     Write-Host "`nLog Locations:" -ForegroundColor Green
-    Write-Host "  Service Logs: C:\ProgramData\proc-wolf\"
-    Write-Host "  Client Logs: %LOCALAPPDATA%\proc-wolf\"
+    Write-Host "  Service Logs: C:\ProgramData\file-utils-ii\"
+    Write-Host "  Client Logs: %LOCALAPPDATA%\file-utils-ii\"
     
     Write-Host "`n" + "="*60 -ForegroundColor Cyan
 }
@@ -265,7 +265,7 @@ function Write-InstallationSummary {
 # Main installation logic
 try {
     if (-not `$Quiet) {
-        Write-Host "PROC-WOLF INSTALLER v$($InstallerConfig.Version)" -ForegroundColor Cyan
+        Write-Host "FILE-UTILS-ii INSTALLER v$($InstallerConfig.Version)" -ForegroundColor Cyan
         Write-Host "="*40 -ForegroundColor Cyan
     }
     
@@ -279,7 +279,7 @@ try {
     # Handle extract-only mode
     if (`$Extract) {
         Write-Info "Extract-only mode specified"
-        `$extractPath = if (`$InstallPath -eq "$($InstallerConfig.DefaultInstallPath)") { ".\proc-wolf-extracted" } else { `$InstallPath }
+        `$extractPath = if (`$InstallPath -eq "$($InstallerConfig.DefaultInstallPath)") { ".\file-utils-ii-extracted" } else { `$InstallPath }
         
         if (Expand-EmbeddedArchive -DestinationPath `$extractPath) {
             Write-Success "Files extracted to: `$extractPath"
@@ -376,7 +376,7 @@ function Write-BuildSummary {
     $installerInfo = Get-Item $InstallerPath
     
     Write-Host "`n" + "="*80 -ForegroundColor Cyan
-    Write-Host "PROC-WOLF INSTALLER BUILD SUMMARY" -ForegroundColor Cyan
+    Write-Host "FILE-UTILS-ii `INSTALLER BUILD SUMMARY" -ForegroundColor Cyan
     Write-Host "="*80 -ForegroundColor Cyan
     
     Write-Host "`nInput:" -ForegroundColor Yellow
@@ -396,15 +396,15 @@ function Write-BuildSummary {
     Write-Host "  - Force overwrite capability"
     
     Write-Host "`nUsage Examples:" -ForegroundColor Green
-    Write-Host "  Default install: .\proc-wolf-installer.ps1"
-    Write-Host "  Custom path: .\proc-wolf-installer.ps1 -InstallPath 'C:\MyApps\proc-wolf'"
-    Write-Host "  Extract only: .\proc-wolf-installer.ps1 -Extract"
-    Write-Host "  Quiet install: .\proc-wolf-installer.ps1 -Quiet"
-    Write-Host "  No service: .\proc-wolf-installer.ps1 -NoService"
+    Write-Host "  Default install: .\file-utils-ii-installer.ps1"
+    Write-Host "  Custom path: .\file-utils-ii-installer.ps1 -InstallPath 'C:\MyApps\proc-wolf'"
+    Write-Host "  Extract only: .\file-utils-ii-installer.ps1 -Extract"
+    Write-Host "  Quiet install: .\file-utils-ii-installer.ps1 -Quiet"
+    Write-Host "  No service: .\file-utils-ii-installer.ps1 -NoService"
     
     Write-Host "`nNext Steps:" -ForegroundColor Green
-    Write-Host "  1. Test the installer: .\proc-wolf-installer.ps1 -Extract"
-    Write-Host "  2. Run Convert-ProcWolfToExe.ps1 to create final .exe"
+    Write-Host "  1. Test the installer: .\file-utils-ii-installer.ps1 -Extract"
+    Write-Host "  2. Run Convert-fileutilsiiToExe.ps1 to create final .exe"
     Write-Host "  3. Generate checksums for distribution"
     
     Write-Host "`n" + "="*80 -ForegroundColor Cyan

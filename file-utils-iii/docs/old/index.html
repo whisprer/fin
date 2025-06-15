@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonant Search - Quantum-Inspired Web Search</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="/assets/favicon.ico">
+    <meta name="description" content="Resonant Search is a quantum-inspired web search engine using advanced algorithms for more relevant results.">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="/assets/logo.svg" alt="Resonant Search Logo">
+                <h1>Resonant Search</h1>
+            </div>
+            <div class="tagline">Quantum-Inspired Web Search Engine</div>
+        </header>
+        
+        <main>
+            <section class="search-section">
+                <form id="search-form" action="/api/search" method="GET">
+                    <div class="search-box">
+                        <input type="text" name="q" id="query" placeholder="Enter your quantum resonant query..." aria-label="Search query" autofocus>
+                        <button type="submit">Search</button>
+                    </div>
+                    <div class="search-options">
+                        <label>
+                            <input type="checkbox" id="quantum-scoring" checked>
+                            Enable Quantum Scoring
+                        </label>
+                        <label>
+                            <input type="checkbox" id="persistence-scoring" checked>
+                            Enable Persistence Scoring
+                        </label>
+                    </div>
+                </form>
+            </section>
+            
+            <section id="results-section" class="results-section" style="display: none;">
+                <div class="stats-bar">
+                    <span id="result-stats"></span>
+                </div>
+                <div id="search-results" class="search-results">
+                    <!-- Results will be populated here -->
+                </div>
+            </section>
+            
+            <section class="about-section">
+                <h2>About Resonant Search</h2>
+                <p>
+                    Resonant Search is a quantum-inspired search engine that uses concepts from quantum mechanics,
+                    persistence theory, and biorthogonal vector spaces to provide more contextually relevant and 
+                    intuitive search results.
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <h3>Quantum Resonance</h3>
+                        <p>
+                            Using principles inspired by quantum physics, our search algorithm finds subtle 
+                            connections between concepts that traditional keyword matching might miss.
+                            This enables a deeper understanding of context and meaning.
+                        </p>
+                    </div>
+                    <div class="feature">
+                        <h3>Persistence Theory</h3>
+                        <p>
+                            Drawing from thermodynamic models, we measure how information persists and 
+                            evolves over time. This helps surface content that remains relevant despite 
+                            changing contexts and information landscapes.
+                        </p>
+                    </div>
+                    <div class="feature">
+                        <h3>Biorthogonal Vectors</h3>
+                        <p>
+                            Our search uses sophisticated mathematical models to capture semantic 
+                            relationships from multiple perspectives simultaneously, allowing for 
+                            richer representation of information and more nuanced matching.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 whispr.dev Resonant Search Engine. All rights reserved.</p>
+            <p>Built with ❤️ by the team at whispr.dev</p>
+        </footer>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>

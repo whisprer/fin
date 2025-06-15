@@ -1,6 +1,6 @@
-# Build-ProcWolfArchive.ps1
-# Creates the initial archive collection of proc-wolf files
-# Part 1 of the proc-wolf self-extracting installer build process
+# 1-build-archive.ps1
+# Creates the initial archive collection of file-utils-ii files
+# Part 1 of the file-utils-ii self-extracting installer build process
 
 param(
     [string]$SourceDir = ".",
@@ -10,34 +10,34 @@ param(
 )
 
 # Color output functions
-function Write-Success { param($Message) Write-Host "✓ $Message" -ForegroundColor Green }
-function Write-Error { param($Message) Write-Host "✗ $Message" -ForegroundColor Red }
-function Write-Warning { param($Message) Write-Host "⚠ $Message" -ForegroundColor Yellow }
-function Write-Info { param($Message) Write-Host "ℹ $Message" -ForegroundColor Cyan }
-function Write-Step { param($Message) Write-Host "➤ $Message" -ForegroundColor Magenta }
+function Write-Success { param($Message) Write-Host ":D $Message" -ForegroundColor Green }
+function Write-Error { param($Message) Write-Host "D: $Message" -ForegroundColor Red }
+function Write-Warning { param($Message) Write-Host ":/ $Message" -ForegroundColor Yellow }
+function Write-Info { param($Message) Write-Host ":) $Message" -ForegroundColor Cyan }
+function Write-Step { param($Message) Write-Host ":| $Message" -ForegroundColor Magenta }
 
 # Configuration
 $ErrorActionPreference = "Stop"
 $BuildInfo = @{
-    Name = "proc-wolf"
+    Name = "file-utils-ii"
     Version = "3.0"
     BuildDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     RequiredFiles = @(
-        "ProcWolf.exe",
-        "ProcWolfCLI.exe", 
-        "ProcWolfService.exe",
+        "file-utils-ii.exe",
+        "file-utils-ii-CLI.exe", 
+        "file-utils-ii-svc.exe",
         "install.bat",
         "uninstall.bat",
         "README.txt",
-        "proc_wolf_full_3-0.py"
+        "file-utils-ii_full_3-0.py"
     )
     OptionalFiles = @(
-        "proc-wolf.ico",
+        "file-utils-ii.ico",
         "config.ini",
         "whitelist.txt",
         "blacklist.txt"
     )
-    OutputArchive = "proc-wolf-files.zip"
+    OutputArchive = "file-utils-ii.7z"
 }
 
 function Test-Prerequisites {
@@ -245,11 +245,11 @@ function Test-Archive {
         $shell = New-Object -ComObject Shell.Application
         $zip = $shell.Namespace($ArchivePath)
         
-        if (-not $zip) {
-            throw "Could not open archive as ZIP file"
+        if (-not $7z) {
+            throw "Could not open archive as 7z file"
         }
         
-        $items = $zip.Items()
+        $items = $7z.Items()
         $fileCount = $items.Count
         
         Write-Success "Archive validation passed"
@@ -279,7 +279,7 @@ function Write-BuildSummary {
     param($ValidationResults, $ArchivePath, $Manifest)
     
     Write-Host "`n" + "="*80 -ForegroundColor Cyan
-    Write-Host "PROC-WOLF ARCHIVE BUILD SUMMARY" -ForegroundColor Cyan
+    Write-Host "file-utils-ii ARCHIVE BUILD SUMMARY" -ForegroundColor Cyan
     Write-Host "="*80 -ForegroundColor Cyan
     
     Write-Host "`nBuild Information:" -ForegroundColor Yellow
@@ -307,15 +307,15 @@ function Write-BuildSummary {
     Write-Host "  Manifest: $(Join-Path (Split-Path $ArchivePath) 'build-manifest.json')"
     
     Write-Host "`nNext Steps:" -ForegroundColor Green
-    Write-Host "  1. Run Build-ProcWolfInstaller.ps1 to create self-extracting installer"
-    Write-Host "  2. Run Convert-ProcWolfToExe.ps1 to create final executable"
+    Write-Host "  1. Run Build-fileutilsiiInstaller.ps1 to create self-extracting installer"
+    Write-Host "  2. Run Convert-fileutilsii2Exe.ps1 to create final executable"
     
     Write-Host "`n" + "="*80 -ForegroundColor Cyan
 }
 
 # Main execution
 try {
-    Write-Host "PROC-WOLF ARCHIVE BUILDER v$($BuildInfo.Version)" -ForegroundColor Cyan
+    Write-Host "file-utils-ii ARCHIVE BUILDER v$($BuildInfo.Version)" -ForegroundColor Cyan
     Write-Host "="*50 -ForegroundColor Cyan
     
     # Test prerequisites

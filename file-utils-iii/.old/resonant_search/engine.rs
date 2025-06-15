@@ -1,0 +1,203 @@
+// src/engine.rs
+
+use crate::tokenizer::PrimeTokenizer;
+use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+use crate::entropy::shannon_entropy;
+use crate::crawler::CrawledDocument; // Requires crawler module, which requires reqwest, tokio, etc.
+
+use std::fs;
+use std::path::{Path, PathBuf};
+use std::io;
+use scraper::Html; // Removed unused Selector
+
+
+/// Represents a processed document in the engine's index.
+struct IndexedDocument {
+    title: String,
+    text: String, // Might store processed text or a summary
+    vector: PrimeVector,
+    entropy: f64,
+    path: PathBuf, // Still using PathBuf, but will store URL as string
+}
+
+/// Represents a search result with scoring details and a snippet.
+pub struct SearchResult {
+    pub title: String,
+    pub resonance: f64,
+    pub delta_entropy: f64,
+    pub score: f64,
+    pub snippet: String,
+    pub path: String, // This will now be the URL for web documents
+}
+
+/// The main search engine struct that manages documents and performs searches.
+pub struct ResonantEngine {
+    tokenizer: PrimeTokenizer,
+    docs: Vec<IndexedDocument>,
+    entropy_weight: f64,
+}
+
+impl ResonantEngine {
+    /// Creates a new `ResonantEngine`.
+    pub fn new() -> Self {
+        ResonantEngine {
+            tokenizer: PrimeTokenizer::new(),
+            docs: Vec::new(),
+            entropy_weight: 0.1,
+        }
+    }
+
+    /// Returns the number of documents in the index.
+    // Added public len method
+    pub fn len(&self) -> usize {
+        self.docs.len()
+    }
+
+    /// Adds a single local file document to the engine's index.
+    #[allow(dead_code)] // Allow dead code since it might not be used with the crawler
+    fn add_local_document(&mut self, title: String, text: String, path: PathBuf) {
+        let tokens = self.tokenizer.tokenize(&text);
+        let vec = build_vector(&tokens);
+        let entropy = shannon_entropy(&tokens);
+
+        self.docs.push(IndexedDocument {
+            title,
+            text,
+            vector: vec,
+            entropy,
+            path,
+        });
+    }
+
+    /// Adds a crawled web document to the engine's index.
+    // Made public
+    pub fn add_crawled_document(&mut self, doc: CrawledDocument) {
+        let tokens = self.tokenizer.tokenize(&doc.text);
+        if tokens.is_empty() {
+            // println!("Skipping indexing for empty web document: {}", doc.url); // Suppress log
+            return;
+        }
+        let vec = build_vector(&tokens);
+        let entropy = shannon_entropy(&tokens);
+
+        // Store the URL string in the path field
+        let doc_path = PathBuf::from(doc.url);
+
+        self.docs.push(IndexedDocument {
+            title: doc.title,
+            text: doc.text, // Store the full text from the crawl
+            vector: vec,
+            entropy,
+            path: doc_path,
+        });
+         // println!("Indexed crawled document: {}", self.docs.last().unwrap().path.display()); // Suppress log
+    }
+
+
+    /// Loads and indexes supported files from a directory and its subdirectories recursively.
+    #[allow(dead_code)] // Allow dead code since it might not be used with the crawler
+    pub fn load_directory<P: AsRef<Path>>(&mut self, folder: P) -> io::Result<()> {
+        let path = folder.as_ref();
+        if !path.is_dir() {
+             return Err(io::Error::new(io::ErrorKind::NotFound, format!("'{}' is not a directory", path.display())));
+        }
+        self.process_directory_recursive(path)
+    }
+
+    /// Recursive helper function to process directories and files.
+    #[allow(dead_code)] // Allow dead code since it might not be used with the crawler
+    fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+        for entry in fs::read_dir(current_dir)? {
+            let entry = entry?;
+            let file_path = entry.path();
+
+            if file_path.is_file() {
+                let extension = file_path.extension().and_then(|s| s.to_str()).unwrap_or("").to_lowercase();
+                 let title = file_path.file_stem()
+                                .and_then(|s| s.to_str())
+                                .unwrap_or_else(|| file_path.file_name().and_then(|s| s.to_str()).unwrap_or("unknown file"))
+                                .to_string();
+
+                let text_content = match extension.as_str() {
+                    "txt" => {
+                        match fs::read_to_string(&file_path) {
+                            Ok(text) => Some(text),
+                            Err(e) => {
+                                eprintln!("Error reading {}: {}", file_path.display(), e);
+                                None
+                            }
+                        }
+                    }
+                    "html" => {
+                        match fs::read_to_string(&file_path) {
+                            Ok(html_string) => {
+                                let fragment = Html::parse_document(&html_string);
+                                let text = fragment.root_element().text().collect::<String>();
+                                Some(text)
+                            }
+                            Err(e) => {
+                                eprintln!("Error reading {}: {}", file_path.display(), e);
+                                None
+                            }
+                        }
+                    }
+                    _ => None,
+                };
+
+                if let Some(text) = text_content {
+                    if !text.trim().is_empty() {
+                         self.add_local_document(title, text, file_path);
+                    } else {
+                        println!("Skipping empty local document after text extraction: {}", file_path.display());
+                    }
+                }
+            } else if file_path.is_dir() {
+                if let Err(e) = self.process_directory_recursive(&file_path) {
+                    eprintln!("Error traversing directory {}: {}", file_path.display(), e);
+                }
+            }
+        }
+        Ok(())
+    }
+
+
+    /// Performs a search query against the indexed documents.
+    /// Returns a vector of `SearchResult`s, sorted by score in descending order.
+    pub fn search(&mut self, query: &str, top_k: usize) -> Vec<SearchResult> {
+        let query_tokens = self.tokenizer.tokenize(query);
+         if query_tokens.is_empty() {
+             return Vec::new();
+         }
+        let query_vec = build_vector(&query_tokens);
+        let query_entropy = shannon_entropy(&query_tokens);
+
+        let mut results: Vec<SearchResult> = self.docs.iter().map(|doc| {
+            let resonance = dot_product(&query_vec, &doc.vector);
+            let delta_entropy = (doc.entropy - query_entropy).abs();
+            let score = resonance - delta_entropy * self.entropy_weight;
+
+            // Generate snippet
+            let snippet_chars: String = doc.text.chars().take(200).collect();
+            let snippet = snippet_chars.trim().replace('\n', " ") + "...";
+
+            SearchResult {
+                title: doc.title.clone(),
+                resonance,
+                delta_entropy,
+                score,
+                snippet,
+                path: doc.path.to_string_lossy().into_owned(), // This will be the URL for web docs
+            }
+        }).collect();
+
+        results.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
+
+        results.into_iter().take(top_k).collect()
+    }
+
+    // Method to set the entropy weight, if needed
+    #[allow(dead_code)]
+    pub fn set_entropy_weight(&mut self, weight: f64) {
+        self.entropy_weight = weight;
+    }
+}

@@ -1,0 +1,3085 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+Loading personal and system profiles took 1425ms.
+ rust  cargo run
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error[E0432]: unresolved import `crate::tokenizer`
+ --> src\main.rs:3:12
+  |
+3 | use crate::tokenizer::PrimeTokenizer;
+  |            ^^^^^^^^^ could not find `tokenizer` in the crate root
+
+error[E0432]: unresolved import `crate::prime_hilbert`
+ --> src\main.rs:4:12
+  |
+4 | use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+  |            ^^^^^^^^^^^^^ could not find `prime_hilbert` in the crate root
+
+error[E0432]: unresolved import `crate::entropy`
+ --> src\main.rs:5:12
+  |
+5 | use crate::entropy::shannon_entropy;
+  |            ^^^^^^^ could not find `entropy` in the crate root
+
+warning: unused import: `Selector`
+  --> src\main.rs:10:21
+   |
+10 | use scraper::{Html, Selector}; // Import necessary items from scraper
+   |                     ^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+error[E0601]: `main` function not found in crate `resonant_search`
+   --> src\main.rs:195:2
+    |
+195 | }
+    |  ^ consider adding a `main` function to `src\main.rs`
+
+Some errors have detailed explanations: E0432, E0601.
+For more information about an error, try `rustc --explain E0432`.
+warning: `resonant_search` (bin "resonant_search") generated 1 warning
+error: could not compile `resonant_search` (bin "resonant_search") due to 4 previous errors; 1 warning emitted
+ rust  cargo run
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+warning: unused import: `Selector`
+  --> src\engine.rs:10:21
+   |
+10 | use scraper::{Html, Selector}; // Import necessary items from scraper
+   |                     ^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: method `set_entropy_weight` is never used
+   --> src\engine.rs:184:12
+    |
+38  | impl ResonantEngine {
+    | ------------------- method in this implementation
+...
+184 |     pub fn set_entropy_weight(&mut self, weight: f64) {
+    |            ^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `resonant_search` (bin "resonant_search") generated 2 warnings (run `cargo fix --bin "resonant_search"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.82s
+     Running `target\debug\resonant_search.exe`
+Initializing Resonant Search Engine...
+Enter the directory path to load documents from (e.g., data/):
+data
+Loading documents from 'data'...
+Documents loaded.
+
+Enter your resonant query (or type 'quit' to exit):
+> red bleeding bones
+
+Searching for resonant matches...
+
+Top Resonant Matches:
+[1] binding_and_collapse
+    Path:           data\binding_and_collapse.txt
+    Resonance:      0.0000
+    Δ Entropy:      0.4150
+    Combined Score: -0.0415
+    Preview:        Pattern binds the void....
+
+[2] binding_and_form
+    Path:           data\binding_and_form.txt
+    Resonance:      0.0000
+    Δ Entropy:      0.4150
+    Combined Score: -0.0415
+    Preview:        Force unfolds the void....
+
+[3] chaos_and_link
+    Path:           data\chaos_and_link.txt
+    Resonance:      0.0000
+    Δ Entropy:      0.4150
+    Combined Score: -0.0415
+    Preview:        Pattern mirrors the structure....
+
+
+Enter your resonant query (or type 'quit' to exit):
+> exit
+
+Searching for resonant matches...
+
+Top Resonant Matches:
+[1] binding_and_collapse
+    Path:           data\binding_and_collapse.txt
+    Resonance:      0.0000
+    Δ Entropy:      2.0000
+    Combined Score: -0.2000
+    Preview:        Pattern binds the void....
+
+[2] binding_and_form
+    Path:           data\binding_and_form.txt
+    Resonance:      0.0000
+    Δ Entropy:      2.0000
+    Combined Score: -0.2000
+    Preview:        Force unfolds the void....
+
+[3] chaos_and_link
+    Path:           data\chaos_and_link.txt
+    Resonance:      0.0000
+    Δ Entropy:      2.0000
+    Combined Score: -0.2000
+    Preview:        Pattern mirrors the structure....
+
+
+Enter your resonant query (or type 'quit' to exit):
+> quit
+Exiting.
+ rust  cargo run
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+ --> src\crawler.rs:5:5
+  |
+5 | use tokio::time::sleep;
+  |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+ --> src\crawler.rs:6:5
+  |
+6 | use tokio::sync::mpsc;
+  |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:13:5
+   |
+13 | use tokio::sync::mpsc;
+   |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0432]: unresolved import `reqwest`
+ --> src\crawler.rs:1:5
+  |
+1 | use reqwest::{Client, Url};
+  |     ^^^^^^^ use of undeclared crate or module `reqwest`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:17:3
+   |
+17 | #[tokio::main]
+   |   ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `futures`
+   --> src\crawler.rs:118:9
+    |
+118 |         futures::future::join_all(worker_handles).await;
+    |         ^^^^^^^ use of undeclared crate or module `futures`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `reqwest`
+   --> src\crawler.rs:133:18
+    |
+133 |             .get(reqwest::header::CONTENT_TYPE)
+    |                  ^^^^^^^ use of undeclared crate or module `reqwest`
+
+warning: unused import: `Selector`
+  --> src\engine.rs:10:21
+   |
+10 | use scraper::{Html, Selector}; // Import necessary items from scraper
+   |                     ^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `std::path::Path`
+  --> src\main.rs:12:5
+   |
+12 | use std::path::Path;
+   |     ^^^^^^^^^^^^^^^
+
+warning: unused import: `scraper::Html`
+  --> src\main.rs:14:5
+   |
+14 | use scraper::Html;
+   |     ^^^^^^^^^^^^^
+
+error[E0061]: this function takes 2 arguments but 1 argument was supplied
+  --> src\main.rs:27:19
+   |
+27 |     let crawler = Crawler::new(doc_sender.clone()); // Pass the sender to the crawler
+   |                   ^^^^^^^^^^^^-------------------- argument #2 is missing
+   |
+note: associated function defined here
+  --> src\crawler.rs:40:12
+   |
+40 |     pub fn new(to_visit_urls: mpsc::Sender<Url>, doc_sender: mpsc::Sender<CrawledDocument>) -> Self {
+   |            ^^^ --------------------------------  -----------------------------------------
+help: provide the argument
+   |
+27 |     let crawler = Crawler::new(doc_sender.clone(), /* doc_sender */); // Pass the sender to the crawler
+   |                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:50:24
+   |
+50 |     let crawl_handle = tokio::spawn(async move {
+   |                        ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0599]: no method named `add_crawled_document` found for struct `ResonantEngine` in the current scope
+  --> src\main.rs:63:16
+   |
+63 |         engine.add_crawled_document(doc);
+   |                ^^^^^^^^^^^^^^^^^^^^ method not found in `ResonantEngine`
+   |
+  ::: src\engine.rs:32:1
+   |
+32 | pub struct ResonantEngine {
+   | ------------------------- method `add_crawled_document` not found for this struct
+
+error[E0616]: field `docs` of struct `ResonantEngine` is private
+  --> src\main.rs:92:87
+   |
+92 |     println!("\nResonant Search Engine is ready. Total documents indexed: {}", engine.docs.len());
+   |                                                                                       ^^^^ private field
+
+error[E0752]: `main` function is not allowed to be `async`
+  --> src\main.rs:18:1
+   |
+18 | async fn main() {
+   | ^^^^^^^^^^^^^^^ `main` function is not allowed to be `async`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\crawler.rs:78:26
+   |
+78 |             let handle = tokio::spawn(async move {
+   |                          ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0282]: type annotations needed for `&mut _`
+  --> src\crawler.rs:72:17
+   |
+72 |             let worker_queue_receiver = &mut queue_receiver;
+   |                 ^^^^^^^^^^^^^^^^^^^^^
+...
+85 |                 while let Some(url) = worker_queue_receiver.recv().await {
+   |                                                             ---- type must be known at this point
+   |
+help: consider giving `worker_queue_receiver` an explicit type, where the placeholders `_` are specified
+   |
+72 |             let worker_queue_receiver: &mut _ = &mut queue_receiver;
+   |                                      ++++++++
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:142:13
+    |
+142 |         let html_string = response.text().await?;
+    |             ^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+    = note: all local variables must have a statically known size
+    = help: unsized locals are gated as an unstable feature
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:142:27
+    |
+142 |         let html_string = response.text().await?;
+    |                           ^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+    = note: all local variables must have a statically known size
+    = help: unsized locals are gated as an unstable feature
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:142:48
+    |
+142 |         let html_string = response.text().await?;
+    |                                                ^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+note: required by a bound in `Break`
+   --> /rustc/4d91de4e48198da2e33413efdcd9cd2cc0c46688\library\core\src\ops\control_flow.rs:94:5
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:142:27
+    |
+142 |         let html_string = response.text().await?;
+    |                           ^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+note: required by a bound in `Continue`
+   --> /rustc/4d91de4e48198da2e33413efdcd9cd2cc0c46688\library\core\src\ops\control_flow.rs:90:5
+
+Some errors have detailed explanations: E0061, E0277, E0282, E0432, E0433, E0599, E0616, E0752.
+For more information about an error, try `rustc --explain E0061`.
+warning: `resonant_search` (bin "resonant_search") generated 3 warnings
+error: could not compile `resonant_search` (bin "resonant_search") due to 18 previous errors; 3 warnings emitted
+ rust  cargo run
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+ --> src\crawler.rs:7:5
+  |
+7 | use tokio::time::sleep;
+  |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+ --> src\crawler.rs:8:5
+  |
+8 | use tokio::sync::mpsc;
+  |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0432]: unresolved import `reqwest`
+ --> src\crawler.rs:3:5
+  |
+3 | use reqwest::{Client, Url};
+  |     ^^^^^^^ use of undeclared crate or module `reqwest`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `futures`
+  --> src\crawler.rs:11:5
+   |
+11 | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+   |     ^^^^^^^ use of undeclared crate or module `futures`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:13:5
+   |
+13 | use tokio::sync::mpsc;
+   |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0432]: unresolved import `futures`
+  --> src\crawler.rs:11:5
+   |
+11 | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+   |     ^^^^^^^ use of undeclared crate or module `futures`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:17:3
+   |
+17 | #[tokio::main]
+   |   ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `reqwest`
+   --> src\crawler.rs:107:18
+    |
+107 |             .get(reqwest::header::CONTENT_TYPE)
+    |                  ^^^^^^^ use of undeclared crate or module `reqwest`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:51:24
+   |
+51 |     let crawl_handle = tokio::spawn(async move {
+   |                        ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0752]: `main` function is not allowed to be `async`
+  --> src\main.rs:18:1
+   |
+18 | async fn main() {
+   | ^^^^^^^^^^^^^^^ `main` function is not allowed to be `async`
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:116:13
+    |
+116 |         let html_string = response.text().await?; // Should return String, which is Sized
+    |             ^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+    = note: all local variables must have a statically known size
+    = help: unsized locals are gated as an unstable feature
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:116:27
+    |
+116 |         let html_string = response.text().await?; // Should return String, which is Sized
+    |                           ^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+    = note: all local variables must have a statically known size
+    = help: unsized locals are gated as an unstable feature
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:116:48
+    |
+116 |         let html_string = response.text().await?; // Should return String, which is Sized
+    |                                                ^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+note: required by a bound in `Break`
+   --> /rustc/4d91de4e48198da2e33413efdcd9cd2cc0c46688\library\core\src\ops\control_flow.rs:94:5
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:116:27
+    |
+116 |         let html_string = response.text().await?; // Should return String, which is Sized
+    |                           ^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+note: required by a bound in `Continue`
+   --> /rustc/4d91de4e48198da2e33413efdcd9cd2cc0c46688\library\core\src\ops\control_flow.rs:90:5
+
+Some errors have detailed explanations: E0277, E0432, E0433, E0752.
+For more information about an error, try `rustc --explain E0277`.
+error: could not compile `resonant_search` (bin "resonant_search") due to 14 previous errors
+ rust  cargo clean
+     Removed 954 files, 365.1MiB total
+ rust  cargo build
+   Compiling cfg-if v1.0.0
+   Compiling zerocopy v0.8.24
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling autocfg v1.4.0
+   Compiling siphasher v1.0.1
+   Compiling siphasher v0.3.11
+   Compiling smallvec v1.15.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling new_debug_unreachable v1.0.6
+   Compiling parking_lot_core v0.9.10
+   Compiling serde v1.0.219
+   Compiling getrandom v0.2.15
+   Compiling scopeguard v1.2.0
+   Compiling syn v1.0.109
+   Compiling mac v0.1.1
+   Compiling rand_core v0.6.4
+   Compiling phf_shared v0.11.3
+   Compiling phf_shared v0.10.0
+   Compiling precomputed-hash v0.1.1
+   Compiling futf v0.1.5
+   Compiling phf v0.10.1
+   Compiling log v0.4.27
+   Compiling version_check v0.9.5
+   Compiling lock_api v0.4.12
+   Compiling num-traits v0.2.19
+   Compiling utf-8 v0.7.6
+   Compiling dtoa v1.0.10
+   Compiling tendril v0.4.3
+   Compiling memchr v2.7.4
+   Compiling ahash v0.8.11
+   Compiling dtoa-short v0.3.5
+   Compiling stable_deref_trait v1.2.0
+   Compiling hamming v0.1.3
+   Compiling byteorder v1.5.0
+   Compiling itoa v1.0.15
+   Compiling servo_arc v0.3.0
+   Compiling windows-targets v0.52.6
+   Compiling aho-corasick v1.1.3
+   Compiling primal-bit v0.3.2
+   Compiling regex-syntax v0.8.5
+   Compiling fxhash v0.2.1
+   Compiling quote v1.0.40
+   Compiling zerocopy v0.7.35
+   Compiling bitflags v2.9.0
+   Compiling once_cell v1.21.3
+   Compiling syn v2.0.100
+   Compiling parking_lot v0.12.3
+   Compiling unicode-width v0.1.14
+   Compiling primal-estimate v0.3.3
+   Compiling ego-tree v0.6.3
+   Compiling primal-sieve v0.3.7
+   Compiling num-integer v0.1.46
+   Compiling getopts v0.2.21
+   Compiling ppv-lite86 v0.2.21
+   Compiling primal-check v0.3.4
+   Compiling primal v0.3.3
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling string_cache v0.8.9
+   Compiling regex-automata v0.4.9
+   Compiling phf_generator v0.11.3
+   Compiling phf_generator v0.10.0
+   Compiling phf_codegen v0.10.0
+   Compiling string_cache_codegen v0.5.4
+   Compiling selectors v0.25.0
+   Compiling markup5ever v0.11.0
+   Compiling phf_macros v0.11.3
+   Compiling cssparser-macros v0.6.1
+   Compiling derive_more v0.99.19
+   Compiling html5ever v0.26.0
+   Compiling phf v0.11.3
+   Compiling regex v1.11.1
+   Compiling cssparser v0.31.2
+   Compiling scraper v0.17.1
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+ --> src\crawler.rs:7:5
+  |
+7 | use tokio::time::sleep;
+  |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+ --> src\crawler.rs:8:5
+  |
+8 | use tokio::sync::mpsc;
+  |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0432]: unresolved import `reqwest`
+ --> src\crawler.rs:3:5
+  |
+3 | use reqwest::{Client, Url};
+  |     ^^^^^^^ use of undeclared crate or module `reqwest`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `futures`
+  --> src\crawler.rs:11:5
+   |
+11 | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+   |     ^^^^^^^ use of undeclared crate or module `futures`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:13:5
+   |
+13 | use tokio::sync::mpsc;
+   |     ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0432]: unresolved import `futures`
+  --> src\crawler.rs:11:5
+   |
+11 | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+   |     ^^^^^^^ use of undeclared crate or module `futures`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:17:3
+   |
+17 | #[tokio::main]
+   |   ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `reqwest`
+   --> src\crawler.rs:107:18
+    |
+107 |             .get(reqwest::header::CONTENT_TYPE)
+    |                  ^^^^^^^ use of undeclared crate or module `reqwest`
+
+error[E0433]: failed to resolve: use of undeclared crate or module `tokio`
+  --> src\main.rs:51:24
+   |
+51 |     let crawl_handle = tokio::spawn(async move {
+   |                        ^^^^^ use of undeclared crate or module `tokio`
+
+error[E0752]: `main` function is not allowed to be `async`
+  --> src\main.rs:18:1
+   |
+18 | async fn main() {
+   | ^^^^^^^^^^^^^^^ `main` function is not allowed to be `async`
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:116:13
+    |
+116 |         let html_string = response.text().await?; // Should return String, which is Sized
+    |             ^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+    = note: all local variables must have a statically known size
+    = help: unsized locals are gated as an unstable feature
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:116:27
+    |
+116 |         let html_string = response.text().await?; // Should return String, which is Sized
+    |                           ^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+    = note: all local variables must have a statically known size
+    = help: unsized locals are gated as an unstable feature
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:116:48
+    |
+116 |         let html_string = response.text().await?; // Should return String, which is Sized
+    |                                                ^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+note: required by a bound in `Break`
+   --> /rustc/4d91de4e48198da2e33413efdcd9cd2cc0c46688\library\core\src\ops\control_flow.rs:94:5
+
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+   --> src\crawler.rs:116:27
+    |
+116 |         let html_string = response.text().await?; // Should return String, which is Sized
+    |                           ^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
+    |
+    = help: the trait `Sized` is not implemented for `str`
+note: required by a bound in `Continue`
+   --> /rustc/4d91de4e48198da2e33413efdcd9cd2cc0c46688\library\core\src\ops\control_flow.rs:90:5
+
+Some errors have detailed explanations: E0277, E0432, E0433, E0752.
+For more information about an error, try `rustc --explain E0277`.
+error: could not compile `resonant_search` (bin "resonant_search") due to 14 previous errors
+ rust  cargo clean
+     Removed 710 files, 315.0MiB total
+ rust  cargo build
+   Compiling cfg-if v1.0.0
+   Compiling zerocopy v0.8.24
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling autocfg v1.4.0
+   Compiling siphasher v0.3.11
+   Compiling siphasher v1.0.1
+   Compiling smallvec v1.15.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling parking_lot_core v0.9.10
+   Compiling new_debug_unreachable v1.0.6
+   Compiling serde v1.0.219
+   Compiling getrandom v0.2.15
+   Compiling scopeguard v1.2.0
+   Compiling syn v1.0.109
+   Compiling rand_core v0.6.4
+   Compiling phf_shared v0.11.3
+   Compiling phf_shared v0.10.0
+   Compiling precomputed-hash v0.1.1
+   Compiling mac v0.1.1
+   Compiling futf v0.1.5
+   Compiling phf v0.10.1
+   Compiling dtoa v1.0.10
+   Compiling version_check v0.9.5
+   Compiling log v0.4.27
+   Compiling lock_api v0.4.12
+   Compiling num-traits v0.2.19
+   Compiling utf-8 v0.7.6
+   Compiling dtoa-short v0.3.5
+   Compiling hamming v0.1.3
+   Compiling tendril v0.4.3
+   Compiling ahash v0.8.11
+   Compiling itoa v1.0.15
+   Compiling byteorder v1.5.0
+   Compiling memchr v2.7.4
+   Compiling stable_deref_trait v1.2.0
+   Compiling fxhash v0.2.1
+   Compiling primal-bit v0.3.2
+   Compiling aho-corasick v1.1.3
+   Compiling servo_arc v0.3.0
+   Compiling unicode-width v0.1.14
+   Compiling bitflags v2.9.0
+   Compiling regex-syntax v0.8.5
+   Compiling windows-targets v0.52.6
+   Compiling primal-estimate v0.3.3
+   Compiling once_cell v1.21.3
+   Compiling zerocopy v0.7.35
+   Compiling getopts v0.2.21
+   Compiling primal-sieve v0.3.7
+   Compiling ego-tree v0.6.3
+   Compiling quote v1.0.40
+   Compiling parking_lot v0.12.3
+   Compiling syn v2.0.100
+   Compiling num-integer v0.1.46
+   Compiling primal-check v0.3.4
+   Compiling primal v0.3.3
+   Compiling ppv-lite86 v0.2.21
+   Compiling regex-automata v0.4.9
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling string_cache v0.8.9
+   Compiling phf_generator v0.11.3
+   Compiling phf_generator v0.10.0
+   Compiling phf_codegen v0.10.0
+   Compiling string_cache_codegen v0.5.4
+   Compiling selectors v0.25.0
+   Compiling markup5ever v0.11.0
+   Compiling regex v1.11.1
+   Compiling phf_macros v0.11.3
+   Compiling cssparser-macros v0.6.1
+   Compiling derive_more v0.99.19
+   Compiling html5ever v0.26.0
+   Compiling phf v0.11.3
+   Compiling cssparser v0.31.2
+   Compiling scraper v0.17.1
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+warning: unused import: `Selector`
+  --> src\engine.rs:10:21
+   |
+10 | use scraper::{Html, Selector}; // Import necessary items from scraper
+   |                     ^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: method `set_entropy_weight` is never used
+   --> src\engine.rs:184:12
+    |
+38  | impl ResonantEngine {
+    | ------------------- method in this implementation
+...
+184 |     pub fn set_entropy_weight(&mut self, weight: f64) {
+    |            ^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `resonant_search` (bin "resonant_search") generated 2 warnings (run `cargo fix --bin "resonant_search"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 31.39s
+ rust  cargo run
+warning: unused import: `Selector`
+  --> src\engine.rs:10:21
+   |
+10 | use scraper::{Html, Selector}; // Import necessary items from scraper
+   |                     ^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: method `set_entropy_weight` is never used
+   --> src\engine.rs:184:12
+    |
+38  | impl ResonantEngine {
+    | ------------------- method in this implementation
+...
+184 |     pub fn set_entropy_weight(&mut self, weight: f64) {
+    |            ^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `resonant_search` (bin "resonant_search") generated 2 warnings (run `cargo fix --bin "resonant_search"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target\debug\resonant_search.exe`
+Initializing Resonant Search Engine...
+Enter the directory path to load documents from (e.g., data/):
+https://google.com/
+Error: Directory 'https://google.com/' not found.
+ rust  cargo clean
+error: failed to parse manifest at `D:\code\repos\GitHub_Desktop\resonant_search\rust\Cargo.toml`
+
+Caused by:
+  no targets specified in the manifest
+  either src/lib.rs, src/main.rs, a [lib] section, or [[bin]] section must be present
+ rust  cargo build
+error: failed to parse manifest at `D:\code\repos\GitHub_Desktop\resonant_search\rust\Cargo.toml`
+
+Caused by:
+  no targets specified in the manifest
+  either src/lib.rs, src/main.rs, a [lib] section, or [[bin]] section must be present
+ rust  cargo run^C
+ rust  cargo clean
+error: failed to parse manifest at `D:\code\repos\GitHub_Desktop\resonant_search\rust\Cargo.toml`
+
+Caused by:
+  no targets specified in the manifest
+  either src/lib.rs, src/main.rs, a [lib] section, or [[bin]] section must be present
+ rust  cargo build
+error: failed to parse manifest at `D:\code\repos\GitHub_Desktop\resonant_search\rust\Cargo.toml`
+
+Caused by:
+  no targets specified in the manifest
+  either src/lib.rs, src/main.rs, a [lib] section, or [[bin]] section must be present
+ rust  cargo build
+error: failed to parse manifest at `D:\code\repos\GitHub_Desktop\resonant_search\rust\Cargo.toml`
+
+Caused by:
+  no targets specified in the manifest
+  either src/lib.rs, src/main.rs, a [lib] section, or [[bin]] section must be present
+ rust  cargo run
+error: failed to parse manifest at `D:\code\repos\GitHub_Desktop\resonant_search\rust\Cargo.toml`
+
+Caused by:
+  no targets specified in the manifest
+  either src/lib.rs, src/main.rs, a [lib] section, or [[bin]] section must be present
+ rust  dir
+
+
+    Directory: D:\code\repos\GitHub_Desktop\resonant_search\rust
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        23/04/2025     13:32                data
+d-----        04/05/2025     08:17                src
+d-----        04/05/2025     08:08                target
+-a----        21/04/2025     14:06            260 Cargo.toml
+
+
+ rust  cargo clean
+error: failed to parse manifest at `D:\code\repos\GitHub_Desktop\resonant_search\rust\Cargo.toml`
+
+Caused by:
+  no targets specified in the manifest
+  either src/lib.rs, src/main.rs, a [lib] section, or [[bin]] section must be present
+ rust  cargo clean
+error: failed to parse manifest at `D:\code\repos\GitHub_Desktop\resonant_search\rust\Cargo.toml`
+
+Caused by:
+  no targets specified in the manifest
+  either src/lib.rs, src/main.rs, a [lib] section, or [[bin]] section must be present
+ rust  cargo clean
+     Removed 833 files, 357.0MiB total
+ rust  cargo build
+    Updating crates.io index
+     Locking 235 packages to latest compatible versions
+      Adding scraper v0.17.1 (available: v0.23.1)
+  Downloaded cc v1.2.21
+  Downloaded h2 v0.4.9
+  Downloaded hyper-rustls v0.27.5
+  Downloaded hyper-tls v0.6.0
+  Downloaded http-body v1.0.1
+  Downloaded reqwest v0.12.15
+  Downloaded tokio-native-tls v0.3.1
+  Downloaded tower-layer v0.3.3
+  Downloaded windows-result v0.3.2
+  Downloaded rustls-webpki v0.103.1
+  Downloaded http-body-util v0.1.3
+  Downloaded native-tls v0.2.14
+  Downloaded libc v0.2.172
+  Downloaded windows-registry v0.4.0
+  Downloaded tokio-rustls v0.26.2
+  Downloaded windows-targets v0.53.0
+  Downloaded windows-strings v0.3.1
+  Downloaded schannel v0.1.27
+  Downloaded hyper-util v0.1.11
+  Downloaded tower v0.5.2
+  Downloaded rustls-pemfile v2.2.0
+  Downloaded sync_wrapper v1.0.2
+  Downloaded windows-link v0.1.1
+  Downloaded windows_x86_64_gnu v0.53.0
+  Downloaded hyper v1.6.0
+  Downloaded rustls v0.23.26
+  Downloaded 26 crates (4.0 MB) in 4.71s
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling cfg-if v1.0.0
+   Compiling autocfg v1.4.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling smallvec v1.15.0
+   Compiling zerocopy v0.8.25
+   Compiling parking_lot_core v0.9.10
+   Compiling stable_deref_trait v1.2.0
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.16
+   Compiling siphasher v1.0.1
+   Compiling getrandom v0.2.16
+   Compiling futures-core v0.3.31
+   Compiling siphasher v0.3.11
+   Compiling itoa v1.0.15
+   Compiling bytes v1.10.1
+   Compiling rand_core v0.6.4
+   Compiling phf_shared v0.11.3
+   Compiling memchr v2.7.4
+   Compiling futures-sink v0.3.31
+   Compiling phf_shared v0.10.0
+   Compiling icu_locid_transform_data v1.5.1
+   Compiling writeable v0.5.5
+   Compiling once_cell v1.21.3
+   Compiling litemap v0.7.5
+   Compiling lock_api v0.4.12
+   Compiling slab v0.4.9
+   Compiling futures-channel v0.3.31
+   Compiling icu_properties_data v1.5.1
+   Compiling fnv v1.0.7
+   Compiling futures-io v0.3.31
+   Compiling serde v1.0.219
+   Compiling pin-utils v0.1.0
+   Compiling futures-task v0.3.31
+   Compiling http v1.3.1
+   Compiling new_debug_unreachable v1.0.6
+   Compiling icu_normalizer_data v1.5.1
+   Compiling tracing-core v0.1.33
+   Compiling quote v1.0.40
+   Compiling windows-targets v0.52.6
+   Compiling httparse v1.10.1
+   Compiling equivalent v1.0.2
+   Compiling windows-sys v0.52.0
+   Compiling syn v1.0.109
+   Compiling syn v2.0.101
+   Compiling parking_lot v0.12.3
+   Compiling hashbrown v0.15.3
+   Compiling windows-sys v0.59.0
+   Compiling tracing v0.1.41
+   Compiling http-body v1.0.1
+   Compiling num-traits v0.2.19
+   Compiling ppv-lite86 v0.2.21
+   Compiling indexmap v2.9.0
+   Compiling write16 v1.0.0
+   Compiling precomputed-hash v0.1.1
+   Compiling log v0.4.27
+   Compiling native-tls v0.2.14
+   Compiling rand_chacha v0.3.1
+   Compiling libc v0.2.172
+   Compiling mac v0.1.1
+   Compiling utf16_iter v1.0.5
+   Compiling windows_x86_64_gnu v0.53.0
+   Compiling utf8_iter v1.0.4
+   Compiling try-lock v0.2.5
+   Compiling atomic-waker v1.1.2
+   Compiling want v0.3.1
+   Compiling futf v0.1.5
+   Compiling rand v0.8.5
+   Compiling socket2 v0.5.9
+   Compiling mio v1.0.3
+   Compiling phf v0.10.1
+   Compiling phf_generator v0.11.3
+   Compiling phf_generator v0.10.0
+   Compiling version_check v0.9.5
+   Compiling dtoa v1.0.10
+   Compiling percent-encoding v2.3.1
+   Compiling utf-8 v0.7.6
+   Compiling tower-service v0.3.3
+   Compiling synstructure v0.13.2
+   Compiling windows-link v0.1.1
+   Compiling phf_codegen v0.10.0
+   Compiling string_cache_codegen v0.5.4
+   Compiling schannel v0.1.27
+   Compiling form_urlencoded v1.2.1
+   Compiling dtoa-short v0.3.5
+   Compiling tendril v0.4.3
+   Compiling selectors v0.25.0
+   Compiling string_cache v0.8.9
+   Compiling hamming v0.1.3
+   Compiling ahash v0.8.11
+   Compiling byteorder v1.5.0
+   Compiling primal-bit v0.3.2
+   Compiling windows-targets v0.53.0
+   Compiling markup5ever v0.11.0
+   Compiling fxhash v0.2.1
+   Compiling windows-result v0.3.2
+   Compiling windows-strings v0.3.1
+   Compiling http-body-util v0.1.3
+   Compiling aho-corasick v1.1.3
+   Compiling sync_wrapper v1.0.2
+   Compiling servo_arc v0.3.0
+   Compiling unicode-width v0.1.14
+   Compiling tower-layer v0.3.3
+   Compiling ryu v1.0.20
+   Compiling num-integer v0.1.46
+   Compiling zerocopy v0.7.35
+   Compiling bitflags v2.9.0
+   Compiling regex-syntax v0.8.5
+   Compiling rustls-pki-types v1.11.0
+   Compiling primal-estimate v0.3.3
+   Compiling serde_urlencoded v0.7.1
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.7.5
+   Compiling zerovec-derive v0.10.3
+   Compiling displaydoc v0.2.5
+   Compiling tokio-macros v2.5.0
+   Compiling futures-macro v0.3.31
+   Compiling icu_provider_macros v1.5.0
+   Compiling phf_macros v0.11.3
+   Compiling html5ever v0.26.0
+   Compiling cssparser-macros v0.6.1
+   Compiling tokio v1.44.2
+   Compiling derive_more v0.99.20
+   Compiling futures-util v0.3.31
+   Compiling phf v0.11.3
+   Compiling rustls-pemfile v2.2.0
+   Compiling regex-automata v0.4.9
+   Compiling primal-sieve v0.3.7
+   Compiling primal-check v0.3.4
+   Compiling getopts v0.2.21
+   Compiling zerofrom v0.1.6
+   Compiling cssparser v0.31.2
+   Compiling windows-registry v0.4.0
+   Compiling encoding_rs v0.8.35
+   Compiling ipnet v2.11.0
+   Compiling yoke v0.7.5
+   Compiling ego-tree v0.6.3
+   Compiling mime v0.3.17
+   Compiling base64 v0.22.1
+   Compiling zerovec v0.10.4
+   Compiling primal v0.3.3
+   Compiling regex v1.11.1
+   Compiling tinystr v0.7.6
+   Compiling icu_collections v1.5.0
+   Compiling icu_locid v1.5.0
+   Compiling scraper v0.17.1
+   Compiling futures-executor v0.3.31
+   Compiling futures v0.3.31
+   Compiling icu_provider v1.5.0
+   Compiling icu_locid_transform v1.5.0
+   Compiling icu_properties v1.5.1
+   Compiling tokio-util v0.7.15
+   Compiling tokio-native-tls v0.3.1
+   Compiling tower v0.5.2
+   Compiling h2 v0.4.9
+   Compiling icu_normalizer v1.5.0
+   Compiling idna_adapter v1.2.0
+   Compiling idna v1.0.3
+   Compiling url v2.5.4
+   Compiling hyper v1.6.0
+   Compiling hyper-util v0.1.11
+   Compiling hyper-tls v0.6.0
+   Compiling reqwest v0.12.15
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+warning: unused import: `Selector`
+  --> src\engine.rs:10:21
+   |
+10 | use scraper::{Html, Selector}; // Import necessary items from scraper
+   |                     ^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+error[E0599]: no method named `add_crawled_document` found for struct `ResonantEngine` in the current scope
+  --> src\main.rs:65:16
+   |
+65 |         engine.add_crawled_document(doc);
+   |                ^^^^^^^^^^^^^^^^^^^^ method not found in `ResonantEngine`
+   |
+  ::: src\engine.rs:32:1
+   |
+32 | pub struct ResonantEngine {
+   | ------------------------- method `add_crawled_document` not found for this struct
+
+error[E0599]: no method named `len` found for struct `ResonantEngine` in the current scope
+  --> src\main.rs:73:20
+   |
+73 |          if engine.len() >= 25000 {
+   |                    ^^^ method not found in `ResonantEngine`
+   |
+  ::: src\engine.rs:32:1
+   |
+32 | pub struct ResonantEngine {
+   | ------------------------- method `len` not found for this struct
+   |
+   = help: items from traits can only be used if the trait is implemented and in scope
+   = note: the following trait defines an item `len`, perhaps you need to implement it:
+           candidate #1: `ExactSizeIterator`
+
+error[E0599]: no method named `len` found for struct `ResonantEngine` in the current scope
+  --> src\main.rs:80:82
+   |
+80 |     println!("Indexing of crawled documents finished. Total indexed: {}", engine.len());
+   |                                                                                  ^^^ method not found in `ResonantEngine`
+   |
+  ::: src\engine.rs:32:1
+   |
+32 | pub struct ResonantEngine {
+   | ------------------------- method `len` not found for this struct
+   |
+   = help: items from traits can only be used if the trait is implemented and in scope
+   = note: the following trait defines an item `len`, perhaps you need to implement it:
+           candidate #1: `ExactSizeIterator`
+
+error[E0599]: no method named `len` found for struct `ResonantEngine` in the current scope
+  --> src\main.rs:94:87
+   |
+94 |     println!("\nResonant Search Engine is ready. Total documents indexed: {}", engine.len());
+   |                                                                                       ^^^ method not found in `ResonantEngine`
+   |
+  ::: src\engine.rs:32:1
+   |
+32 | pub struct ResonantEngine {
+   | ------------------------- method `len` not found for this struct
+   |
+   = help: items from traits can only be used if the trait is implemented and in scope
+   = note: the following trait defines an item `len`, perhaps you need to implement it:
+           candidate #1: `ExactSizeIterator`
+
+For more information about this error, try `rustc --explain E0599`.
+warning: `resonant_search` (bin "resonant_search") generated 1 warning
+error: could not compile `resonant_search` (bin "resonant_search") due to 4 previous errors; 1 warning emitted
+ rust  cargo clean
+     Removed 1438 files, 690.1MiB total
+ rust  cargo build
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling cfg-if v1.0.0
+   Compiling autocfg v1.4.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling smallvec v1.15.0
+   Compiling zerocopy v0.8.25
+   Compiling parking_lot_core v0.9.10
+   Compiling stable_deref_trait v1.2.0
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.16
+   Compiling siphasher v1.0.1
+   Compiling getrandom v0.2.16
+   Compiling futures-core v0.3.31
+   Compiling siphasher v0.3.11
+   Compiling bytes v1.10.1
+   Compiling itoa v1.0.15
+   Compiling rand_core v0.6.4
+   Compiling phf_shared v0.11.3
+   Compiling memchr v2.7.4
+   Compiling futures-sink v0.3.31
+   Compiling litemap v0.7.5
+   Compiling phf_shared v0.10.0
+   Compiling once_cell v1.21.3
+   Compiling icu_locid_transform_data v1.5.1
+   Compiling writeable v0.5.5
+   Compiling futures-channel v0.3.31
+   Compiling lock_api v0.4.12
+   Compiling slab v0.4.9
+   Compiling icu_properties_data v1.5.1
+   Compiling fnv v1.0.7
+   Compiling futures-io v0.3.31
+   Compiling pin-utils v0.1.0
+   Compiling serde v1.0.219
+   Compiling futures-task v0.3.31
+   Compiling http v1.3.1
+   Compiling icu_normalizer_data v1.5.1
+   Compiling new_debug_unreachable v1.0.6
+   Compiling tracing-core v0.1.33
+   Compiling syn v1.0.109
+   Compiling windows-targets v0.52.6
+   Compiling hashbrown v0.15.3
+   Compiling quote v1.0.40
+   Compiling equivalent v1.0.2
+   Compiling httparse v1.10.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling windows-sys v0.52.0
+   Compiling windows-sys v0.59.0
+   Compiling tracing v0.1.41
+   Compiling http-body v1.0.1
+   Compiling syn v2.0.101
+   Compiling parking_lot v0.12.3
+   Compiling rand_chacha v0.3.1
+   Compiling num-traits v0.2.19
+   Compiling indexmap v2.9.0
+   Compiling precomputed-hash v0.1.1
+   Compiling utf8_iter v1.0.4
+   Compiling rand v0.8.5
+   Compiling try-lock v0.2.5
+   Compiling atomic-waker v1.1.2
+   Compiling native-tls v0.2.14
+   Compiling write16 v1.0.0
+   Compiling mac v0.1.1
+   Compiling log v0.4.27
+   Compiling libc v0.2.172
+   Compiling windows_x86_64_gnu v0.53.0
+   Compiling utf16_iter v1.0.5
+   Compiling futf v0.1.5
+   Compiling want v0.3.1
+   Compiling phf v0.10.1
+   Compiling dtoa v1.0.10
+   Compiling phf_generator v0.11.3
+   Compiling phf_generator v0.10.0
+   Compiling percent-encoding v2.3.1
+   Compiling mio v1.0.3
+   Compiling socket2 v0.5.9
+   Compiling windows-link v0.1.1
+   Compiling version_check v0.9.5
+   Compiling phf_codegen v0.10.0
+   Compiling string_cache_codegen v0.5.4
+   Compiling utf-8 v0.7.6
+   Compiling tower-service v0.3.3
+   Compiling tendril v0.4.3
+   Compiling selectors v0.25.0
+   Compiling form_urlencoded v1.2.1
+   Compiling dtoa-short v0.3.5
+   Compiling string_cache v0.8.9
+   Compiling synstructure v0.13.2
+   Compiling ahash v0.8.11
+   Compiling byteorder v1.5.0
+   Compiling markup5ever v0.11.0
+   Compiling hamming v0.1.3
+   Compiling primal-bit v0.3.2
+   Compiling fxhash v0.2.1
+   Compiling windows-targets v0.53.0
+   Compiling schannel v0.1.27
+   Compiling windows-result v0.3.2
+   Compiling windows-strings v0.3.1
+   Compiling http-body-util v0.1.3
+   Compiling aho-corasick v1.1.3
+   Compiling sync_wrapper v1.0.2
+   Compiling servo_arc v0.3.0
+   Compiling num-integer v0.1.46
+   Compiling zerocopy v0.7.35
+   Compiling regex-syntax v0.8.5
+   Compiling bitflags v2.9.0
+   Compiling primal-estimate v0.3.3
+   Compiling ryu v1.0.20
+   Compiling tower-layer v0.3.3
+   Compiling unicode-width v0.1.14
+   Compiling rustls-pki-types v1.11.0
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.7.5
+   Compiling zerovec-derive v0.10.3
+   Compiling displaydoc v0.2.5
+   Compiling tokio-macros v2.5.0
+   Compiling icu_provider_macros v1.5.0
+   Compiling futures-macro v0.3.31
+   Compiling phf_macros v0.11.3
+   Compiling cssparser-macros v0.6.1
+   Compiling html5ever v0.26.0
+   Compiling derive_more v0.99.20
+   Compiling tokio v1.44.2
+   Compiling rustls-pemfile v2.2.0
+   Compiling futures-util v0.3.31
+   Compiling getopts v0.2.21
+   Compiling regex-automata v0.4.9
+   Compiling phf v0.11.3
+   Compiling serde_urlencoded v0.7.1
+   Compiling primal-sieve v0.3.7
+   Compiling primal-check v0.3.4
+   Compiling windows-registry v0.4.0
+   Compiling encoding_rs v0.8.35
+   Compiling ipnet v2.11.0
+   Compiling ego-tree v0.6.3
+   Compiling zerofrom v0.1.6
+   Compiling base64 v0.22.1
+   Compiling mime v0.3.17
+   Compiling cssparser v0.31.2
+   Compiling yoke v0.7.5
+   Compiling primal v0.3.3
+   Compiling zerovec v0.10.4
+   Compiling regex v1.11.1
+   Compiling tinystr v0.7.6
+   Compiling icu_collections v1.5.0
+   Compiling futures-executor v0.3.31
+   Compiling futures v0.3.31
+   Compiling icu_locid v1.5.0
+   Compiling icu_provider v1.5.0
+   Compiling scraper v0.17.1
+   Compiling tokio-util v0.7.15
+   Compiling tokio-native-tls v0.3.1
+   Compiling tower v0.5.2
+   Compiling icu_locid_transform v1.5.0
+   Compiling h2 v0.4.9
+   Compiling icu_properties v1.5.1
+   Compiling icu_normalizer v1.5.0
+   Compiling hyper v1.6.0
+   Compiling idna_adapter v1.2.0
+   Compiling idna v1.0.3
+   Compiling url v2.5.4
+   Compiling hyper-util v0.1.11
+   Compiling hyper-tls v0.6.0
+   Compiling reqwest v0.12.15
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error[E0432]: unresolved import `engine::ResonantEngine`
+ --> src\main.rs:9:5
+  |
+9 | use engine::ResonantEngine;
+  |     ^^^^^^^^^^^^^^^^^^^^^^ no `ResonantEngine` in `engine`
+
+For more information about this error, try `rustc --explain E0432`.
+error: could not compile `resonant_search` (bin "resonant_search") due to 1 previous error
+ rust  cargo clean
+     Removed 1438 files, 689.6MiB total
+ rust  cargo build
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling cfg-if v1.0.0
+   Compiling autocfg v1.4.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling smallvec v1.15.0
+   Compiling zerocopy v0.8.25
+   Compiling parking_lot_core v0.9.10
+   Compiling stable_deref_trait v1.2.0
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.16
+   Compiling futures-core v0.3.31
+   Compiling getrandom v0.2.16
+   Compiling siphasher v1.0.1
+   Compiling itoa v1.0.15
+   Compiling siphasher v0.3.11
+   Compiling memchr v2.7.4
+   Compiling rand_core v0.6.4
+   Compiling bytes v1.10.1
+   Compiling futures-sink v0.3.31
+   Compiling writeable v0.5.5
+   Compiling phf_shared v0.11.3
+   Compiling phf_shared v0.10.0
+   Compiling litemap v0.7.5
+   Compiling serde v1.0.219
+   Compiling lock_api v0.4.12
+   Compiling slab v0.4.9
+   Compiling icu_locid_transform_data v1.5.1
+   Compiling once_cell v1.21.3
+   Compiling futures-channel v0.3.31
+   Compiling futures-io v0.3.31
+   Compiling futures-task v0.3.31
+   Compiling icu_properties_data v1.5.1
+   Compiling fnv v1.0.7
+   Compiling pin-utils v0.1.0
+   Compiling icu_normalizer_data v1.5.1
+   Compiling new_debug_unreachable v1.0.6
+   Compiling http v1.3.1
+   Compiling tracing-core v0.1.33
+   Compiling windows-targets v0.52.6
+   Compiling httparse v1.10.1
+   Compiling quote v1.0.40
+   Compiling syn v1.0.109
+   Compiling equivalent v1.0.2
+   Compiling windows-sys v0.52.0
+   Compiling hashbrown v0.15.3
+   Compiling windows-sys v0.59.0
+   Compiling syn v2.0.101
+   Compiling http-body v1.0.1
+   Compiling parking_lot v0.12.3
+   Compiling tracing v0.1.41
+   Compiling num-traits v0.2.19
+   Compiling ppv-lite86 v0.2.21
+   Compiling atomic-waker v1.1.2
+   Compiling log v0.4.27
+   Compiling indexmap v2.9.0
+   Compiling try-lock v0.2.5
+   Compiling mac v0.1.1
+   Compiling libc v0.2.172
+   Compiling utf16_iter v1.0.5
+   Compiling precomputed-hash v0.1.1
+   Compiling native-tls v0.2.14
+   Compiling rand_chacha v0.3.1
+   Compiling utf8_iter v1.0.4
+   Compiling write16 v1.0.0
+   Compiling windows_x86_64_gnu v0.53.0
+   Compiling futf v0.1.5
+   Compiling rand v0.8.5
+   Compiling want v0.3.1
+   Compiling socket2 v0.5.9
+   Compiling mio v1.0.3
+   Compiling phf v0.10.1
+   Compiling version_check v0.9.5
+   Compiling synstructure v0.13.2
+   Compiling windows-link v0.1.1
+   Compiling utf-8 v0.7.6
+   Compiling tower-service v0.3.3
+   Compiling dtoa v1.0.10
+   Compiling percent-encoding v2.3.1
+   Compiling tendril v0.4.3
+   Compiling dtoa-short v0.3.5
+   Compiling phf_generator v0.11.3
+   Compiling phf_generator v0.10.0
+   Compiling phf_codegen v0.10.0
+   Compiling schannel v0.1.27
+   Compiling form_urlencoded v1.2.1
+   Compiling string_cache_codegen v0.5.4
+   Compiling ahash v0.8.11
+   Compiling selectors v0.25.0
+   Compiling string_cache v0.8.9
+   Compiling serde_json v1.0.140
+   Compiling hamming v0.1.3
+   Compiling ryu v1.0.20
+   Compiling byteorder v1.5.0
+   Compiling primal-bit v0.3.2
+   Compiling windows-targets v0.53.0
+   Compiling markup5ever v0.11.0
+   Compiling windows-result v0.3.2
+   Compiling fxhash v0.2.1
+   Compiling windows-strings v0.3.1
+   Compiling http-body-util v0.1.3
+   Compiling aho-corasick v1.1.3
+   Compiling sync_wrapper v1.0.2
+   Compiling num-integer v0.1.46
+   Compiling servo_arc v0.3.0
+   Compiling rustls-pki-types v1.11.0
+   Compiling primal-estimate v0.3.3
+   Compiling bitflags v2.9.0
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.7.5
+   Compiling zerovec-derive v0.10.3
+   Compiling displaydoc v0.2.5
+   Compiling tokio-macros v2.5.0
+   Compiling icu_provider_macros v1.5.0
+   Compiling futures-macro v0.3.31
+   Compiling phf_macros v0.11.3
+   Compiling cssparser-macros v0.6.1
+   Compiling derive_more v0.99.20
+   Compiling tokio v1.44.2
+   Compiling unicode-width v0.1.14
+   Compiling phf v0.11.3
+   Compiling futures-util v0.3.31
+   Compiling tower-layer v0.3.3
+   Compiling zerocopy v0.7.35
+   Compiling regex-syntax v0.8.5
+   Compiling getopts v0.2.21
+   Compiling cssparser v0.31.2
+   Compiling rustls-pemfile v2.2.0
+   Compiling primal-sieve v0.3.7
+   Compiling primal-check v0.3.4
+   Compiling windows-registry v0.4.0
+   Compiling zerofrom v0.1.6
+   Compiling serde_urlencoded v0.7.1
+   Compiling encoding_rs v0.8.35
+   Compiling ego-tree v0.6.3
+   Compiling html5ever v0.26.0
+   Compiling base64 v0.22.1
+   Compiling yoke v0.7.5
+   Compiling mime v0.3.17
+   Compiling ipnet v2.11.0
+   Compiling primal v0.3.3
+   Compiling zerovec v0.10.4
+   Compiling regex-automata v0.4.9
+   Compiling tinystr v0.7.6
+   Compiling icu_collections v1.5.0
+   Compiling icu_locid v1.5.0
+   Compiling futures-executor v0.3.31
+   Compiling futures v0.3.31
+   Compiling icu_provider v1.5.0
+   Compiling tokio-util v0.7.15
+   Compiling tokio-native-tls v0.3.1
+   Compiling tower v0.5.2
+   Compiling regex v1.11.1
+   Compiling icu_locid_transform v1.5.0
+   Compiling h2 v0.4.9
+   Compiling scraper v0.17.1
+   Compiling icu_properties v1.5.1
+   Compiling hyper v1.6.0
+   Compiling icu_normalizer v1.5.0
+   Compiling idna_adapter v1.2.0
+   Compiling idna v1.0.3
+   Compiling url v2.5.4
+   Compiling hyper-util v0.1.11
+   Compiling hyper-tls v0.6.0
+   Compiling reqwest v0.12.15
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error[E0428]: the name `CrawledDocument` is defined multiple times
+   --> src\crawler.rs:167:1
+    |
+26  | pub struct CrawledDocument {
+    | -------------------------- previous definition of the type `CrawledDocument` here
+...
+167 | pub struct CrawledDocument {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^ `CrawledDocument` redefined here
+    |
+    = note: `CrawledDocument` must be defined only once in the type namespace of this module
+
+error[E0428]: the name `Crawler` is defined multiple times
+   --> src\crawler.rs:174:1
+    |
+33  | pub struct Crawler {
+    | ------------------ previous definition of the type `Crawler` here
+...
+174 | pub struct Crawler {
+    | ^^^^^^^^^^^^^^^^^^ `Crawler` redefined here
+    |
+    = note: `Crawler` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `Client` is defined multiple times
+   --> src\crawler.rs:144:15
+    |
+3   | use reqwest::{Client, Url};
+    |               ------ previous import of the type `Client` here
+...
+144 | use reqwest::{Client, Url};
+    |               ^^^^^^--
+    |               |
+    |               `Client` reimported here
+    |               help: remove unnecessary import
+    |
+    = note: `Client` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `Url` is defined multiple times
+   --> src\crawler.rs:144:23
+    |
+3   | use reqwest::{Client, Url};
+    |                       --- previous import of the type `Url` here
+...
+144 | use reqwest::{Client, Url};
+    |                       ^^^ `Url` reimported here
+    |
+    = note: `Url` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `Html` is defined multiple times
+   --> src\crawler.rs:145:15
+    |
+4   | use scraper::{Html, Selector};
+    |               ---- previous import of the type `Html` here
+...
+145 | use scraper::{Html, Selector};
+    |               ^^^^--
+    |               |
+    |               `Html` reimported here
+    |               help: remove unnecessary import
+    |
+    = note: `Html` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `Selector` is defined multiple times
+   --> src\crawler.rs:145:21
+    |
+4   | use scraper::{Html, Selector};
+    |                     -------- previous import of the type `Selector` here
+...
+145 | use scraper::{Html, Selector};
+    |                     ^^^^^^^^ `Selector` reimported here
+    |
+    = note: `Selector` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `Duration` is defined multiple times
+   --> src\crawler.rs:147:5
+    |
+6   | use std::time::Duration;
+    |     ------------------- previous import of the type `Duration` here
+...
+147 | use std::time::Duration;
+    |     ^^^^^^^^^^^^^^^^^^^ `Duration` reimported here
+    |
+    = note: `Duration` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `sleep` is defined multiple times
+   --> src\crawler.rs:148:5
+    |
+7   | use tokio::time::sleep;
+    |     ------------------ previous import of the value `sleep` here
+...
+148 | use tokio::time::sleep;
+    |     ^^^^^^^^^^^^^^^^^^ `sleep` reimported here
+    |
+    = note: `sleep` must be defined only once in the value namespace of this module
+
+error[E0252]: the name `mpsc` is defined multiple times
+   --> src\crawler.rs:149:5
+    |
+8   | use tokio::sync::mpsc;
+    |     ----------------- previous import of the module `mpsc` here
+...
+149 | use tokio::sync::mpsc;
+    |     ^^^^^^^^^^^^^^^^^ `mpsc` reimported here
+    |
+    = note: `mpsc` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `Error` is defined multiple times
+   --> src\crawler.rs:150:5
+    |
+9   | use std::error::Error;
+    |     ----------------- previous import of the trait `Error` here
+...
+150 | use std::error::Error;
+    |     ^^^^^^^^^^^^^^^^^ `Error` reimported here
+    |
+    = note: `Error` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `fmt` is defined multiple times
+   --> src\crawler.rs:151:5
+    |
+10  | use std::fmt;
+    |     -------- previous import of the module `fmt` here
+...
+151 | use std::fmt;
+    |     ^^^^^^^^ `fmt` reimported here
+    |
+    = note: `fmt` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `stream` is defined multiple times
+   --> src\crawler.rs:152:23
+    |
+11  | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+    |                       ---- previous import of the module `stream` here
+...
+152 | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+    |                       ^^^^--
+    |                       |
+    |                       `stream` reimported here
+    |                       help: remove unnecessary import
+    |
+    = note: `stream` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `StreamExt` is defined multiple times
+   --> src\crawler.rs:152:29
+    |
+11  | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+    |                             --------- previous import of the trait `StreamExt` here
+...
+152 | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+    |                             ^^^^^^^^^ `StreamExt` reimported here
+    |
+    = note: `StreamExt` must be defined only once in the type namespace of this module
+
+error[E0428]: the name `CrawlerError` is defined multiple times
+   --> src\crawler.rs:156:1
+    |
+15  | struct CrawlerError(String);
+    | ---------------------------- previous definition of the type `CrawlerError` here
+...
+156 | struct CrawlerError(String);
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CrawlerError` redefined here
+    |
+    = note: `CrawlerError` must be defined only once in the type namespace of this module
+
+warning: unused imports: `Client` and `Url`
+   --> src\crawler.rs:144:15
+    |
+144 | use reqwest::{Client, Url};
+    |               ^^^^^^  ^^^
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused imports: `Html` and `Selector`
+   --> src\crawler.rs:145:15
+    |
+145 | use scraper::{Html, Selector};
+    |               ^^^^  ^^^^^^^^
+
+warning: unused import: `std::time::Duration`
+   --> src\crawler.rs:147:5
+    |
+147 | use std::time::Duration;
+    |     ^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `tokio::time::sleep`
+   --> src\crawler.rs:148:5
+    |
+148 | use tokio::time::sleep;
+    |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `tokio::sync::mpsc`
+   --> src\crawler.rs:149:5
+    |
+149 | use tokio::sync::mpsc;
+    |     ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::error::Error`
+   --> src\crawler.rs:150:5
+    |
+150 | use std::error::Error;
+    |     ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::fmt`
+   --> src\crawler.rs:151:5
+    |
+151 | use std::fmt;
+    |     ^^^^^^^^
+
+warning: unused imports: `StreamExt` and `self`
+   --> src\crawler.rs:152:23
+    |
+152 | use futures::stream::{self, StreamExt}; // Import StreamExt for for_each_concurrent
+    |                       ^^^^  ^^^^^^^^^
+
+error[E0119]: conflicting implementations of trait `Debug` for type `crawler::CrawlerError`
+   --> src\crawler.rs:155:10
+    |
+14  | #[derive(Debug)]
+    |          ----- first implementation here
+...
+155 | #[derive(Debug)]
+    |          ^^^^^ conflicting implementation for `crawler::CrawlerError`
+    |
+    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0119]: conflicting implementations of trait `std::fmt::Display` for type `crawler::CrawlerError`
+   --> src\crawler.rs:158:1
+    |
+17  | impl fmt::Display for CrawlerError {
+    | ---------------------------------- first implementation here
+...
+158 | impl fmt::Display for CrawlerError {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `crawler::CrawlerError`
+
+error[E0119]: conflicting implementations of trait `std::error::Error` for type `crawler::CrawlerError`
+   --> src\crawler.rs:164:1
+    |
+23  | impl Error for CrawlerError {}
+    | --------------------------- first implementation here
+...
+164 | impl Error for CrawlerError {}
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `crawler::CrawlerError`
+
+error[E0034]: multiple applicable items in scope
+   --> src\crawler.rs:65:41
+    |
+65  | ...                   match Self::fetch_and_process_url(&client, &url).await {
+    |                                   ^^^^^^^^^^^^^^^^^^^^^ multiple `fetch_and_process_url` found
+    |
+note: candidate #1 is defined in an impl for the type `crawler::Crawler`
+   --> src\crawler.rs:95:5
+    |
+95  |     async fn fetch_and_process_url(client: &Client, url: &Url) -> Result<Option<CrawledDocument>, Box<dyn Error>...
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `crawler::Crawler`
+   --> src\crawler.rs:236:5
+    |
+236 |     async fn fetch_and_process_url(client: &Client, url: &Url) -> Result<Option<CrawledDocument>, Box<dyn Error>...
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0034]: multiple applicable items in scope
+   --> src\crawler.rs:206:41
+    |
+206 | ...                   match Self::fetch_and_process_url(&client, &url).await {
+    |                                   ^^^^^^^^^^^^^^^^^^^^^ multiple `fetch_and_process_url` found
+    |
+note: candidate #1 is defined in an impl for the type `crawler::Crawler`
+   --> src\crawler.rs:95:5
+    |
+95  |     async fn fetch_and_process_url(client: &Client, url: &Url) -> Result<Option<CrawledDocument>, Box<dyn Error>...
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `crawler::Crawler`
+   --> src\crawler.rs:236:5
+    |
+236 |     async fn fetch_and_process_url(client: &Client, url: &Url) -> Result<Option<CrawledDocument>, Box<dyn Error>...
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0592]: duplicate definitions with name `new`
+   --> src\crawler.rs:42:5
+    |
+42  |     pub fn new(doc_sender: mpsc::Sender<CrawledDocument>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `new`
+...
+183 |     pub fn new(doc_sender: mpsc::Sender<CrawledDocument>) -> Self {
+    |     ------------------------------------------------------------- other definition for `new`
+
+error[E0592]: duplicate definitions with name `crawl`
+   --> src\crawler.rs:52:5
+    |
+52  |     pub async fn crawl(&self, urls_to_crawl: Vec<String>, num_workers: usize) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `crawl`
+...
+193 |     pub async fn crawl(&self, urls_to_crawl: Vec<String>, num_workers: usize) {
+    |     ------------------------------------------------------------------------- other definition for `crawl`
+
+error[E0592]: duplicate definitions with name `fetch_and_process_url`
+   --> src\crawler.rs:95:5
+    |
+95  |     async fn fetch_and_process_url(client: &Client, url: &Url) -> Result<Option<CrawledDocument>, Box<dyn Error>...
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `fetch_and_process_url`
+...
+236 |     async fn fetch_and_process_url(client: &Client, url: &Url) -> Result<Option<CrawledDocument>, Box<dyn Error>...
+    |     ------------------------------------------------------------------------------------------------------------- other definition for `fetch_and_process_url`
+
+error[E0034]: multiple applicable items in scope
+   --> src\main.rs:30:28
+    |
+30  |     let crawler = Crawler::new(doc_sender.clone()); // Pass the sender to the crawler
+    |                            ^^^ multiple `new` found
+    |
+note: candidate #1 is defined in an impl for the type `crawler::Crawler`
+   --> src\crawler.rs:42:5
+    |
+42  |     pub fn new(doc_sender: mpsc::Sender<CrawledDocument>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `crawler::Crawler`
+   --> src\crawler.rs:183:5
+    |
+183 |     pub fn new(doc_sender: mpsc::Sender<CrawledDocument>) -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some errors have detailed explanations: E0034, E0119, E0252, E0428, E0592.
+For more information about an error, try `rustc --explain E0034`.
+warning: `resonant_search` (bin "resonant_search") generated 8 warnings
+error: could not compile `resonant_search` (bin "resonant_search") due to 23 previous errors; 8 warnings emitted
+ rust  cargo clean
+     Removed 1458 files, 704.3MiB total
+ rust  cargo build
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling cfg-if v1.0.0
+   Compiling autocfg v1.4.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling smallvec v1.15.0
+   Compiling zerocopy v0.8.25
+   Compiling parking_lot_core v0.9.10
+   Compiling stable_deref_trait v1.2.0
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.16
+   Compiling itoa v1.0.15
+   Compiling getrandom v0.2.16
+   Compiling futures-core v0.3.31
+   Compiling siphasher v0.3.11
+   Compiling siphasher v1.0.1
+   Compiling memchr v2.7.4
+   Compiling bytes v1.10.1
+   Compiling rand_core v0.6.4
+   Compiling futures-sink v0.3.31
+   Compiling phf_shared v0.11.3
+   Compiling phf_shared v0.10.0
+   Compiling icu_locid_transform_data v1.5.1
+   Compiling litemap v0.7.5
+   Compiling writeable v0.5.5
+   Compiling serde v1.0.219
+   Compiling lock_api v0.4.12
+   Compiling slab v0.4.9
+   Compiling once_cell v1.21.3
+   Compiling futures-channel v0.3.31
+   Compiling pin-utils v0.1.0
+   Compiling icu_properties_data v1.5.1
+   Compiling futures-task v0.3.31
+   Compiling fnv v1.0.7
+   Compiling futures-io v0.3.31
+   Compiling new_debug_unreachable v1.0.6
+   Compiling icu_normalizer_data v1.5.1
+   Compiling http v1.3.1
+   Compiling tracing-core v0.1.33
+   Compiling httparse v1.10.1
+   Compiling windows-targets v0.52.6
+   Compiling hashbrown v0.15.3
+   Compiling syn v1.0.109
+   Compiling equivalent v1.0.2
+   Compiling quote v1.0.40
+   Compiling windows-sys v0.52.0
+   Compiling windows-sys v0.59.0
+   Compiling syn v2.0.101
+   Compiling parking_lot v0.12.3
+   Compiling http-body v1.0.1
+   Compiling tracing v0.1.41
+   Compiling num-traits v0.2.19
+   Compiling indexmap v2.9.0
+   Compiling libc v0.2.172
+   Compiling mac v0.1.1
+   Compiling utf8_iter v1.0.4
+   Compiling precomputed-hash v0.1.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling utf16_iter v1.0.5
+   Compiling try-lock v0.2.5
+   Compiling windows_x86_64_gnu v0.53.0
+   Compiling native-tls v0.2.14
+   Compiling atomic-waker v1.1.2
+   Compiling log v0.4.27
+   Compiling write16 v1.0.0
+   Compiling want v0.3.1
+   Compiling phf v0.10.1
+   Compiling futf v0.1.5
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling windows-link v0.1.1
+   Compiling socket2 v0.5.9
+   Compiling mio v1.0.3
+   Compiling version_check v0.9.5
+   Compiling dtoa v1.0.10
+   Compiling tower-service v0.3.3
+   Compiling percent-encoding v2.3.1
+   Compiling utf-8 v0.7.6
+   Compiling phf_generator v0.11.3
+   Compiling synstructure v0.13.2
+   Compiling phf_generator v0.10.0
+   Compiling schannel v0.1.27
+   Compiling phf_codegen v0.10.0
+   Compiling string_cache_codegen v0.5.4
+   Compiling tendril v0.4.3
+   Compiling form_urlencoded v1.2.1
+   Compiling dtoa-short v0.3.5
+   Compiling string_cache v0.8.9
+   Compiling selectors v0.25.0
+   Compiling serde_json v1.0.140
+   Compiling ahash v0.8.11
+   Compiling hamming v0.1.3
+   Compiling ryu v1.0.20
+   Compiling byteorder v1.5.0
+   Compiling markup5ever v0.11.0
+   Compiling primal-bit v0.3.2
+   Compiling windows-targets v0.53.0
+   Compiling windows-result v0.3.2
+   Compiling windows-strings v0.3.1
+   Compiling fxhash v0.2.1
+   Compiling http-body-util v0.1.3
+   Compiling aho-corasick v1.1.3
+   Compiling sync_wrapper v1.0.2
+   Compiling servo_arc v0.3.0
+   Compiling num-integer v0.1.46
+   Compiling rustls-pki-types v1.11.0
+   Compiling tower-layer v0.3.3
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.7.5
+   Compiling zerovec-derive v0.10.3
+   Compiling displaydoc v0.2.5
+   Compiling tokio-macros v2.5.0
+   Compiling icu_provider_macros v1.5.0
+   Compiling futures-macro v0.3.31
+   Compiling phf_macros v0.11.3
+   Compiling cssparser-macros v0.6.1
+   Compiling html5ever v0.26.0
+   Compiling tokio v1.44.2
+   Compiling phf v0.11.3
+   Compiling derive_more v0.99.20
+   Compiling futures-util v0.3.31
+   Compiling bitflags v2.9.0
+   Compiling zerocopy v0.7.35
+   Compiling unicode-width v0.1.14
+   Compiling primal-estimate v0.3.3
+   Compiling regex-syntax v0.8.5
+   Compiling cssparser v0.31.2
+   Compiling primal-sieve v0.3.7
+   Compiling zerofrom v0.1.6
+   Compiling getopts v0.2.21
+   Compiling rustls-pemfile v2.2.0
+   Compiling primal-check v0.3.4
+   Compiling windows-registry v0.4.0
+   Compiling yoke v0.7.5
+   Compiling serde_urlencoded v0.7.1
+   Compiling encoding_rs v0.8.35
+   Compiling zerovec v0.10.4
+   Compiling ipnet v2.11.0
+   Compiling ego-tree v0.6.3
+   Compiling mime v0.3.17
+   Compiling base64 v0.22.1
+   Compiling primal v0.3.3
+   Compiling regex-automata v0.4.9
+   Compiling tinystr v0.7.6
+   Compiling icu_collections v1.5.0
+   Compiling icu_locid v1.5.0
+   Compiling futures-executor v0.3.31
+   Compiling icu_provider v1.5.0
+   Compiling futures v0.3.31
+   Compiling icu_locid_transform v1.5.0
+   Compiling tokio-util v0.7.15
+   Compiling tokio-native-tls v0.3.1
+   Compiling tower v0.5.2
+   Compiling regex v1.11.1
+   Compiling scraper v0.17.1
+   Compiling h2 v0.4.9
+   Compiling icu_properties v1.5.1
+   Compiling icu_normalizer v1.5.0
+   Compiling idna_adapter v1.2.0
+   Compiling hyper v1.6.0
+   Compiling idna v1.0.3
+   Compiling url v2.5.4
+   Compiling hyper-util v0.1.11
+   Compiling hyper-tls v0.6.0
+   Compiling reqwest v0.12.15
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error: future cannot be sent between threads safely
+   --> src\main.rs:51:24
+    |
+51  |       let crawl_handle = tokio::spawn(async move {
+    |  ________________________^
+52  | |         // The crawl function now takes the list of URLs directly
+53  | |         crawler.crawl(seed_urls, num_crawler_workers).await;
+...   |
+56  | |     });
+    | |______^ future created by async block is not `Send`
+    |
+    = help: the trait `std::marker::Send` is not implemented for `dyn std::error::Error`
+note: future is not `Send` as this value is used across an await
+   --> src\crawler.rs:68:74
+    |
+65  | ...                   match Self::fetch_and_process_url(&client, &url).await {
+    |                             ------------------------------------------------ has type `Result<Option<CrawledDocument>, Box<dyn std::error::Error>>` which is not `Send`
+...
+68  | ...                           if let Err(e) = doc_sender.send(doc).await {
+    |                                                                    ^^^^^ await occurs here, with `Self::fetch_and_process_url(&client, &url).await` maybe used later
+note: required by a bound in `tokio::spawn`
+   --> C:\Users\phine\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-1.44.2\src\task\spawn.rs:168:21
+    |
+166 |     pub fn spawn<F>(future: F) -> JoinHandle<F::Output>
+    |            ----- required by a bound in this function
+167 |     where
+168 |         F: Future + Send + 'static,
+    |                     ^^^^ required by this bound in `spawn`
+
+error: could not compile `resonant_search` (bin "resonant_search") due to 1 previous error
+ rust  cargo clean
+     Removed 1458 files, 704.6MiB total
+ rust  cargo build
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling cfg-if v1.0.0
+   Compiling autocfg v1.4.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling smallvec v1.15.0
+   Compiling zerocopy v0.8.25
+   Compiling parking_lot_core v0.9.10
+   Compiling stable_deref_trait v1.2.0
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.16
+   Compiling futures-core v0.3.31
+   Compiling getrandom v0.2.16
+   Compiling siphasher v1.0.1
+   Compiling siphasher v0.3.11
+   Compiling itoa v1.0.15
+   Compiling bytes v1.10.1
+   Compiling rand_core v0.6.4
+   Compiling memchr v2.7.4
+   Compiling futures-sink v0.3.31
+   Compiling phf_shared v0.11.3
+   Compiling phf_shared v0.10.0
+   Compiling serde v1.0.219
+   Compiling litemap v0.7.5
+   Compiling once_cell v1.21.3
+   Compiling icu_locid_transform_data v1.5.1
+   Compiling writeable v0.5.5
+   Compiling lock_api v0.4.12
+   Compiling slab v0.4.9
+   Compiling futures-channel v0.3.31
+   Compiling icu_properties_data v1.5.1
+   Compiling pin-utils v0.1.0
+   Compiling futures-io v0.3.31
+   Compiling futures-task v0.3.31
+   Compiling fnv v1.0.7
+   Compiling icu_normalizer_data v1.5.1
+   Compiling windows-targets v0.52.6
+   Compiling http v1.3.1
+   Compiling new_debug_unreachable v1.0.6
+   Compiling tracing-core v0.1.33
+   Compiling quote v1.0.40
+   Compiling windows-sys v0.52.0
+   Compiling syn v1.0.109
+   Compiling httparse v1.10.1
+   Compiling syn v2.0.101
+   Compiling equivalent v1.0.2
+   Compiling parking_lot v0.12.3
+   Compiling hashbrown v0.15.3
+   Compiling tracing v0.1.41
+   Compiling windows-sys v0.59.0
+   Compiling http-body v1.0.1
+   Compiling num-traits v0.2.19
+   Compiling indexmap v2.9.0
+   Compiling ppv-lite86 v0.2.21
+   Compiling atomic-waker v1.1.2
+   Compiling libc v0.2.172
+   Compiling mac v0.1.1
+   Compiling windows_x86_64_gnu v0.53.0
+   Compiling log v0.4.27
+   Compiling native-tls v0.2.14
+   Compiling socket2 v0.5.9
+   Compiling mio v1.0.3
+   Compiling utf8_iter v1.0.4
+   Compiling rand_chacha v0.3.1
+   Compiling write16 v1.0.0
+   Compiling precomputed-hash v0.1.1
+   Compiling utf16_iter v1.0.5
+   Compiling try-lock v0.2.5
+   Compiling want v0.3.1
+   Compiling phf v0.10.1
+   Compiling futf v0.1.5
+   Compiling rand v0.8.5
+   Compiling dtoa v1.0.10
+   Compiling version_check v0.9.5
+   Compiling utf-8 v0.7.6
+   Compiling windows-link v0.1.1
+   Compiling percent-encoding v2.3.1
+   Compiling tower-service v0.3.3
+   Compiling synstructure v0.13.2
+   Compiling phf_generator v0.11.3
+   Compiling phf_generator v0.10.0
+   Compiling ahash v0.8.11
+   Compiling schannel v0.1.27
+   Compiling phf_codegen v0.10.0
+   Compiling form_urlencoded v1.2.1
+   Compiling string_cache_codegen v0.5.4
+   Compiling tendril v0.4.3
+   Compiling selectors v0.25.0
+   Compiling dtoa-short v0.3.5
+   Compiling string_cache v0.8.9
+   Compiling ryu v1.0.20
+   Compiling byteorder v1.5.0
+   Compiling hamming v0.1.3
+   Compiling serde_json v1.0.140
+   Compiling fxhash v0.2.1
+   Compiling primal-bit v0.3.2
+   Compiling markup5ever v0.11.0
+   Compiling windows-targets v0.53.0
+   Compiling windows-result v0.3.2
+   Compiling windows-strings v0.3.1
+   Compiling http-body-util v0.1.3
+   Compiling aho-corasick v1.1.3
+   Compiling sync_wrapper v1.0.2
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.7.5
+   Compiling zerovec-derive v0.10.3
+   Compiling displaydoc v0.2.5
+   Compiling tokio-macros v2.5.0
+   Compiling icu_provider_macros v1.5.0
+   Compiling futures-macro v0.3.31
+   Compiling phf_macros v0.11.3
+   Compiling cssparser-macros v0.6.1
+   Compiling tokio v1.44.2
+   Compiling num-integer v0.1.46
+   Compiling futures-util v0.3.31
+   Compiling phf v0.11.3
+   Compiling derive_more v0.99.20
+   Compiling servo_arc v0.3.0
+   Compiling zerofrom v0.1.6
+   Compiling html5ever v0.26.0
+   Compiling unicode-width v0.1.14
+   Compiling tower-layer v0.3.3
+   Compiling yoke v0.7.5
+   Compiling cssparser v0.31.2
+   Compiling regex-syntax v0.8.5
+   Compiling primal-estimate v0.3.3
+   Compiling zerocopy v0.7.35
+   Compiling rustls-pki-types v1.11.0
+   Compiling bitflags v2.9.0
+   Compiling zerovec v0.10.4
+   Compiling primal-check v0.3.4
+   Compiling primal-sieve v0.3.7
+   Compiling getopts v0.2.21
+   Compiling rustls-pemfile v2.2.0
+   Compiling windows-registry v0.4.0
+   Compiling serde_urlencoded v0.7.1
+   Compiling encoding_rs v0.8.35
+   Compiling base64 v0.22.1
+   Compiling tinystr v0.7.6
+   Compiling icu_collections v1.5.0
+   Compiling icu_locid v1.5.0
+   Compiling ipnet v2.11.0
+   Compiling mime v0.3.17
+   Compiling ego-tree v0.6.3
+   Compiling primal v0.3.3
+   Compiling regex-automata v0.4.9
+   Compiling icu_provider v1.5.0
+   Compiling icu_locid_transform v1.5.0
+   Compiling futures-executor v0.3.31
+   Compiling futures v0.3.31
+   Compiling icu_properties v1.5.1
+   Compiling tokio-util v0.7.15
+   Compiling tokio-native-tls v0.3.1
+   Compiling tower v0.5.2
+   Compiling regex v1.11.1
+   Compiling h2 v0.4.9
+   Compiling scraper v0.17.1
+   Compiling icu_normalizer v1.5.0
+   Compiling idna_adapter v1.2.0
+   Compiling idna v1.0.3
+   Compiling url v2.5.4
+   Compiling hyper v1.6.0
+   Compiling hyper-util v0.1.11
+   Compiling hyper-tls v0.6.0
+   Compiling reqwest v0.12.15
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error[E0428]: the name `IndexedDocument` is defined multiple times
+   --> src\engine.rs:217:1
+    |
+15  | struct IndexedDocument {
+    | ---------------------- previous definition of the type `IndexedDocument` here
+...
+217 | struct IndexedDocument {
+    | ^^^^^^^^^^^^^^^^^^^^^^ `IndexedDocument` redefined here
+    |
+    = note: `IndexedDocument` must be defined only once in the type namespace of this module
+
+error[E0428]: the name `SearchResult` is defined multiple times
+   --> src\engine.rs:226:1
+    |
+24  | pub struct SearchResult {
+    | ----------------------- previous definition of the type `SearchResult` here
+...
+226 | pub struct SearchResult {
+    | ^^^^^^^^^^^^^^^^^^^^^^^ `SearchResult` redefined here
+    |
+    = note: `SearchResult` must be defined only once in the type namespace of this module
+
+error[E0428]: the name `ResonantEngine` is defined multiple times
+   --> src\engine.rs:236:1
+    |
+34  | pub struct ResonantEngine {
+    | ------------------------- previous definition of the type `ResonantEngine` here
+...
+236 | pub struct ResonantEngine {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^ `ResonantEngine` redefined here
+    |
+    = note: `ResonantEngine` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `PrimeTokenizer` is defined multiple times
+   --> src\engine.rs:205:5
+    |
+3   | use crate::tokenizer::PrimeTokenizer;
+    |     -------------------------------- previous import of the type `PrimeTokenizer` here
+...
+205 | use crate::tokenizer::PrimeTokenizer;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `PrimeTokenizer` reimported here
+    |
+    = note: `PrimeTokenizer` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `build_vector` is defined multiple times
+   --> src\engine.rs:206:28
+    |
+4   | use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+    |                            ------------ previous import of the value `build_vector` here
+...
+206 | use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+    |                            ^^^^^^^^^^^^--
+    |                            |
+    |                            `build_vector` reimported here
+    |                            help: remove unnecessary import
+    |
+    = note: `build_vector` must be defined only once in the value namespace of this module
+
+error[E0252]: the name `dot_product` is defined multiple times
+   --> src\engine.rs:206:42
+    |
+4   | use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+    |                                          ----------- previous import of the value `dot_product` here
+...
+206 | use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+    |                                          ^^^^^^^^^^^--
+    |                                          |
+    |                                          `dot_product` reimported here
+    |                                          help: remove unnecessary import
+    |
+    = note: `dot_product` must be defined only once in the value namespace of this module
+
+error[E0252]: the name `PrimeVector` is defined multiple times
+   --> src\engine.rs:206:55
+    |
+4   | use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+    |                                                       ----------- previous import of the type `PrimeVector` here
+...
+206 | use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+    |                                                       ^^^^^^^^^^^ `PrimeVector` reimported here
+    |
+    = note: `PrimeVector` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `shannon_entropy` is defined multiple times
+   --> src\engine.rs:207:5
+    |
+5   | use crate::entropy::shannon_entropy;
+    |     ------------------------------- previous import of the value `shannon_entropy` here
+...
+207 | use crate::entropy::shannon_entropy;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `shannon_entropy` reimported here
+    |
+    = note: `shannon_entropy` must be defined only once in the value namespace of this module
+
+error[E0252]: the name `CrawledDocument` is defined multiple times
+   --> src\engine.rs:208:5
+    |
+6   | use crate::crawler::CrawledDocument;
+    |     ------------------------------- previous import of the type `CrawledDocument` here
+...
+208 | use crate::crawler::CrawledDocument; // Requires crawler module, which requires reqwest, tokio, etc.
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CrawledDocument` reimported here
+    |
+    = note: `CrawledDocument` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `fs` is defined multiple times
+   --> src\engine.rs:210:5
+    |
+8   | use std::fs;
+    |     ------- previous import of the module `fs` here
+...
+210 | use std::fs;
+    |     ^^^^^^^ `fs` reimported here
+    |
+    = note: `fs` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `Path` is defined multiple times
+   --> src\engine.rs:211:17
+    |
+9   | use std::path::{Path, PathBuf};
+    |                 ---- previous import of the type `Path` here
+...
+211 | use std::path::{Path, PathBuf};
+    |                 ^^^^--
+    |                 |
+    |                 `Path` reimported here
+    |                 help: remove unnecessary import
+    |
+    = note: `Path` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `PathBuf` is defined multiple times
+   --> src\engine.rs:211:23
+    |
+9   | use std::path::{Path, PathBuf};
+    |                       ------- previous import of the type `PathBuf` here
+...
+211 | use std::path::{Path, PathBuf};
+    |                       ^^^^^^^ `PathBuf` reimported here
+    |
+    = note: `PathBuf` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `io` is defined multiple times
+   --> src\engine.rs:212:5
+    |
+10  | use std::io;
+    |     ------- previous import of the module `io` here
+...
+212 | use std::io;
+    |     ^^^^^^^ `io` reimported here
+    |
+    = note: `io` must be defined only once in the type namespace of this module
+
+error[E0252]: the name `Html` is defined multiple times
+   --> src\engine.rs:213:5
+    |
+11  | use scraper::Html; // Removed unused Selector
+    |     ------------- previous import of the type `Html` here
+...
+213 | use scraper::Html; // Removed unused Selector
+    |     ^^^^^^^^^^^^^ `Html` reimported here
+    |
+    = note: `Html` must be defined only once in the type namespace of this module
+
+warning: unused import: `crate::tokenizer::PrimeTokenizer`
+   --> src\engine.rs:205:5
+    |
+205 | use crate::tokenizer::PrimeTokenizer;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused imports: `PrimeVector`, `build_vector`, and `dot_product`
+   --> src\engine.rs:206:28
+    |
+206 | use crate::prime_hilbert::{build_vector, dot_product, PrimeVector};
+    |                            ^^^^^^^^^^^^  ^^^^^^^^^^^  ^^^^^^^^^^^
+
+warning: unused import: `crate::entropy::shannon_entropy`
+   --> src\engine.rs:207:5
+    |
+207 | use crate::entropy::shannon_entropy;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::crawler::CrawledDocument`
+   --> src\engine.rs:208:5
+    |
+208 | use crate::crawler::CrawledDocument; // Requires crawler module, which requires reqwest, tokio, etc.
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::fs`
+   --> src\engine.rs:210:5
+    |
+210 | use std::fs;
+    |     ^^^^^^^
+
+warning: unused imports: `PathBuf` and `Path`
+   --> src\engine.rs:211:17
+    |
+211 | use std::path::{Path, PathBuf};
+    |                 ^^^^  ^^^^^^^
+
+warning: unused import: `std::io`
+   --> src\engine.rs:212:5
+    |
+212 | use std::io;
+    |     ^^^^^^^
+
+warning: unused import: `scraper::Html`
+   --> src\engine.rs:213:5
+    |
+213 | use scraper::Html; // Removed unused Selector
+    |     ^^^^^^^^^^^^^
+
+error[E0592]: duplicate definitions with name `new`
+   --> src\engine.rs:42:5
+    |
+42  |     pub fn new() -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `new`
+...
+244 |     pub fn new() -> Self {
+    |     -------------------- other definition for `new`
+
+error[E0592]: duplicate definitions with name `len`
+   --> src\engine.rs:52:5
+    |
+52  |     pub fn len(&self) -> usize {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `len`
+...
+254 |     pub fn len(&self) -> usize {
+    |     -------------------------- other definition for `len`
+
+error[E0592]: duplicate definitions with name `add_local_document`
+   --> src\engine.rs:58:5
+    |
+58  |     fn add_local_document(&mut self, title: String, text: String, path: PathBuf) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `add_local_document`
+...
+260 |     fn add_local_document(&mut self, title: String, text: String, path: PathBuf) {
+    |     ---------------------------------------------------------------------------- other definition for `add_local_document`
+
+error[E0592]: duplicate definitions with name `add_crawled_document`
+   --> src\engine.rs:74:5
+    |
+74  |     pub fn add_crawled_document(&mut self, doc: CrawledDocument) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `add_crawled_document`
+...
+276 |     pub fn add_crawled_document(&mut self, doc: CrawledDocument) {
+    |     ------------------------------------------------------------ other definition for `add_crawled_document`
+
+error[E0592]: duplicate definitions with name `load_directory`
+   --> src\engine.rs:99:5
+    |
+99  |     pub fn load_directory<P: AsRef<Path>>(&mut self, folder: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `load_directory`
+...
+301 |     pub fn load_directory<P: AsRef<Path>>(&mut self, folder: P) -> io::Result<()> {
+    |     ----------------------------------------------------------------------------- other definition for `load_directory`
+
+error[E0592]: duplicate definitions with name `process_directory_recursive`
+   --> src\engine.rs:109:5
+    |
+109 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `process_directory_recursive`
+...
+311 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ------------------------------------------------------------------------------------------- other definition for `process_directory_recursive`
+
+error[E0592]: duplicate definitions with name `search`
+   --> src\engine.rs:166:5
+    |
+166 |     pub fn search(&mut self, query: &str, top_k: usize) -> Vec<SearchResult> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `search`
+...
+368 |     pub fn search(&mut self, query: &str, top_k: usize) -> Vec<SearchResult> {
+    |     ------------------------------------------------------------------------ other definition for `search`
+
+error[E0592]: duplicate definitions with name `set_entropy_weight`
+   --> src\engine.rs:200:5
+    |
+200 |     pub fn set_entropy_weight(&mut self, weight: f64) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definitions for `set_entropy_weight`
+...
+402 |     pub fn set_entropy_weight(&mut self, weight: f64) {
+    |     ------------------------------------------------- other definition for `set_entropy_weight`
+
+error[E0034]: multiple applicable items in scope
+   --> src\engine.rs:104:14
+    |
+104 |         self.process_directory_recursive(path)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ multiple `process_directory_recursive` found
+    |
+note: candidate #1 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:109:5
+    |
+109 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:311:5
+    |
+311 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0034]: multiple applicable items in scope
+   --> src\engine.rs:149:31
+    |
+149 |                          self.add_local_document(title, text, file_path);
+    |                               ^^^^^^^^^^^^^^^^^^ multiple `add_local_document` found
+    |
+note: candidate #1 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:58:5
+    |
+58  |     fn add_local_document(&mut self, title: String, text: String, path: PathBuf) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:260:5
+    |
+260 |     fn add_local_document(&mut self, title: String, text: String, path: PathBuf) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0034]: multiple applicable items in scope
+   --> src\engine.rs:155:38
+    |
+155 |                 if let Err(e) = self.process_directory_recursive(&file_path) {
+    |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ multiple `process_directory_recursive` found
+    |
+note: candidate #1 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:109:5
+    |
+109 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:311:5
+    |
+311 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0034]: multiple applicable items in scope
+   --> src\engine.rs:306:14
+    |
+306 |         self.process_directory_recursive(path)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ multiple `process_directory_recursive` found
+    |
+note: candidate #1 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:109:5
+    |
+109 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:311:5
+    |
+311 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0034]: multiple applicable items in scope
+   --> src\engine.rs:351:31
+    |
+351 |                          self.add_local_document(title, text, file_path);
+    |                               ^^^^^^^^^^^^^^^^^^ multiple `add_local_document` found
+    |
+note: candidate #1 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:58:5
+    |
+58  |     fn add_local_document(&mut self, title: String, text: String, path: PathBuf) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:260:5
+    |
+260 |     fn add_local_document(&mut self, title: String, text: String, path: PathBuf) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0034]: multiple applicable items in scope
+   --> src\engine.rs:357:38
+    |
+357 |                 if let Err(e) = self.process_directory_recursive(&file_path) {
+    |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ multiple `process_directory_recursive` found
+    |
+note: candidate #1 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:109:5
+    |
+109 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:311:5
+    |
+311 |     fn process_directory_recursive<P: AsRef<Path>>(&mut self, current_dir: P) -> io::Result<()> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0034]: multiple applicable items in scope
+   --> src\main.rs:20:38
+    |
+20  |     let mut engine = ResonantEngine::new();
+    |                                      ^^^ multiple `new` found
+    |
+note: candidate #1 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:42:5
+    |
+42  |     pub fn new() -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^
+note: candidate #2 is defined in an impl for the type `engine::ResonantEngine`
+   --> src\engine.rs:244:5
+    |
+244 |     pub fn new() -> Self {
+    |     ^^^^^^^^^^^^^^^^^^^^
+
+Some errors have detailed explanations: E0034, E0252, E0428, E0592.
+For more information about an error, try `rustc --explain E0034`.
+warning: `resonant_search` (bin "resonant_search") generated 8 warnings
+error: could not compile `resonant_search` (bin "resonant_search") due to 29 previous errors; 8 warnings emitted
+ rust  cargo clean
+     Removed 1458 files, 704.5MiB total
+ rust  cargo build
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling cfg-if v1.0.0
+   Compiling autocfg v1.4.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling smallvec v1.15.0
+   Compiling zerocopy v0.8.25
+   Compiling stable_deref_trait v1.2.0
+   Compiling parking_lot_core v0.9.10
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.16
+   Compiling siphasher v1.0.1
+   Compiling getrandom v0.2.16
+   Compiling itoa v1.0.15
+   Compiling siphasher v0.3.11
+   Compiling futures-core v0.3.31
+   Compiling bytes v1.10.1
+   Compiling rand_core v0.6.4
+   Compiling phf_shared v0.11.3
+   Compiling memchr v2.7.4
+   Compiling futures-sink v0.3.31
+   Compiling phf_shared v0.10.0
+   Compiling icu_locid_transform_data v1.5.1
+   Compiling litemap v0.7.5
+   Compiling once_cell v1.21.3
+   Compiling serde v1.0.219
+   Compiling writeable v0.5.5
+   Compiling lock_api v0.4.12
+   Compiling slab v0.4.9
+   Compiling futures-channel v0.3.31
+   Compiling icu_properties_data v1.5.1
+   Compiling fnv v1.0.7
+   Compiling pin-utils v0.1.0
+   Compiling futures-io v0.3.31
+   Compiling futures-task v0.3.31
+   Compiling http v1.3.1
+   Compiling new_debug_unreachable v1.0.6
+   Compiling icu_normalizer_data v1.5.1
+   Compiling windows-targets v0.52.6
+   Compiling tracing-core v0.1.33
+   Compiling syn v1.0.109
+   Compiling quote v1.0.40
+   Compiling windows-sys v0.52.0
+   Compiling equivalent v1.0.2
+   Compiling syn v2.0.101
+   Compiling parking_lot v0.12.3
+   Compiling hashbrown v0.15.3
+   Compiling httparse v1.10.1
+   Compiling tracing v0.1.41
+   Compiling http-body v1.0.1
+   Compiling windows-sys v0.59.0
+   Compiling num-traits v0.2.19
+   Compiling indexmap v2.9.0
+   Compiling windows_x86_64_gnu v0.53.0
+   Compiling precomputed-hash v0.1.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling write16 v1.0.0
+   Compiling libc v0.2.172
+   Compiling utf8_iter v1.0.4
+   Compiling utf16_iter v1.0.5
+   Compiling log v0.4.27
+   Compiling mac v0.1.1
+   Compiling try-lock v0.2.5
+   Compiling atomic-waker v1.1.2
+   Compiling native-tls v0.2.14
+   Compiling want v0.3.1
+   Compiling mio v1.0.3
+   Compiling socket2 v0.5.9
+   Compiling futf v0.1.5
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling phf v0.10.1
+   Compiling windows-link v0.1.1
+   Compiling version_check v0.9.5
+   Compiling tower-service v0.3.3
+   Compiling percent-encoding v2.3.1
+   Compiling dtoa v1.0.10
+   Compiling utf-8 v0.7.6
+   Compiling synstructure v0.13.2
+   Compiling phf_generator v0.11.3
+   Compiling phf_generator v0.10.0
+   Compiling phf_codegen v0.10.0
+   Compiling string_cache_codegen v0.5.4
+   Compiling tendril v0.4.3
+   Compiling form_urlencoded v1.2.1
+   Compiling dtoa-short v0.3.5
+   Compiling selectors v0.25.0
+   Compiling string_cache v0.8.9
+   Compiling serde_json v1.0.140
+   Compiling ahash v0.8.11
+   Compiling ryu v1.0.20
+   Compiling byteorder v1.5.0
+   Compiling hamming v0.1.3
+   Compiling primal-bit v0.3.2
+   Compiling markup5ever v0.11.0
+   Compiling windows-targets v0.53.0
+   Compiling fxhash v0.2.1
+   Compiling windows-strings v0.3.1
+   Compiling windows-result v0.3.2
+   Compiling http-body-util v0.1.3
+   Compiling aho-corasick v1.1.3
+   Compiling schannel v0.1.27
+   Compiling sync_wrapper v1.0.2
+   Compiling num-integer v0.1.46
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.7.5
+   Compiling zerovec-derive v0.10.3
+   Compiling displaydoc v0.2.5
+   Compiling tokio-macros v2.5.0
+   Compiling icu_provider_macros v1.5.0
+   Compiling futures-macro v0.3.31
+   Compiling phf_macros v0.11.3
+   Compiling cssparser-macros v0.6.1
+   Compiling tokio v1.44.2
+   Compiling phf v0.11.3
+   Compiling futures-util v0.3.31
+   Compiling derive_more v0.99.20
+   Compiling servo_arc v0.3.0
+   Compiling rustls-pki-types v1.11.0
+   Compiling primal-estimate v0.3.3
+   Compiling cssparser v0.31.2
+   Compiling unicode-width v0.1.14
+   Compiling bitflags v2.9.0
+   Compiling regex-syntax v0.8.5
+   Compiling tower-layer v0.3.3
+   Compiling zerofrom v0.1.6
+   Compiling zerocopy v0.7.35
+   Compiling getopts v0.2.21
+   Compiling html5ever v0.26.0
+   Compiling rustls-pemfile v2.2.0
+   Compiling yoke v0.7.5
+   Compiling primal-sieve v0.3.7
+   Compiling primal-check v0.3.4
+   Compiling zerovec v0.10.4
+   Compiling windows-registry v0.4.0
+   Compiling serde_urlencoded v0.7.1
+   Compiling encoding_rs v0.8.35
+   Compiling ego-tree v0.6.3
+   Compiling base64 v0.22.1
+   Compiling ipnet v2.11.0
+   Compiling mime v0.3.17
+   Compiling primal v0.3.3
+   Compiling tinystr v0.7.6
+   Compiling icu_collections v1.5.0
+   Compiling icu_locid v1.5.0
+   Compiling regex-automata v0.4.9
+   Compiling icu_provider v1.5.0
+   Compiling futures-executor v0.3.31
+   Compiling futures v0.3.31
+   Compiling icu_locid_transform v1.5.0
+   Compiling tokio-util v0.7.15
+   Compiling tokio-native-tls v0.3.1
+   Compiling tower v0.5.2
+   Compiling icu_properties v1.5.1
+   Compiling regex v1.11.1
+   Compiling h2 v0.4.9
+   Compiling scraper v0.17.1
+   Compiling icu_normalizer v1.5.0
+   Compiling idna_adapter v1.2.0
+   Compiling idna v1.0.3
+   Compiling url v2.5.4
+   Compiling hyper v1.6.0
+   Compiling hyper-util v0.1.11
+   Compiling hyper-tls v0.6.0
+   Compiling reqwest v0.12.15
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+error: future cannot be sent between threads safely
+   --> src\main.rs:51:24
+    |
+51  |       let crawl_handle = tokio::spawn(async move {
+    |  ________________________^
+52  | |         // The crawl function now takes the list of URLs directly
+53  | |         crawler.crawl(seed_urls, num_crawler_workers).await;
+...   |
+56  | |     });
+    | |______^ future created by async block is not `Send`
+    |
+    = help: the trait `std::marker::Send` is not implemented for `dyn std::error::Error`
+note: future is not `Send` as this value is used across an await
+   --> src\crawler.rs:68:74
+    |
+65  | ...                   match Self::fetch_and_process_url(&client, &url).await {
+    |                             ------------------------------------------------ has type `Result<Option<CrawledDocument>, Box<dyn std::error::Error>>` which is not `Send`
+...
+68  | ...                           if let Err(e) = doc_sender.send(doc).await {
+    |                                                                    ^^^^^ await occurs here, with `Self::fetch_and_process_url(&client, &url).await` maybe used later
+note: required by a bound in `tokio::spawn`
+   --> C:\Users\phine\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-1.44.2\src\task\spawn.rs:168:21
+    |
+166 |     pub fn spawn<F>(future: F) -> JoinHandle<F::Output>
+    |            ----- required by a bound in this function
+167 |     where
+168 |         F: Future + Send + 'static,
+    |                     ^^^^ required by this bound in `spawn`
+
+error: could not compile `resonant_search` (bin "resonant_search") due to 1 previous error
+ rust  cargo run
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 10.15s
+     Running `target\debug\resonant_search.exe`
+Initializing Resonant Search Engine...
+Starting web crawling and indexing...
+Starting crawl of 8 URLs with 20 workers...
+Failed to fetch or process https://stackoverflow.com/: Crawler error: HTTP error status: 403 Forbidden
+Failed to fetch or process https://crates.io/: Crawler error: HTTP error status: 403 Forbidden
+Crawler finished processing URLs.
+Indexing of crawled documents finished. Total indexed: 6
+
+Resonant Search Engine is ready. Total documents indexed: 6
+
+Enter your resonant query (or type 'quit' to exit):
+> what the fuck did i find?
+
+Searching for resonant matches...
+
+Top Resonant Matches:
+[1] Example Domain
+    URL:            http://example.com/
+    Resonance:      0.0000
+    Δ Entropy:      1.6685
+    Combined Score: -0.1668
+    Preview:        Example Domain     This domain is for use in illustrative examples in documents. You may use this     domain in literature without prior coordination or asking for permission.     More informati...
+
+[2] Tokio - An asynchronous Rust runtime
+    URL:            https://tokio.rs/
+    Resonance:      0.2130
+    Δ Entropy:      4.7488
+    Combined Score: -0.2619
+    Preview:        LearnAPI DocsBlogBuild reliable network applications without compromising speed.Tokio is an asynchronous runtime for the Rust programming language. It provides the building blocks needed for writing n...
+
+[3] Docs.rs
+    URL:            https://docs.rs/
+    Resonance:      0.0880
+    Δ Entropy:      3.8414
+    Combined Score: -0.2961
+    Preview:        Docs.rs...
+
+[4]
+            Rust Programming Language
+
+    URL:            https://www.rust-lang.org/
+    Resonance:      0.1474
+    Δ Entropy:      5.0684
+    Combined Score: -0.3595
+    Preview:        Install         Learn         Playground         Tools         Governance         Community         Blog...
+
+[5] GitHub · Build and ship software on a single, collaborative platform · GitHub
+    URL:            https://www.github.com/
+    Resonance:      0.1571
+    Δ Entropy:      5.8574
+    Combined Score: -0.4286
+    Preview:        Skip to content                                             {"props":{"docsUrl":"https://docs.github.com/get-started/accessibility/keyboard-shortcuts"}}...
+
+
+Enter your resonant query (or type 'quit' to exit):
+> error: process didn't exit successfully: `target\debug\resonant_search.exe` (exit code: 0xc000013a, STATUS_CONTROL_C_EXIT)
+ rust  cargo clean
+     Removed 1656 files, 964.0MiB total
+ rust  cargo build
+   Compiling proc-macro2 v1.0.95
+   Compiling unicode-ident v1.0.18
+   Compiling cfg-if v1.0.0
+   Compiling autocfg v1.4.0
+   Compiling windows_x86_64_gnu v0.52.6
+   Compiling smallvec v1.15.0
+   Compiling zerocopy v0.8.25
+   Compiling stable_deref_trait v1.2.0
+   Compiling parking_lot_core v0.9.10
+   Compiling scopeguard v1.2.0
+   Compiling pin-project-lite v0.2.16
+   Compiling futures-core v0.3.31
+   Compiling getrandom v0.2.16
+   Compiling itoa v1.0.15
+   Compiling siphasher v1.0.1
+   Compiling siphasher v0.3.11
+   Compiling memchr v2.7.4
+   Compiling rand_core v0.6.4
+   Compiling bytes v1.10.1
+   Compiling futures-sink v0.3.31
+   Compiling phf_shared v0.11.3
+   Compiling phf_shared v0.10.0
+   Compiling writeable v0.5.5
+   Compiling once_cell v1.21.3
+   Compiling serde v1.0.219
+   Compiling icu_locid_transform_data v1.5.1
+   Compiling lock_api v0.4.12
+   Compiling slab v0.4.9
+   Compiling litemap v0.7.5
+   Compiling futures-channel v0.3.31
+   Compiling futures-task v0.3.31
+   Compiling fnv v1.0.7
+   Compiling icu_properties_data v1.5.1
+   Compiling futures-io v0.3.31
+   Compiling pin-utils v0.1.0
+   Compiling icu_normalizer_data v1.5.1
+   Compiling http v1.3.1
+   Compiling new_debug_unreachable v1.0.6
+   Compiling tracing-core v0.1.33
+   Compiling windows-targets v0.52.6
+   Compiling equivalent v1.0.2
+   Compiling httparse v1.10.1
+   Compiling windows-sys v0.52.0
+   Compiling hashbrown v0.15.3
+   Compiling syn v1.0.109
+   Compiling quote v1.0.40
+   Compiling tracing v0.1.41
+   Compiling windows-sys v0.59.0
+   Compiling http-body v1.0.1
+   Compiling syn v2.0.101
+   Compiling parking_lot v0.12.3
+   Compiling num-traits v0.2.19
+   Compiling log v0.4.27
+   Compiling windows_x86_64_gnu v0.53.0
+   Compiling atomic-waker v1.1.2
+   Compiling indexmap v2.9.0
+   Compiling utf16_iter v1.0.5
+   Compiling native-tls v0.2.14
+   Compiling write16 v1.0.0
+   Compiling mac v0.1.1
+   Compiling try-lock v0.2.5
+   Compiling ppv-lite86 v0.2.21
+   Compiling libc v0.2.172
+   Compiling precomputed-hash v0.1.1
+   Compiling utf8_iter v1.0.4
+   Compiling want v0.3.1
+   Compiling futf v0.1.5
+   Compiling phf v0.10.1
+   Compiling rand_chacha v0.3.1
+   Compiling mio v1.0.3
+   Compiling socket2 v0.5.9
+   Compiling percent-encoding v2.3.1
+   Compiling windows-link v0.1.1
+   Compiling synstructure v0.13.2
+   Compiling version_check v0.9.5
+   Compiling dtoa v1.0.10
+   Compiling utf-8 v0.7.6
+   Compiling rand v0.8.5
+   Compiling tower-service v0.3.3
+   Compiling form_urlencoded v1.2.1
+   Compiling tendril v0.4.3
+   Compiling dtoa-short v0.3.5
+   Compiling schannel v0.1.27
+   Compiling string_cache v0.8.9
+   Compiling byteorder v1.5.0
+   Compiling serde_json v1.0.140
+   Compiling ahash v0.8.11
+   Compiling hamming v0.1.3
+   Compiling ryu v1.0.20
+   Compiling fxhash v0.2.1
+   Compiling primal-bit v0.3.2
+   Compiling windows-targets v0.53.0
+   Compiling phf_generator v0.11.3
+   Compiling phf_generator v0.10.0
+   Compiling windows-result v0.3.2
+   Compiling phf_codegen v0.10.0
+   Compiling windows-strings v0.3.1
+   Compiling string_cache_codegen v0.5.4
+   Compiling http-body-util v0.1.3
+   Compiling selectors v0.25.0
+   Compiling num-integer v0.1.46
+   Compiling aho-corasick v1.1.3
+   Compiling sync_wrapper v1.0.2
+   Compiling servo_arc v0.3.0
+   Compiling zerocopy v0.7.35
+   Compiling tower-layer v0.3.3
+   Compiling markup5ever v0.11.0
+   Compiling rustls-pki-types v1.11.0
+   Compiling unicode-width v0.1.14
+   Compiling primal-estimate v0.3.3
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.7.5
+   Compiling zerovec-derive v0.10.3
+   Compiling displaydoc v0.2.5
+   Compiling tokio-macros v2.5.0
+   Compiling icu_provider_macros v1.5.0
+   Compiling futures-macro v0.3.31
+   Compiling phf_macros v0.11.3
+   Compiling cssparser-macros v0.6.1
+   Compiling tokio v1.44.2
+   Compiling derive_more v0.99.20
+   Compiling bitflags v2.9.0
+   Compiling futures-util v0.3.31
+   Compiling phf v0.11.3
+   Compiling regex-syntax v0.8.5
+   Compiling rustls-pemfile v2.2.0
+   Compiling html5ever v0.26.0
+   Compiling cssparser v0.31.2
+   Compiling zerofrom v0.1.6
+   Compiling getopts v0.2.21
+   Compiling primal-sieve v0.3.7
+   Compiling yoke v0.7.5
+   Compiling primal-check v0.3.4
+   Compiling zerovec v0.10.4
+   Compiling windows-registry v0.4.0
+   Compiling serde_urlencoded v0.7.1
+   Compiling encoding_rs v0.8.35
+   Compiling base64 v0.22.1
+   Compiling ipnet v2.11.0
+   Compiling ego-tree v0.6.3
+   Compiling tinystr v0.7.6
+   Compiling icu_collections v1.5.0
+   Compiling regex-automata v0.4.9
+   Compiling icu_locid v1.5.0
+   Compiling mime v0.3.17
+   Compiling primal v0.3.3
+   Compiling futures-executor v0.3.31
+   Compiling icu_provider v1.5.0
+   Compiling futures v0.3.31
+   Compiling icu_locid_transform v1.5.0
+   Compiling icu_properties v1.5.1
+   Compiling tokio-util v0.7.15
+   Compiling tokio-native-tls v0.3.1
+   Compiling tower v0.5.2
+   Compiling regex v1.11.1
+   Compiling h2 v0.4.9
+   Compiling scraper v0.17.1
+   Compiling icu_normalizer v1.5.0
+   Compiling idna_adapter v1.2.0
+   Compiling idna v1.0.3
+   Compiling url v2.5.4
+   Compiling hyper v1.6.0
+   Compiling hyper-util v0.1.11
+   Compiling hyper-tls v0.6.0
+   Compiling reqwest v0.12.15
+   Compiling resonant_search v0.1.0 (D:\code\repos\GitHub_Desktop\resonant_search\rust)
+warning: unused variable: `links`
+   --> src\crawler.rs:292:21
+    |
+292 |                 let links: Vec<String> = fragment.select(&link_selector)
+    |                     ^^^^^ help: if this is intentional, prefix it with an underscore: `_links`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `topics`
+  --> src\main.rs:32:9
+   |
+32 |     let topics = [
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_topics`
+
+warning: methods `set_max_depth`, `set_max_pages`, `set_stay_in_domain`, and `set_allowed_domains` are never used
+  --> src\crawler.rs:65:12
+   |
+49 | impl Crawler {
+   | ------------ methods in this implementation
+...
+65 |     pub fn set_max_depth(&mut self, depth: u32) -> &mut Self {
+   |            ^^^^^^^^^^^^^
+...
+71 |     pub fn set_max_pages(&mut self, pages: usize) -> &mut Self {
+   |            ^^^^^^^^^^^^^
+...
+77 |     pub fn set_stay_in_domain(&mut self, stay: bool) -> &mut Self {
+   |            ^^^^^^^^^^^^^^^^^^
+...
+83 |     pub fn set_allowed_domains(&mut self, domains: Vec<String>) -> &mut Self {
+   |            ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: `resonant_search` (bin "resonant_search") generated 3 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 05s
+ rust  cargo run
+warning: unused variable: `links`
+   --> src\crawler.rs:292:21
+    |
+292 |                 let links: Vec<String> = fragment.select(&link_selector)
+    |                     ^^^^^ help: if this is intentional, prefix it with an underscore: `_links`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `topics`
+  --> src\main.rs:32:9
+   |
+32 |     let topics = [
+   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_topics`
+
+warning: methods `set_max_depth`, `set_max_pages`, `set_stay_in_domain`, and `set_allowed_domains` are never used
+  --> src\crawler.rs:65:12
+   |
+49 | impl Crawler {
+   | ------------ methods in this implementation
+...
+65 |     pub fn set_max_depth(&mut self, depth: u32) -> &mut Self {
+   |            ^^^^^^^^^^^^^
+...
+71 |     pub fn set_max_pages(&mut self, pages: usize) -> &mut Self {
+   |            ^^^^^^^^^^^^^
+...
+77 |     pub fn set_stay_in_domain(&mut self, stay: bool) -> &mut Self {
+   |            ^^^^^^^^^^^^^^^^^^
+...
+83 |     pub fn set_allowed_domains(&mut self, domains: Vec<String>) -> &mut Self {
+   |            ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: `resonant_search` (bin "resonant_search") generated 3 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+     Running `target\debug\resonant_search.exe`
+Initializing Resonant Search Engine...
+Do you want to:
+1. Use default seed URLs
+2. Load URLs from a file
+3. Specify a single domain to crawl
+> 1
+Using default seed URLs based on predefined topics...
+Starting with 10 seed URLs
+  - https://mutable-instruments.net/
+  - https://www.modulargrid.net/
+  - https://www.muffwiggler.com/forum/
+  - https://learningsynths.ableton.com/
+  - https://www.soundonsound.com/techniques/synth-secrets
+  - https://doepfer.de/home.htm
+  - https://academic.oup.com/journals/search-results?page=1&q=quantum%20physics
+  - https://doc.rust-lang.org/book/
+  - https://blog.rust-lang.org/
+  - https://crates.io/categories/audio
+
+How many pages would you like to crawl? (default: 1000)
+> 100
+How many concurrent workers? (default: 10, max recommended: 20)
+> 5
+Starting web crawling with 5 workers, targeting 100 pages...
+Starting crawl of 10 seed URLs with 5 workers...
+Max depth: 3, Max pages: 1000
+Worker 0 started
+Worker 1 started
+Worker 2 started
+Worker 3 started
+Worker 4 started
+Failed to fetch or process https://www.soundonsound.com/techniques/synth-secrets: Crawler error: HTTP error status: 410 Gone
+Failed to fetch or process https://academic.oup.com/journals/search-results?page=1&q=quantum%20physics: Crawler error: HTTP error status: 403 Forbidden
+Processed 10 pages so far...
+Worker 1 stopping: queue is empty
+Worker 4 stopping: queue is empty
+Worker 3 stopping: queue is empty
+Failed to fetch or process https://crates.io/categories/audio: Crawler error: HTTP error status: 403 Forbidden
+Worker 0 stopping: queue is empty
+Worker 2 stopping: queue is empty
+Crawler finished processing URLs.
+Total URLs crawled: 10
+Indexing of crawled documents finished. Total indexed: 7
+
+Resonant Search Engine is ready. Total documents indexed: 7
+
+Enter your resonant query (or type 'quit' to exit):
+> what could i have found?
+
+Searching for resonant matches...
+
+Top Resonant Matches:
+[1] Mutable Instruments resources
+    URL:            https://mutable-instruments.net/
+    Resonance:      0.0000
+    Δ Entropy:      1.6781
+    Combined Score: -0.1678
+    Preview:        Thank you!   Mutable Instruments has shut down in December 2022   Documentation   Open-source software and hardware...
+
+[2] Doepfer homepage
+    URL:            https://doepfer.de/home.htm
+    Resonance:      0.0000
+    Δ Entropy:      3.0400
+    Combined Score: -0.3040
+    Preview:        Hersteller       von elektronischen Musikinstrumenten:                Analoge Modulsysteme         Midi-to-CV/Gate/Sync           Interface         Midi...
+
+[3] The Rust Programming Language - The Rust Programming Language
+    URL:            https://doc.rust-lang.org/book/
+    Resonance:      0.0000
+    Δ Entropy:      4.2207
+    Combined Score: -0.4221
+    Preview:        try {                 var theme = localStorage.getItem('mdbook-theme');                 var sidebar = localStorage.getItem('mdbook-sidebar');                  if (t...
+
+[4] Learning Synths
+    URL:            https://learningsynths.ableton.com/
+    Resonance:      0.0000
+    Δ Entropy:      4.4954
+    Combined Score: -0.4495
+    Preview:        .no-script-message {                 position: absolute;                 top: 65%;                 left: 20%;                 right: 20%;                 text-align: center;...
+
+[5] The Rust Programming Language Blog
+    URL:            https://blog.rust-lang.org/
+    Resonance:      0.0024
+    Δ Entropy:      4.7697
+    Combined Score: -0.4746
+    Preview:        Rust Blog                                     Rust         Install         Learn         Tools         Governance         Community    🖌...
+
+
+Enter your resonant query (or type 'quit' to exit):
+>

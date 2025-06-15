@@ -1,31 +1,31 @@
-# Convert-ProcWolfToExe.ps1
+# 3-make-exe.ps1
 # Converts PowerShell installer to executable using ps2exe
-# Part 3 of the proc-wolf self-extracting installer build process
+# Part 3 of the file-utils-ii self-extracting installer build process
 
 param(
-    [string]$InputScript = ".\dist\proc-wolf-installer.ps1",
-    [string]$OutputExe = ".\dist\proc-wolf-installer.exe",
-    [string]$IconPath = ".\proc-wolf.ico",
+    [string]$InputScript = ".\dist\file-utils-ii_installer.ps1",
+    [string]$OutputExe = ".\dist\file-utils-ii_installer.exe",
+    [string]$IconPath = ".\file-utils.ico",
     [string]$Version = "3.0.0.0",
-    [string]$Company = "RYO Modular",
-    [string]$Product = "proc-wolf Process Monitor",
-    [string]$Copyright = "Copyright (c) 2025 RYO Modular",
+    [string]$Company = "whispr.dev",
+    [string]$Product = "file-utils-ii Process Monitor",
+    [string]$Copyright = "Copyright (c) 2025 whispr.dev",
     [switch]$Verbose,
     [switch]$Force,
     [switch]$NoConsole
 )
 
 # Color output functions
-function Write-Success { param($Message) Write-Host "✓ $Message" -ForegroundColor Green }
-function Write-Error { param($Message) Write-Host "✗ $Message" -ForegroundColor Red }
-function Write-Warning { param($Message) Write-Host "⚠ $Message" -ForegroundColor Yellow }
-function Write-Info { param($Message) Write-Host "ℹ $Message" -ForegroundColor Cyan }
-function Write-Step { param($Message) Write-Host "➤ $Message" -ForegroundColor Magenta }
+function Write-Success { param($Message) Write-Host ":D $Message" -ForegroundColor Green }
+function Write-Error { param($Message) Write-Host "D: $Message" -ForegroundColor Red }
+function Write-Warning { param($Message) Write-Host ":( $Message" -ForegroundColor Yellow }
+function Write-Info { param($Message) Write-Host ":/ $Message" -ForegroundColor Cyan }
+function Write-Step { param($Message) Write-Host ":| $Message" -ForegroundColor Magenta }
 
 # Configuration
 $ErrorActionPreference = "Stop"
 $ConversionConfig = @{
-    Name = "proc-wolf EXE Converter"
+    Name = "file-utils-ii EXE Converter"
     Version = "3.0"
     BuildDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     RequiredModules = @("ps2exe")
@@ -193,8 +193,8 @@ function New-Executable {
     }
     
     # Additional metadata
-    $ps2exeParams.description = "proc-wolf Process Monitor Self-Extracting Installer"
-    $ps2exeParams.title = "proc-wolf Installer"
+    $ps2exeParams.description = "fille-utils-ii Process Monitor Self-Extracting Installer"
+    $ps2exeParams.title = "foile-utils-ii Installer"
     
     Write-Info "Conversion parameters:"
     $ps2exeParams.GetEnumerator() | ForEach-Object {
@@ -300,7 +300,7 @@ function New-Checksums {
         $checksumFile = Join-Path $outputDir "$(Split-Path $ExePath -LeafBase).checksums.txt"
         
         $checksumContent = @"
-proc-wolf Installer Checksums
+file-utils-ii Installer Checksums
 Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 File: $(Split-Path $ExePath -Leaf)
 Size: $((Get-Item $ExePath).Length) bytes
@@ -333,7 +333,7 @@ function New-InstallationGuide {
         $guideFile = Join-Path $outputDir "INSTALLATION-GUIDE.md"
         
         $guide = @"
-# proc-wolf Installation Guide
+# file-utils-ii Installation Guide
 
 ## Overview
 This is a self-extracting installer for proc-wolf v3.0, a comprehensive process monitoring and security tool.
@@ -349,15 +349,15 @@ This is a self-extracting installer for proc-wolf v3.0, a comprehensive process 
 ### Method 1: Default Installation
 1. Right-click on `$(Split-Path $ExePath -Leaf)` and select "Run as administrator"
 2. Follow the on-screen prompts
-3. proc-wolf will be installed to `C:\Program Files\proc-wolf`
+3. file-utils-ii will be installed to `C:\Program Files\file-utils-ii`
 
 ### Method 2: Custom Installation Path
 1. Open an elevated PowerShell prompt
-2. Run: ``.\$(Split-Path $ExePath -Leaf) -InstallPath "C:\MyPath\proc-wolf"``
+2. Run: ``.\$(Split-Path $ExePath -Leaf) -InstallPath "C:\MyPath\file-utils-ii"``
 
 ### Method 3: Extract Files Only
 1. Run: ``.\$(Split-Path $ExePath -Leaf) -Extract``
-2. Files will be extracted to `.\proc-wolf-extracted`
+2. Files will be extracted to `.\file-utils-ii_extracted`
 
 ## Installation Options
 - ``-InstallPath <path>`` - Custom installation directory
@@ -384,23 +384,23 @@ Verify the installer integrity using these checksums:
 ``````
 
 ## What Gets Installed
-- **ProcWolf.exe** - Background monitor with system tray
-- **ProcWolfCLI.exe** - Command-line interface
-- **ProcWolfService.exe** - Windows service for continuous monitoring
+- **fileutilsii.exe** - Background monitor with system tray
+- **fileutilsiiCLI.exe** - Command-line interface
+- **fieutilsiisvc.exe** - Windows service for continuous monitoring
 - **Configuration files** - Default settings and whitelists
 - **Documentation** - README and usage instructions
 
 ## Post-Installation
-1. The proc-wolf service will start automatically
-2. Launch the system tray monitor: `C:\Program Files\proc-wolf\ProcWolf.exe`
-3. Use CLI commands: `C:\Program Files\proc-wolf\ProcWolfCLI.exe list`
+1. The file-utils-ii service will start automatically
+2. Launch the system tray monitor: `C:\Program Files\file-utils-ii\fileutilsii.exe`
+3. Use CLI commands: `C:\Program Files\file-utils-ii\fileutilsiiCLI.exe list`
 
 ## Log Locations
 - **Service logs**: `C:\ProgramData\proc-wolf\`
 - **Client logs**: `%LOCALAPPDATA%\proc-wolf\`
 
 ## Uninstallation
-1. Run `C:\Program Files\proc-wolf\uninstall.bat` as administrator
+1. Run `C:\Program Files\file-utils-ii\uninstall.bat` as administrator
 2. Or use Windows "Add/Remove Programs"
 
 ## Troubleshooting
@@ -416,7 +416,7 @@ Verify the installer integrity using these checksums:
 - Try reinstalling with `-Force` parameter
 
 ### Permission Denied Errors
-- Ensure proc-wolf service has proper permissions
+- Ensure file-utils-ii service has proper permissions
 - Check file/folder permissions in installation directory
 
 ## Support
@@ -426,7 +426,7 @@ For issues or questions:
 - Ensure all system requirements are met
 
 ## Security Note
-proc-wolf requires administrator privileges to monitor system processes effectively. The installer has been compiled from trusted PowerShell scripts and includes integrity verification.
+file-utils-ii requires administrator privileges to monitor system processes effectively. The installer has been compiled from trusted PowerShell scripts and includes integrity verification.
 
 Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 "@
@@ -448,7 +448,7 @@ function Write-BuildSummary {
     $outputInfo = Get-Item $OutputExe
     
     Write-Host "`n" + "="*80 -ForegroundColor Cyan
-    Write-Host "PROC-WOLF EXECUTABLE BUILD SUMMARY" -ForegroundColor Cyan
+    Write-Host "FILE-UTILS-ii EXECUTABLE BUILD SUMMARY" -ForegroundColor Cyan
     Write-Host "="*80 -ForegroundColor Cyan
     
     Write-Host "`nConversion Details:" -ForegroundColor Yellow
@@ -483,10 +483,10 @@ function Write-BuildSummary {
     }
     
     Write-Host "`nDistribution Ready:" -ForegroundColor Green
-    Write-Host "  ✓ Self-contained executable installer"
-    Write-Host "  ✓ Integrity checksums generated"
-    Write-Host "  ✓ Installation guide created"
-    Write-Host "  ✓ No external dependencies required"
+    Write-Host "  Self-contained executable installer"
+    Write-Host "  Integrity checksums generated"
+    Write-Host "  Installation guide created"
+    Write-Host "  No external dependencies required"
     
     Write-Host "`nNext Steps:" -ForegroundColor Green
     Write-Host "  1. Test the installer: .\$(Split-Path $OutputExe -Leaf) -Extract"
@@ -499,7 +499,7 @@ function Write-BuildSummary {
 
 # Main execution
 try {
-    Write-Host "PROC-WOLF EXECUTABLE CONVERTER v$($ConversionConfig.Version)" -ForegroundColor Cyan
+    Write-Host "FILE-UTILS-ii EXECUTABLE CONVERTER v$($ConversionConfig.Version)" -ForegroundColor Cyan
     Write-Host "="*50 -ForegroundColor Cyan
     
     # Test prerequisites

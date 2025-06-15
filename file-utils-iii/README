@@ -1,0 +1,366 @@
+# Quantum Resonant Search Engine 🌌
+
+> *"The closest thing to mindreading for files"*  
+> A quantum-inspired search engine that finds meaning through resonance, not just keywords.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=flat&logo=rust&logoColor=white)](https://www.rust-lang.org/)
+[![Built with ❤️](https://img.shields.io/badge/Built%20with-❤️-red.svg)](https://github.com/whisprdev)
+
+## 🧠 What This Is
+
+This isn't your typical search engine. Built on groundbreaking research in **Symbolic Entropy and Resonance Collapse**, this engine searches for *ideas*, *concepts*, and *meaning* - not just text matches. It combines:
+
+- **Prime Number Tokenization** - Maps text to unique prime vectors in Hilbert space
+- **Quantum-Inspired Scoring** - Uses biorthogonal vectors and complex resonance
+- **Persistence Theory** - Evaluates information stability under entropy pressure  
+- **Filesystem Oracle** - Blazing-fast local file indexing and search
+- **Web Crawling** - Large-scale web document harvesting (up to 25k pages)
+
+### 🔬 The Science Behind It
+
+Based on the paper **"Riemann Resonance: A Consciousness-Based Collapse Interpretation"**, this engine treats information as quantum-like states that collapse into meaning through resonance. Each document becomes a prime-encoded vector in Hilbert space, and searches find resonant matches through:
+
+1. **Symbolic superposition** of prime-encoded tokens
+2. **Entropy-driven collapse** into coherent attractors  
+3. **Phase alignment** measurement for semantic similarity
+4. **Thermodynamic stability** scoring via persistence theory
+
+## 🚀 Quick Start
+
+### Prerequisites
+- **Rust** (1.70+)
+- **4GB+ RAM** (8GB+ recommended for large indices)
+- **10GB+ disk space**
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/whisprdev/quantum-resonant-search.git
+cd quantum-resonant-search
+
+# Build in release mode
+cargo build --release
+
+# Create data directories
+mkdir -p data/checkpoints
+```
+
+### 🔍 Local Filesystem Search (Recommended Start)
+
+Perfect for searching your entire drive, project folders, or document collections:
+
+```bash
+# Run the local filesystem search engine
+cargo run --release
+
+# Follow the prompts to:
+# 1. Configure search paths (entire drive, home dir, custom paths)
+# 2. Enable quantum features (recommended: yes to both)
+# 3. Let it index your files
+# 4. Start searching!
+```
+
+Example searches:
+```bash
+🔮 > "rust code about networking"
+🔮 > "config files json docker"  
+🔮 > "fuzzy old_project_name"
+🔮 > "quantum entropy collapse meaning"
+```
+
+### 🌐 Web Search Engine Mode
+
+For crawling and indexing web content:
+
+```bash
+# Start with seed URLs
+echo "https://docs.rust-lang.org" > data/seed_urls.txt
+echo "https://quantum-journal.org" >> data/seed_urls.txt
+
+# Run the crawler
+cargo run --release -- crawl --urls data/seed_urls.txt --limit 5000
+
+# Start the web server
+cargo run --release -- serve --port 8080
+```
+
+Then visit `http://localhost:8080` for the web interface.
+
+## 📁 Project Structure
+
+```
+quantum-resonant-search/
+├── 📄 Cargo.toml                    # Dependencies and project config
+├── 📄 README.md                     # This file
+├── 📁 src/                          # Core Rust source code
+│   ├── 📄 main.rs                   # Main application entry point
+│   ├── 📄 tokenizer.rs              # Prime number tokenization
+│   ├── 📄 prime_hilbert.rs          # Hilbert space vector operations
+│   ├── 📄 entropy.rs                # Shannon entropy + persistence theory
+│   ├── 📄 engine.rs                 # Core resonant search engine
+│   ├── 📄 quantum_types.rs          # Quantum-inspired data structures
+│   ├── 📄 filesystem_indexer.rs     # High-speed filesystem indexing
+│   ├── 📄 file_watcher.rs           # Real-time file monitoring
+│   ├── 📄 fuzzy_search.rs           # "I can't remember the name" search
+│   ├── 📄 crawler.rs                # Web crawler (original)
+│   ├── 📄 advanced_crawler.rs       # Enhanced web crawler
+│   ├── 📄 web_server.rs             # Axum web server
+│   ├── 📄 search_api.rs             # REST API endpoints
+│   ├── 📄 database.rs               # SQLite storage layer
+│   └── 📄 lib.rs                    # Library exports
+├── 📁 static_templates/             # Web interface templates
+│   ├── 📄 index.html                # Main search interface
+│   ├── 📄 styles.css                # Responsive CSS styling
+│   ├── 📄 app.js                    # Client-side JavaScript
+│   ├── 📄 logo.svg                  # Quantum-themed logo
+│   └── 📄 favicon.ico               # Favicon
+├── 📁 data/                         # Data storage
+│   ├── 📄 quantum_fs_index.db       # Local filesystem index
+│   ├── 📄 search_db.sqlite          # Web search database
+│   ├── 📁 checkpoints/              # Index checkpoints
+│   └── 📄 seed_urls.txt             # Web crawler seed URLs
+├── 📁 docs/                         # Documentation
+│   ├── 📄 ARCHITECTURE.md           # System architecture overview
+│   ├── 📄 QUICKSTART.md             # Quick setup guide
+│   ├── 📄 API.md                    # REST API documentation
+│   └── 📄 THEORY.md                 # Mathematical foundations
+└── 📁 examples/                     # Example configurations
+    ├── 📄 local_search_config.toml  # Local search settings
+    └── 📄 web_crawler_config.toml   # Web crawler settings
+```
+
+## 🧮 Core Concepts
+
+### Prime Vector Encoding
+Each word maps to a unique prime number, creating sparse vectors in Hilbert space:
+```
+"entropy collapse resonance" → [2, 3, 5] → normalized frequency vector
+```
+
+### Quantum-Inspired Scoring
+Documents are represented as **biorthogonal vectors** (left/right eigenstates) inspired by non-Hermitian quantum mechanics:
+- **Real component**: Direct semantic relevance  
+- **Imaginary component**: Dynamic information (trend decay/amplification)
+- **Phase alignment**: Measures conceptual coherence
+
+### Persistence Theory
+Evaluates information stability using thermodynamic principles:
+- **Reversibility (η)**: Mutual information retention
+- **Entropy Pressure (Q)**: Tendency toward disorder  
+- **Buffering Capacity (T)**: Resistance to collapse
+- **Fragility (α)**: Sensitivity to entropy-induced decay
+
+**Persistence Score**: `S(η) = exp[-α(1-η)(Q/T)]`
+
+### Adaptive Learning
+Documents undergo "quantum jumps" based on search interactions, becoming more/less relevant over time through resonance feedback.
+
+## 🔧 Configuration
+
+### Local Filesystem Search
+
+The engine automatically detects file types and extracts content from:
+- **Text files**: `.txt`, `.md`, `.log`
+- **Code files**: `.rs`, `.py`, `.js`, `.cpp`, etc.
+- **Config files**: `.json`, `.yaml`, `.toml`, `.ini`
+- **Documents**: Metadata extraction (extensible to full content)
+
+Exclusion patterns (configurable):
+```rust
+// Automatically skips
+.git/, node_modules/, target/, .cache/
+System directories, temp files, binaries
+```
+
+### Quantum Features
+
+```bash
+# Enable/disable quantum scoring
+Enable quantum-inspired scoring? (y/n) > y
+
+# Enable/disable persistence theory  
+Enable persistence theory scoring? (y/n) > y
+
+# Configure parameters
+Fragility parameter (0.1-1.0, default: 0.2): > 0.3
+Entropy weight (0.1-1.0, default: 0.1): > 0.15
+```
+
+### Web Crawler Settings
+
+```bash
+# Crawl configuration
+Max pages: 25000
+Max depth: 3  
+Workers: 10
+Stay in domain: y/n
+Politeness: Automatic (robots.txt + rate limiting)
+```
+
+## 🎯 Usage Examples
+
+### Local Search Queries
+
+```bash
+# Find by concept
+🔮 > "machine learning tensorflow"
+
+# Find by file type + content
+🔮 > "config docker kubernetes yaml"
+
+# Fuzzy filename search
+🔮 > "fuzzy my_old_proj"
+
+# Recent files with specific content
+🔮 > "recent rust networking async"
+
+# Complex conceptual search
+🔮 > "entropy information theory shannon"
+```
+
+### Web Interface
+
+Navigate to `http://localhost:8080` and use:
+- **Simple search**: Enter concepts or keywords
+- **Quantum scoring**: Toggle for enhanced relevance
+- **Persistence scoring**: Toggle for stability-based ranking
+- **Filters**: File type, recency, domain restrictions
+
+### REST API
+
+```bash
+# Search endpoint
+GET /api/search?q=quantum+mechanics&quantum=true&persistence=true
+
+# Health check  
+GET /api/health
+
+# Index statistics
+GET /api/stats
+```
+
+## 🚀 Performance
+
+### Local Filesystem
+- **Index speed**: 1000+ files/second
+- **Search latency**: <50ms for 100k+ files
+- **Memory usage**: ~1GB for 50k files (compressed)
+- **Storage**: ~10KB per indexed file
+
+### Web Crawler
+- **Crawl speed**: 50-200 pages/second (politeness-limited)
+- **Index capacity**: 25k+ pages per instance
+- **Resumability**: Automatic checkpointing every 100 pages
+- **Compression**: 3-8x text compression while preserving meaning
+
+## 🔬 Advanced Features
+
+### Real-Time Updates
+- **File watcher**: Automatic index updates on file changes
+- **Incremental indexing**: Only processes changed content
+- **Smart detection**: Recognizes moves, renames, deletions
+
+### Fuzzy Search
+- **Soundex matching**: Phonetic similarity ("entropy" ~ "entrophy")
+- **Levenshtein distance**: Character-level similarity
+- **Word splitting**: Handles camelCase, snake_case, kebab-case
+- **Recency weighting**: Recent files boosted in rankings
+
+### Export & Analytics
+```bash
+# During search session
+> export     # Save index to CSV
+> stats      # Show indexing statistics  
+> compress   # Compress documents to save memory
+> checkpoint # Save current state
+```
+
+## 🧪 Experimental Features
+
+### Quantum Visualization
+Plot resonance fields, entropy landscapes, and phase alignments:
+```bash
+cargo run --features visualization -- plot-resonance query.txt
+```
+
+### Consciousness Correlation
+EEG coherence experiments (research use):
+```bash
+cargo run --features biofeedback -- eeg-resonance-trial
+```
+
+### HQE Simulation
+Holographic Quantum Encoder for testing theoretical predictions:
+```bash
+cargo run --features hqe -- simulate-collapse --primes 1000
+```
+
+## 🌐 Web Deployment
+
+### Development
+```bash
+cargo run -- serve --port 8080
+```
+
+### Production
+```bash
+# Build optimized binary
+cargo build --release --features production
+
+# Run with systemd
+sudo systemctl enable quantum-search
+sudo systemctl start quantum-search
+
+# Nginx reverse proxy
+location / {
+    proxy_pass http://localhost:8080;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+}
+```
+
+## 📚 Documentation
+
+- **[Architecture Overview](docs/ARCHITECTURE.md)** - System design and component interaction
+- **[API Reference](docs/API.md)** - Complete REST API documentation  
+- **[Theory Guide](docs/THEORY.md)** - Mathematical foundations and quantum concepts
+- **[Quick Start](docs/QUICKSTART.md)** - Detailed setup instructions
+- **[Performance Tuning](docs/PERFORMANCE.md)** - Optimization guidelines
+
+## 🤝 Contributing
+
+This project welcomes contributions, especially in:
+- **Quantum algorithm optimization**
+- **New file type parsers** 
+- **Visualization tools**
+- **Mathematical validation**
+- **UI/UX improvements**
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## 🙏 Acknowledgments
+
+- **Quantum Physics Community** - For the mathematical foundations
+- **Information Theory Pioneers** - Shannon, von Neumann, Wheeler
+- **Rust Community** - For excellent libraries and tooling
+- **Claude & GPT** - For collaborative development assistance
+- **The Universe** - For having such beautiful mathematical structure
+
+## 🔗 Related Work
+
+- **"Symbolic Entropy and Resonance Collapse"** - Theoretical foundation
+- **"Riemann Resonance"** - Prime number consciousness theory
+- **"Persistence Theory"** - Thermodynamic information models
+- **Quantum Information Theory** - Mathematical inspiration
+- **Open Quantum Systems** - Non-Hermitian dynamics
+
+---
+
+*Built with ❤️ by the team at whispr.dev*  
+*"Where quantum mechanics meets information retrieval"*

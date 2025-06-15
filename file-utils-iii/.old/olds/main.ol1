@@ -1,0 +1,134 @@
+// src/main.rs
+
+mod tokenizer;
+mod entropy;
+mod prime_hilbert;
+mod engine;
+mod crawler; // Declare the new crawler module
+
+use engine::ResonantEngine;
+use crawler::{Crawler, CrawledDocument}; // Import Crawler and CrawledDocument
+use std::io::{self, Write};
+use std::path::Path;
+use tokio::sync::mpsc;
+use futures::stream::{self, StreamExt}; // For futures Stream
+
+#[tokio::main] // Use the tokio main macro for async
+async fn main() {
+    println!("Initializing Resonant Search Engine...");
+    let mut engine = ResonantEngine::new();
+
+    // --- Crawler Setup ---
+    // Channels for communication between crawler and main thread
+    let (to_visit_sender, to_visit_receiver) = mpsc::channel::<reqwest::Url>(1000); // Channel for URLs to crawl
+    let (doc_sender, mut doc_receiver) = mpsc::channel::<CrawledDocument>(100); // Channel for crawled documents
+
+    // Create the crawler instance
+    let mut crawler = Crawler::new(to_visit_sender.clone(), doc_sender.clone());
+
+    // Define initial seed URLs (replace with your source of 25k URLs)
+    let seed_urls: Vec<String> = vec![
+        "http://example.com".to_string(),
+        "https://www.rust-lang.org/".to_string(),
+        "https://tokio.rs/".to_string(),
+        // Add many more URLs here to reach your target of 25,000
+        // You'll need a way to get this list of 25k URLs.
+        // As discussed, the top 25k by Google SEO isn't directly available,
+        // so you'd need an alternative source for this list.
+    ];
+    let num_crawler_workers = 10; // Adjust the number of concurrent workers
+
+    // Spawn the crawler task
+    let crawl_handle = tokio::spawn(async move {
+        if let Err(e) = crawler.crawl(seed_urls, num_crawler_workers).await {
+            eprintln!("Crawler encountered a fatal error: {}", e);
+        }
+        // Explicitly drop the senders in the spawned task when crawling is done
+        drop(to_visit_sender);
+        drop(doc_sender);
+    });
+    // --- End Crawler Setup ---
+
+
+    // --- Indexing Process ---
+    // Process crawled documents as they arrive from the crawler
+    println!("Starting indexing of crawled documents...");
+    while let Some(doc) = doc_receiver.recv().await {
+        engine.add_crawled_document(doc);
+        println!("Indexed document. Current index size: {}", engine.docs.len());
+         if engine.docs.len() >= 25000 {
+             println!("Reached target index size of 25,000. Stopping indexing.");
+             // In a real scenario, you might want to wait for the crawler to finish
+             // or implement a more sophisticated stopping mechanism.
+             break;
+         }
+    }
+    println!("Indexing of crawled documents finished.");
+    // --- End Indexing Process ---
+
+    // Wait for the crawler to finish (optional, depending on your desired flow)
+    let _ = crawl_handle.await;
+
+    // --- Local File Loading (Optional) ---
+    // You can still load local files if needed, after or before crawling
+    // println!("Enter the directory path to load additional local documents from (e.g., data/) or press Enter to skip:");
+    // let mut dir_path = String::new();
+    // io::stdin().read_line(&mut dir_path).expect("Failed to read line");
+    // let dir_path = dir_path.trim();
+    // if !dir_path.is_empty() {
+    //     let path = Path::new(&dir_path);
+    //     if path.exists() && path.is_dir() {
+    //         println!("Loading local documents from '{}'...", dir_path);
+    //         if let Err(e) = engine.load_directory(path) {
+    //             eprintln!("Error loading directory '{}': {}", dir_path, e);
+    //         }
+    //         println!("Local documents loaded.");
+    //     } else {
+    //         eprintln!("Error: '{}' is not a valid directory.", dir_path);
+    //     }
+    // }
+    // --- End Local File Loading ---
+
+
+    // --- Search Loop ---
+    println!("\nResonant Search Engine is ready. Total documents indexed: {}", engine.docs.len());
+    loop {
+        println!("\nEnter your resonant query (or type 'quit' to exit):");
+        print!("> ");
+        io::stdout().flush().expect("Failed to flush stdout");
+
+        let mut query = String::new();
+        io::stdin().read_line(&mut query)
+            .expect("Failed to read line");
+        let query = query.trim();
+
+        if query.eq_ignore_ascii_case("quit") {
+            println!("Exiting.");
+            break;
+        }
+
+        if query.is_empty() {
+            println!("Query is empty. Please enter a query.");
+            continue;
+        }
+
+        println!("\nSearching for resonant matches...");
+        let results = engine.search(query, 5); // Display top 5 results
+
+        println!("\nTop Resonant Matches:");
+        if results.is_empty() {
+            println!("No results found.");
+        } else {
+            for (idx, r) in results.iter().enumerate() {
+                println!("[{}] {}", idx + 1, r.title);
+                println!("    URL:            {}", r.path); // Display URL
+                println!("    Resonance:      {:.4}", r.resonance);
+                println!("    Δ Entropy:      {:.4}", r.delta_entropy);
+                println!("    Combined Score: {:.4}", r.score);
+                println!("    Preview:        {}", r.snippet);
+                println!();
+            }
+        }
+    }
+    // --- End Search Loop ---
+}
