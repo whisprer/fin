@@ -1,0 +1,32 @@
+[package]
+name = "mayan_calendar"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4"
+eframe = "0.26"
+egui = "0.26"
+image = "0.24"
+lazy_static = "1.4"
+lru = "0.12"
+parking_lot = "0.12"
+rayon = "1.8"
+thiserror = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+memmap2 = "0.9"
+
+[features]
+default = ["vendored-fonts"]
+vendored-fonts = []
+
+# Add binary targets
+[[bin]]
+name = "mayan_calendar"
+path = "src/main.rs"
+
+[[bin]]
+name = "verify_assets"
+path = "src/bin/verify_assets.rs"
+required-features = []
