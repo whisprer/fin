@@ -1,0 +1,32 @@
+# Proc-Wolf Process Monitor
+
+## Files Included
+- ProcWolf.exe - Background monitor with system tray icon
+- ProcWolfCLI.exe - Command line interface for direct control
+- ProcWolfService.exe - Windows service for continuous monitoring
+- install.bat - Script to install the Windows service
+- uninstall.bat - Script to uninstall the Windows service
+
+## Installation
+1. Right-click on install.bat and select "Run as administrator"
+2. The service will be installed and started automatically
+
+## Usage
+- **Background Monitor**: Run ProcWolf.exe to start the system tray monitor
+- **Command Line Interface**: Run ProcWolfCLI.exe with the following commands:
+  - `ProcWolfCLI.exe list` - List all processes
+  - `ProcWolfCLI.exe list --assess` - List all processes with threat assessment
+  - `ProcWolfCLI.exe assess --name chrome.exe` - Assess a specific process
+  - `ProcWolfCLI.exe kill --name badprocess.exe` - Kill a process
+  - `ProcWolfCLI.exe nuke --name malware.exe` - Completely remove a process
+  - `ProcWolfCLI.exe monitor` - Monitor processes in real-time
+  - `ProcWolfCLI.exe history` - View process history
+
+## Uninstallation
+1. Right-click on uninstall.bat and select "Run as administrator"
+2. The service will be stopped and removed
+
+## Log Files
+- Service logs: C:\ProgramData\proc-wolf\proc-wolf-service.log
+- Background logs: %LOCALAPPDATA%\proc-wolf\proc-wolf-background.log
+- CLI logs: proc-wolf-cli.log (in the same directory as the executable)

@@ -1,0 +1,335 @@
+# 🔐 file-utils - Quantum-Enhanced Secure File Encryption & Deletion Tool
+
+[![Rust Version](https://img.shields.io/badge/rust-1.70%2B-orange)](https://www.rust-lang.org/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Security](https://img.shields.io/badge/security-military--grade-green.svg)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+
+> **Built by whispr.dev | Created by claudefren & woflfren**  
+> A blazingly fast, military-grade file encryption and secure deletion tool written in Rust
+
+## 🚀 What Makes file-utils Special?
+
+**file-utils** isn't just another encryption tool - it's a quantum-enhanced, SysInternals-inspired powerhouse that combines:
+
+- 🔬 **Dual Encryption Modes**: Traditional AES-256-CTR + Experimental Quantum-Resistant Encryption
+- 🔥 **Windows Stubborn File Obliteration**: Uses `\\?\` paths, attribute removal, and reboot scheduling
+- ⚡ **Lightning Performance**: Native Rust speed with 1MB chunked processing
+- 🎯 **SysInternals-Style Techniques**: Multi-pass secure deletion with DoD-compliant wiping
+- 🧠 **Smart CLI**: Auto-generates output paths, interactive key prompts, batch processing
+
+## 📁 Project Structure
+
+```
+file-utils/
+├── 📄 Cargo.toml              # Dependencies & metadata
+├── 📖 README.md               # This comprehensive guide
+├── 📁 src/
+│   ├── 🚪 main.rs             # CLI interface & argument parsing
+│   ├── ⚙️  config.rs          # Configuration management
+│   ├── 🔐 crypto.rs           # Dual-mode encryption engine
+│   ├── 💀 secure_delete.rs    # Military-grade file obliteration
+│   ├── 📂 file_utils.rs       # File operations & utilities
+│   └── 🎨 ui.rs               # User interface components
+└── 📁 target/                 # Compiled binaries (after build)
+```
+
+## 🛠️ Installation & Setup
+
+### Prerequisites
+- **Rust 1.70+** - [Install from rustup.rs](https://rustup.rs/)
+- **Windows**: Full functionality with long path & attribute support
+- **Linux/macOS**: Core functionality (some Windows-specific features disabled)
+
+### Quick Install
+```bash
+# Clone or download the project
+git clone https://github.com/whispr-dev/file-utils.git
+cd file-utils
+
+# Build optimized release version
+cargo build --release
+
+# Optional: Install globally
+cargo install --path .
+```
+
+### 🔧 Dependencies
+All dependencies are managed automatically by Cargo:
+- **AES encryption**: `aes` + `ctr` crates with CTR128BE mode
+- **Random generation**: `rand` with OS entropy
+- **CLI parsing**: `clap` v4 with modern interface
+- **Error handling**: `anyhow` for user-friendly errors
+- **Windows APIs**: Direct kernel32 bindings for low-level operations
+
+## 💡 Usage Guide
+
+### Basic Commands
+
+```bash
+# 🔐 Encrypt a single file (auto-generates key prompt)
+file-utils encrypt secret.txt
+
+# 🔓 Decrypt with specific output location
+file-utils decrypt secret.txt.enc -o restored_secret.txt
+
+# 💀 Secure delete (3-pass DoD wipe)
+file-utils -s stubborn_file.exe
+```
+
+### Advanced Operations
+
+```bash
+# 🧪 Quantum encryption mode with custom key
+file-utils encrypt data.bin -m quantum -k "my_super_secret_key" -o encrypted/
+
+# 🔥 Encrypt + secure delete original (one command)
+file-utils encrypt confidential/ -s -m aes
+
+# 📊 Batch operations with progress
+file-utils encrypt large_dataset/ -o encrypted_output/ -k "batch_key"
+```
+
+### Environment Configuration
+
+```bash
+# Set default crypto mode globally
+export CRYPTO_MODE=quantum    # or 'aes'
+
+# Use quantum mode for this session
+CRYPTO_MODE=quantum file-utils encrypt sensitive.pdf
+```
+
+## 🎯 Command Reference
+
+### Core Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `encrypt <path>` | Encrypt file/directory | `file-utils encrypt secret.txt` |
+| `decrypt <path>` | Decrypt file/directory | `file-utils decrypt secret.txt.enc` |
+| `-s, --secure <path>` | Secure delete file | `file-utils -s old_file.doc` |
+
+### Options & Flags
+
+| Flag | Description | Default | Example |
+|------|-------------|---------|---------|
+| `-o, --output <path>` | Output location | Auto-generated | `-o encrypted/` |
+| `-k, --key <key>` | Encryption key | Interactive prompt | `-k "my_secret"` |
+| `-m, --mode <mode>` | Crypto mode (`aes`/`quantum`) | `aes` | `-m quantum` |
+| `-s, --secure` | Secure delete after operation | Disabled | `encrypt file.txt -s` |
+
+### Auto-Generated Paths
+
+When no output path is specified:
+- **Encryption**: `document.pdf` → `document.pdf.enc`
+- **Decryption**: `document.pdf.enc` → `document.pdf`
+- **Custom output**: Always creates parent directories if needed
+
+## 🔬 Encryption Modes Deep Dive
+
+### 🏛️ AES-256-CTR Mode (Default)
+- **Algorithm**: AES-256 in Counter Mode with `ctr::Ctr128BE<Aes256>`
+- **Key Handling**: PBKDF2-style key derivation for short keys
+- **IV Generation**: Cryptographically secure random IVs per file
+- **Format**: `[16-byte IV][encrypted data]`
+
+### 🧪 Quantum-Resistant Mode (Experimental)
+Our custom **RKState** (Resilient Kryptographic State) algorithm:
+- **Multi-round processing**: 3 rounds of quantum-inspired transformations
+- **Entropy cascading**: 64-byte entropy pool with golden ratio decay
+- **State evolution**: Dynamic α/η parameters with √2 amplification
+- **Format**: `[8-byte length][quantum-processed data]`
+
+> ⚠️ **Note**: Quantum mode is experimental. Use AES mode for production systems.
+
+## 💀 Secure Deletion Features
+
+### Windows-Specific Obliteration
+- **`\\?\` Long Path Support**: Handles paths >260 characters
+- **Attribute Removal**: Clears READ_ONLY, HIDDEN, SYSTEM flags via `SetFileAttributesW`
+- **Reboot Scheduling**: Uses `MoveFileExW` with `MOVEFILE_DELAY_UNTIL_REBOOT`
+- **Process Detection**: Framework for identifying file lock owners
+
+### Multi-Pass Wiping Strategy
+1. **Pass 1**: Overwrite with zeros (`0x00`)
+2. **Pass 2**: Overwrite with ones (`0xFF`) 
+3. **Pass 3**: Cryptographically random data
+4. **Chunked Processing**: 1MB chunks for large files
+5. **Forced Sync**: `sync_all()` ensures disk writes
+
+### Retry & Escalation Logic
+```rust
+Standard Deletion → Attribute Removal → Process Termination → Reboot Scheduling
+```
+
+## 📚 Usage Examples
+
+### 🏠 Personal File Protection
+```bash
+# Encrypt personal documents with quantum crypto
+file-utils encrypt ~/Documents/personal/ -m quantum -s
+
+# Quick decrypt with auto-path detection
+file-utils decrypt personal_backup.enc
+
+# Nuclear option: secure delete sensitive files
+file-utils -s browser_history.db
+file-utils -s ~/.bash_history
+```
+
+### 🏢 Enterprise Security
+```bash
+# Batch encrypt customer data with AES
+file-utils encrypt customer_db/ -o encrypted_backups/ -k "$MASTER_KEY"
+
+# Secure workstation cleanup
+file-utils -s C:\temp\
+file-utils -s "C:\Users\%USERNAME%\AppData\Local\Temp\"
+
+# Compliance-grade deletion (Windows)
+file-utils -s "\\?\C:\Very\Long\Path\That\Exceeds\260\Characters\sensitive_document.docx"
+```
+
+### 🧪 Development & Testing
+```bash
+# Test both encryption modes
+file-utils encrypt test_data.bin -m aes -o test_aes.enc
+file-utils encrypt test_data.bin -m quantum -o test_quantum.enc
+
+# Performance comparison
+time file-utils encrypt large_file.iso -m aes
+time file-utils encrypt large_file.iso -m quantum
+
+# Key derivation testing
+echo "short" | file-utils encrypt - -k "abc" -m aes
+```
+
+## 🔧 Advanced Configuration
+
+### Environment Variables
+```bash
+# Set default encryption mode
+export CRYPTO_MODE=quantum
+
+# Custom temp directories (if needed)
+export TEMP_DIR=/secure/temp
+```
+
+### Batch Processing Scripts
+
+**PowerShell (Windows)**:
+```powershell
+# Encrypt all Office documents
+Get-ChildItem -Recurse -Include *.docx,*.xlsx,*.pptx | 
+ForEach-Object { file-utils encrypt $_.FullName -s }
+```
+
+**Bash (Linux/macOS)**:
+```bash
+# Secure delete all .tmp files
+find . -name "*.tmp" -exec file-utils -s {} \;
+
+# Batch encrypt with progress
+find ~/sensitive -type f -exec file-utils encrypt {} -o ~/encrypted/ \;
+```
+
+## 🚨 Security Considerations
+
+### ✅ Best Practices
+- **Always verify encryption** by attempting decryption before deleting originals
+- **Use strong, unique keys** - consider password managers or hardware tokens
+- **Test secure deletion** on non-critical files first
+- **Backup encrypted files** to prevent data loss
+- **Use AES mode for production** workloads requiring compliance
+
+### ⚠️ Important Warnings
+- **Quantum mode is experimental** - not audited for production use
+- **Secure deletion is irreversible** - there's no "undo" button
+- **Windows long path support** requires appropriate permissions
+- **Key loss means data loss** - store keys securely
+
+### 🔒 Threat Model
+**file-utils** protects against:
+- ✅ Casual filesystem browsing
+- ✅ Standard file recovery tools
+- ✅ Most forensic analysis techniques
+- ✅ Stubborn Windows file locks
+
+**Does NOT protect against:**
+- ❌ Nation-state electron microscopy attacks
+- ❌ Quantum computers (for AES mode)
+- ❌ Physical memory dumps while running
+- ❌ Hardware-level forensics on SSDs
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"Permission denied" on Windows**:
+```bash
+# Run as administrator or use long path format
+file-utils -s "\\?\C:\path\to\locked\file.exe"
+```
+
+**"Key too short" errors**:
+```bash
+# Use longer keys or let the tool prompt you
+file-utils encrypt file.txt  # Interactive key prompt
+```
+
+**Large file processing slow**:
+```bash
+# Use AES mode for better performance on large files
+file-utils encrypt bigfile.iso -m aes
+```
+
+### Debug Information
+```bash
+# Build with debug symbols for troubleshooting
+cargo build --debug
+RUST_BACKTRACE=1 ./target/debug/file-utils encrypt problematic_file.txt
+```
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Whether you're fixing bugs, adding features, or improving documentation:
+
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b amazing-feature`
+3. **Commit** your changes: `git commit -am 'Add amazing feature'`
+4. **Push** to the branch: `git push origin amazing-feature`
+5. **Open** a Pull Request
+
+### Development Setup
+```bash
+# Clone for development
+git clone https://github.com/whispr-dev/file-utils.git
+cd file-utils
+
+# Install development dependencies
+cargo install cargo-watch cargo-audit
+
+# Run tests
+cargo test
+
+# Auto-rebuild on changes
+cargo watch -x run
+```
+
+## 📄 License
+
+This project is licensed under the Hybrid MIT & CC0 License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **whispr.dev** - For the vision and engineering excellence
+- **claudefren** - Primary architect and crypto implementation
+- **woflfren** - Product direction and Windows security features  
+- **Rust Community** - For the incredible ecosystem of crates
+- **SysInternals Team** - Inspiration for Windows file handling techniques
+
+---
+
+**💬 Need Help?** Open an issue on GitHub or contact us at security@whispr.dev
+
+**🔐 Stay Secure!** - The whispr.dev Team
