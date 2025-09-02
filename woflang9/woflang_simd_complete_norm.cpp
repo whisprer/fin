@@ -1,0 +1,375 @@
+// woflang_simd_complete.cpp - Complete SIMD tokenizer implementation
+#include <vector>
+#include <string>
+#include <cstdint>
+#include <stdexcept>
+#include <cwctype>
+
+#if defined(_MSC_VER)
+    #include <intrin.h>
+#elif defined(__GNUC__) || defined(__clang__)
+    #include <cpuid.h>
+#endif
+
+#include <immintrin.h>
+
+// Token structure for downstream use
+struct WofToken {
+    std::u32string token; // Full token text (Unicode)
+    uint16_t opcode;      // Token ID (optional; fill with 0 if not using)
+    size_t position;      // Byte offset in original UTF-8 input
+    size_t length;        // Length in UTF-32 characters
+};
+
+//==============================================================================
+// CPU Feature Detection
+
+inline bool isAVX2Supported() {
+#if defined(_MSC_VER)
+    int info[4];
+    __cpuid(info, 0);
+    int nIds = info[0];
+    if (nIds >= 7) {
+        __cpuidex(info, 7, 0);
+        return (info[1] & (1 << 5)) != 0;
+    }
+    return false;
+#elif defined(__GNUC__) || defined(__clang__)
+    unsigned int eax, ebx, ecx, edx;
+    if (!__get_cpuid_max(0, nullptr)) return false;
+    __cpuid_count(7, 0, eax, ebx, ecx, edx);
+    return (ebx & (1 << 5)) != 0;
+#else
+    return false;
+#endif
+}
+
+//==============================================================================
+// AVX2-accelerated tokenization
+
+inline std::vector<std::u32string> simd_tokenize_avx2(const std::u32string& line) {
+    std::vector<std::u32string> tokens;
+    const size_t n = line.size();
+    
+    if (n == 0) return tokens;
+    
+    const size_t stride = 8; // AVX2 processes 8 x 32-bit values at once
+    size_t i = 0;
+
+    // Set up whitespace detection vectors
+    const __m256i ws_space = _mm256_set1_epi32(U' ');
+    const __m256i ws_tab   = _mm256_set1_epi32(U'\t');
+    const __m256i ws_nl    = _mm256_set1_epi32(U'\n');
+    const __m256i ws_cr    = _mm256_set1_epi32(U'\r');
+
+    size_t token_start = 0;
+    bool in_token = false;
+
+    // Process chunks of 8 characters at a time
+    while (i + stride <= n) {
+        // Load 8 UTF-32 characters
+        __m256i chars = _mm256_loadu_si256(reinterpret_cast<const __m256i*>(&line[i]));
+        
+        // Compare against all whitespace characters
+        __m256i mask_space = _mm256_cmpeq_epi32(chars, ws_space);
+        __m256i mask_tab   = _mm256_cmpeq_epi32(chars, ws_tab);
+        __m256i mask_nl    = _mm256_cmpeq_epi32(chars, ws_nl);
+        __m256i mask_cr    = _mm256_cmpeq_epi32(chars, ws_cr);
+        
+        // Combine all whitespace masks
+        __m256i mask_ws = _mm256_or_si256(
+            _mm256_or_si256(mask_space, mask_tab),
+            _mm256_or_si256(mask_nl, mask_cr)
+        );
+
+        // Extract bitmask for conditional processing
+        uint32_t bitmask = _mm256_movemask_ps(_mm256_castsi256_ps(mask_ws));
+
+        // Process each character in the chunk
+        for (int j = 0; j < stride; ++j) {
+            bool is_whitespace = (bitmask >> j) & 1;
+            
+            if (is_whitespace) {
+                if (in_token) {
+                    // End of token - extract it
+                    tokens.emplace_back(line.substr(token_start, i + j - token_start));
+                    in_token = false;
+                }
+            } else {
+                if (!in_token) {
+                    // Start of new token
+                    token_start = i + j;
+                    in_token = true;
+                }
+            }
+        }
+        i += stride;
+    }
+
+    // Handle remaining characters (scalar fallback for tail)
+    while (i < n) {
+        bool is_whitespace = (line[i] == U' ' || line[i] == U'\t' || 
+                             line[i] == U'\n' || line[i] == U'\r');
+        
+        if (is_whitespace) {
+            if (in_token) {
+                tokens.emplace_back(line.substr(token_start, i - token_start));
+                in_token = false;
+            }
+        } else {
+            if (!in_token) {
+                token_start = i;
+                in_token = true;
+            }
+        }
+        ++i;
+    }
+
+    // Handle final token if we ended inside one
+    if (in_token) {
+        tokens.emplace_back(line.substr(token_start, i - token_start));
+    }
+
+    return tokens;
+}
+
+//==============================================================================
+// Scalar fallback implementation
+
+inline std::vector<std::u32string> simd_tokenize_scalar(const std::u32string& line) {
+    std::vector<std::u32string> tokens;
+    const size_t n = line.size();
+    
+    if (n == 0) return tokens;
+    
+    size_t i = 0;
+    
+    while (i < n) {
+        // Skip whitespace
+        while (i < n && (line[i] == U' ' || line[i] == U'\t' || 
+                        line[i] == U'\n' || line[i] == U'\r')) {
+            ++i;
+        }
+        
+        if (i >= n) break;
+        
+        // Collect non-whitespace characters
+        size_t token_start = i;
+        while (i < n && !(line[i] == U' ' || line[i] == U'\t' || 
+                         line[i] == U'\n' || line[i] == U'\r')) {
+            ++i;
+        }
+        
+        if (i > token_start) {
+            tokens.emplace_back(line.substr(token_start, i - token_start));
+        }
+    }
+    
+    return tokens;
+}
+
+//==============================================================================
+// Main dispatch function - selects best available implementation
+
+inline std::vector<std::u32string> simd_tokenize(const std::u32string& line) {
+    if (line.empty()) {
+        return {};
+    }
+    
+    // Runtime dispatch based on CPU capabilities
+    if (isAVX2Supported()) {
+        return simd_tokenize_avx2(line);
+    }
+    
+    // Fallback to scalar implementation
+    return simd_tokenize_scalar(line);
+}
+
+//==============================================================================
+// UTF-8 conversion and position mapping utilities
+
+// Enhanced UTF-8 to UTF-32 converter with error handling
+inline std::u32string utf8_to_utf32(const std::string& input) {
+    std::u32string out;
+    out.reserve(input.size()); // Conservative estimate
+    
+    size_t i = 0;
+    while (i < input.size()) {
+        char32_t ch = 0;
+        unsigned char c = static_cast<unsigned char>(input[i]);
+        
+        if (c < 0x80) {
+            // 1-byte sequence (ASCII)
+            ch = c;
+            ++i;
+        } else if ((c >> 5) == 0x6) {
+            // 2-byte sequence
+            if (i + 1 >= input.size()) 
+                throw std::invalid_argument("Invalid UTF-8: incomplete 2-byte sequence");
+            ch = ((c & 0x1F) << 6) | (static_cast<unsigned char>(input[i + 1]) & 0x3F);
+            i += 2;
+        } else if ((c >> 4) == 0xE) {
+            // 3-byte sequence
+            if (i + 2 >= input.size()) 
+                throw std::invalid_argument("Invalid UTF-8: incomplete 3-byte sequence");
+            ch = ((c & 0x0F) << 12) | 
+                 ((static_cast<unsigned char>(input[i + 1]) & 0x3F) << 6) |
+                 (static_cast<unsigned char>(input[i + 2]) & 0x3F);
+            i += 3;
+        } else if ((c >> 3) == 0x1E) {
+            // 4-byte sequence
+            if (i + 3 >= input.size()) 
+                throw std::invalid_argument("Invalid UTF-8: incomplete 4-byte sequence");
+            ch = ((c & 0x07) << 18) | 
+                 ((static_cast<unsigned char>(input[i + 1]) & 0x3F) << 12) |
+                 ((static_cast<unsigned char>(input[i + 2]) & 0x3F) << 6) | 
+                 (static_cast<unsigned char>(input[i + 3]) & 0x3F);
+            i += 4;
+        } else {
+            throw std::invalid_argument("Invalid UTF-8: illegal start byte");
+        }
+        out.push_back(ch);
+    }
+    return out;
+}
+
+// Helper to map UTF-32 positions back to UTF-8 byte positions
+inline std::vector<size_t> build_utf8_position_map(const std::string& input_utf8) {
+    std::vector<size_t> pos_map;
+    size_t byte_pos = 0;
+    size_t i = 0;
+    
+    while (i < input_utf8.size()) {
+        pos_map.push_back(byte_pos);
+        unsigned char c = static_cast<unsigned char>(input_utf8[i]);
+        
+        if (c < 0x80) {
+            byte_pos += 1;
+            i += 1;
+        } else if ((c >> 5) == 0x6) {
+            byte_pos += 2;
+            i += 2;
+        } else if ((c >> 4) == 0xE) {
+            byte_pos += 3;
+            i += 3;
+        } else if ((c >> 3) == 0x1E) {
+            byte_pos += 4;
+            i += 4;
+        } else {
+            ++i; // Skip invalid bytes
+        }
+    }
+    return pos_map;
+}
+
+//==============================================================================
+// Main API functions
+
+// Main SIMD parser entry point (UTF-8 input)
+inline std::vector<WofToken> parseWoflangSIMD(const std::string& input_utf8) {
+    if (input_utf8.empty()) {
+        return {};
+    }
+    
+    std::u32string input = utf8_to_utf32(input_utf8);
+    std::vector<size_t> pos_map = build_utf8_position_map(input_utf8);
+    std::vector<std::u32string> tokens = simd_tokenize(input);
+
+    std::vector<WofToken> out;
+    out.reserve(tokens.size());
+    
+    size_t utf32_pos = 0;
+    for (const auto& t : tokens) {
+        // Skip whitespace to find actual token start
+        while (utf32_pos < input.size() && 
+               (input[utf32_pos] == U' ' || input[utf32_pos] == U'\t' || 
+                input[utf32_pos] == U'\n' || input[utf32_pos] == U'\r')) {
+            ++utf32_pos;
+        }
+        
+        size_t byte_pos = (utf32_pos < pos_map.size()) ? pos_map[utf32_pos] : input_utf8.size();
+        
+        out.push_back(WofToken{ 
+            t, 
+            0,                  // opcode - fill later if needed
+            byte_pos,           // position in original UTF-8 bytes
+            t.size()            // length in UTF-32 characters
+        });
+        
+        utf32_pos += t.size();
+    }
+    return out;
+}
+
+// Overload for already-UTF32 input
+inline std::vector<WofToken> parseWoflangSIMD(const std::u32string& input) {
+    if (input.empty()) {
+        return {};
+    }
+    
+    std::vector<std::u32string> tokens = simd_tokenize(input);
+    std::vector<WofToken> out;
+    out.reserve(tokens.size());
+    
+    size_t pos = 0;
+    for (const auto& t : tokens) {
+        // Skip whitespace to find actual token start
+        while (pos < input.size() && 
+               (input[pos] == U' ' || input[pos] == U'\t' || 
+                input[pos] == U'\n' || input[pos] == U'\r')) {
+            ++pos;
+        }
+        
+        out.push_back(WofToken{ 
+            t, 
+            0,          // opcode
+            pos,        // position in UTF-32 characters  
+            t.size()    // length
+        });
+        
+        pos += t.size();
+    }
+    return out;
+}
+
+//==============================================================================
+// Example usage and test harness
+#ifdef WOFLANG_SIMD_TEST
+#include <iostream>
+#include <chrono>
+
+void test_tokenizer() {
+    std::string test_input = "hello world\tthis is a test\n\rwith unicode: 你好 世界";
+    
+    std::cout << "Testing WofLang SIMD Tokenizer\n";
+    std::cout << "Input: " << test_input << "\n\n";
+    
+    auto start = std::chrono::high_resolution_clock::now();
+    auto tokens = parseWoflangSIMD(test_input);
+    auto end = std::chrono::high_resolution_clock::now();
+    
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    
+    std::cout << "Tokenization took: " << duration.count() << " microseconds\n";
+    std::cout << "Found " << tokens.size() << " tokens:\n";
+    
+    for (const auto& token : tokens) {
+        std::cout << "  Token: '";
+        // Simple UTF-32 to UTF-8 conversion for display
+        for (char32_t c : token.token) {
+            if (c < 0x80) {
+                std::cout << static_cast<char>(c);
+            } else {
+                std::cout << "?"; // Simplified for demo
+            }
+        }
+        std::cout << "' at position " << token.position 
+                  << " length " << token.length << "\n";
+    }
+}
+
+int main() {
+    test_tokenizer();
+    return 0;
+}
+#endif

@@ -1,0 +1,71 @@
+# showcase.wof - A tour of Woflang's features
+# ============================================
+
+"Welcome to Woflang!" print
+"A Unicode-native stack language" print
+cr
+
+# Basic arithmetic with Unicode
+"π times 2:" print
+π 2 * .
+cr
+
+# Greek letter operations
+"Sum of 1 to 10:" print
+1 2 3 4 5 6 7 8 9 10 Σ .
+cr
+
+# Quantum computing demo
+"Quantum superposition:" print
+|0⟩ H inspect
+measure
+"Collapsed to:" print .
+cr
+
+# Fractals
+"Checking if (0.3, 0.5) is in Mandelbrot set:" print
+0.3 0.5 100 mandelbrot
+"Result:" print .
+cr
+
+# Sacred operations
+"Seeking wisdom from the Oracle..." print
+prophecy
+cr
+
+"Calculating stack entropy:" print
+1 1 2 3 5 8 13 21  # Fibonacci numbers
+entropy
+cr
+
+# Music operations
+"Creating a C major chord:" print
+C major
+"Frequencies:" print .s
+clear
+
+# Chemistry
+"Molecular weight of H2O:" print
+"H2O" molecular_weight .
+cr
+
+# Cryptography
+"Encrypting a message:" print
+"Hello, Woflang!" "secret" xor_cipher
+"Encrypted:" print to_hex .
+cr
+
+# Variables and math
+"Storing the golden ratio:" print
+1.618033988749895 !phi
+"φ² - φ - 1 = " print
+$phi dup * $phi - 1 - .
+cr
+
+# Final message
+"🌟 Thanks for exploring Woflang! 🌟" print
+cr
+
+# Clean up
+clear
+"Stack cleared. Goodbye!" print

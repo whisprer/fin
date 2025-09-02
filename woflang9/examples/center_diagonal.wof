@@ -1,0 +1,73 @@
+# Cantor's Diagonalization - HowlPattern is Uncountable (woflang style)
+# --------------------------------------------------------------
+# Types and conventions (informal, for comments only):
+#   Wofl        := "Entity"
+#   HowlBit     := 0 or 1   (bit values)
+#   HowlPattern := [0,1,0,1,...] (infinite binary sequence, here we use finite prefix)
+#   Pack        := function (Wofl → HowlPattern)
+#   We'll model packs as a list of HowlPatterns, indexed by n ∈ [0,N)
+# --------------------------------------------------------------
+
+# Simulate Pack: a list of finite HowlPatterns (each a list of bits)
+# For demo: define a Pack of N=4 "howl patterns"
+[
+    [0 1 0 1]    # wofl 0
+    [1 0 1 1]    # wofl 1
+    [1 1 0 0]    # wofl 2
+    [0 0 1 1]    # wofl 3
+] 'Pack
+
+# Print Pack
+"Pack of HowlPatterns:" .
+Pack .
+
+# Diagonalization: 
+# For each k, get the k-th bit of the k-th pattern, flip it, collect into sequence "d"
+# We'll use a finite prefix of length N (4 here)
+
+# Helper: nth pattern from pack (stack: pack n -- pattern)
+'nth_pattern { swap nth } def
+
+# Helper: nth bit from pattern (stack: pattern n -- bit)
+'nth_bit { swap nth } def
+
+# Helper: flip bit (0->1, 1->0)
+'flip { 1 swap - abs } def
+
+# Build diagonal howl: (Pack -- HowlPattern)
+'diagonal_howl {
+    dup size 'N ! 0 []      # copy pack, get length, store as N, start with []
+    N 0 do                  # for k in 0..N-1
+        dup k nth_pattern    # get pattern k
+        k nth_bit            # get bit k
+        flip                 # flip it
+        swap push            # add to growing diagonal list
+    loop
+    # Now: [d_N ... d_0] so reverse for order
+    reverse
+} def
+
+# Run diagonalization and show result
+Pack diagonal_howl 'd !
+"Diagonal HowlPattern d:" . d .
+
+# Show that d cannot be in Pack
+# Check d == Pack[k] for any k
+# For each k, compare d to Pack[k]
+"Checking for contradiction:" .
+
+Pack size 'N !
+N 0 do
+    Pack k nth_pattern 'patt !
+    d k nth_bit 'd_bit !
+    patt k nth_bit 'pk_bit !
+    "Comparing bit k=" k . ": d_bit=" d_bit . ", pack_bit=" pk_bit .
+    d_bit pk_bit != if
+        "Found d differs from pack at bit k=" k . " (good: contradiction achieved)" .
+    else
+        "At k=" k . "bits match (shouldn't happen for diagonal)" .
+    endif
+loop
+
+# If d differs from every pattern in its own diagonal position, it's not in the pack
+"Therefore, diagonal HowlPattern d is not present in Pack. (Uncountability proved)" .

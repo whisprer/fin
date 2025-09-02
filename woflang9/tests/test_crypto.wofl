@@ -1,0 +1,2 @@
+"hello" to_hex from_hex "hello" expect_eq
+"woflang" base64_encode base64_decode "woflang" expect_eq

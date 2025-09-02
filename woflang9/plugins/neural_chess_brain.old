@@ -1,0 +1,267 @@
+// Place this as: plugins/neural_chess_brain.hpp
+
+// neural_chess_brain.hpp - Neural Network Brain for Chess
+// RNN/CNN/LSTM + GAN system for WofLang Chess
+
+#pragma once
+#include <vector>
+#include <memory>
+#include <random>
+#include <algorithm>
+#include <cmath>
+#include <functional>
+#include <chrono>
+#include <atomic>
+#include <iomanip>
+
+namespace woflang {
+
+// Forward declaration
+class ChessBoard;
+enum class Color : uint8_t;
+
+// Activation functions
+inline float tanh_activation(float x) { return std::tanh(x); }
+inline float relu_activation(float x) { return std::max(0.0f, x); }
+inline float sigmoid_activation(float x) { return 1.0f / (1.0f + std::exp(-x)); }
+
+// Neural Clock for timing cycles
+class NeuralClock {
+private:
+    float cycle_duration_;
+    std::chrono::steady_clock::time_point last_tick_;
+    
+public:
+    NeuralClock(float cycle_duration) 
+        : cycle_duration_(cycle_duration), last_tick_(std::chrono::steady_clock::now()) {}
+    
+    bool tick() {
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration<float>(now - last_tick_).count();
+        if (elapsed >= cycle_duration_) {
+            last_tick_ = now;
+            return true;
+        }
+        return false;
+    }
+};
+
+// Cellular Automata Interface for neural dynamics
+class CAInterface {
+private:
+    size_t width_, height_;
+    std::vector<std::vector<float>> cells_;
+    std::vector<std::function<float(const std::vector<float>&)>> update_rules_;
+    std::mt19937 rng_;
+    
+public:
+    CAInterface(size_t width, size_t height) 
+        : width_(width), height_(height), rng_(std::random_device{}()) {
+        
+        // Initialize cells with random values
+        cells_.resize(height_);
+        for (auto& row : cells_) {
+            row.resize(width_);
+            for (auto& cell : row) {
+                cell = std::uniform_real_distribution<float>(-1.0f, 1.0f)(rng_);
+            }
+        }
+        
+        // Define update rules
+        update_rules_.emplace_back([](const std::vector<float>& neighbors) {
+            float sum = 0.0f;
+            for (float n : neighbors) sum += n;
+            return (sum > 2.0f && sum < 3.5f) ? 1.0f : 0.0f;
+        });
+        
+        update_rules_.emplace_back([](const std::vector<float>& neighbors) {
+            float sum = 0.0f;
+            for (float n : neighbors) sum += n;
+            return sum / neighbors.size();
+        });
+        
+        update_rules_.emplace_back([](const std::vector<float>& neighbors) {
+            if (neighbors.empty()) return 0.0f;
+            float center = neighbors[neighbors.size() / 2];
+            float sum = 0.0f;
+            for (float n : neighbors) sum += n;
+            float avg = sum / neighbors.size();
+            return (center + avg) / 2.0f;
+        });
+    }
+    
+    void update() {
+        auto new_cells = cells_;
+        size_t rule_idx = std::uniform_int_distribution<size_t>(0, update_rules_.size() - 1)(rng_);
+        
+        for (size_t i = 1; i < height_ - 1; i++) {
+            for (size_t j = 1; j < width_ - 1; j++) {
+                std::vector<float> neighbors = {
+                    cells_[i-1][j-1], cells_[i-1][j], cells_[i-1][j+1],
+                    cells_[i][j-1],   cells_[i][j],   cells_[i][j+1],
+                    cells_[i+1][j-1], cells_[i+1][j], cells_[i+1][j+1]
+                };
+                new_cells[i][j] = update_rules_[rule_idx](neighbors);
+            }
+        }
+        cells_ = std::move(new_cells);
+    }
+    
+    std::vector<float> get_state() const {
+        std::vector<float> state;
+        state.reserve(width_ * height_);
+        for (const auto& row : cells_) {
+            for (float cell : row) {
+                state.push_back(cell);
+            }
+        }
+        return state;
+    }
+};
+
+// RNN (Recurrent Neural Network)
+class RNN {
+private:
+    std::vector<float> hidden_state_;
+    std::vector<std::vector<float>> weights_;
+    std::vector<std::vector<float>> discriminator_weights_;
+    size_t input_dim_, hidden_size_;
+    std::mt19937 rng_;
+    
+public:
+    RNN(size_t input_dim, size_t hidden_size) 
+        : input_dim_(input_dim), hidden_size_(hidden_size), rng_(std::random_device{}()) {
+        
+        hidden_state_.resize(hidden_size_, 0.0f);
+        
+        // Initialize weights
+        weights_.resize(hidden_size_);
+        discriminator_weights_.resize(hidden_size_);
+        
+        std::uniform_real_distribution<float> dist(-0.1f, 0.1f);
+        
+        for (size_t i = 0; i < hidden_size_; i++) {
+            weights_[i].resize(input_dim_ + hidden_size_);
+            discriminator_weights_[i].resize(hidden_size_);
+            
+            for (auto& w : weights_[i]) {
+                w = dist(rng_);
+            }
+            for (auto& w : discriminator_weights_[i]) {
+                w = dist(rng_);
+            }
+        }
+    }
+    
+    std::vector<float> forward(const std::vector<float>& input) {
+        std::vector<float> output(hidden_size_);
+        
+        for (size_t i = 0; i < hidden_size_; i++) {
+            float sum = 0.0f;
+            
+            // Input weights
+            for (size_t j = 0; j < input.size() && j < input_dim_; j++) {
+                sum += input[j] * weights_[i][j];
+            }
+            
+            // Hidden state weights
+            for (size_t j = 0; j < hidden_size_; j++) {
+                sum += hidden_state_[j] * weights_[i][input_dim_ + j];
+            }
+            
+            output[i] = tanh_activation(sum);
+        }
+        
+        hidden_state_ = output;
+        return output;
+    }
+    
+    float discriminate(const std::vector<float>& state) const {
+        float sum = 0.0f;
+        for (size_t i = 0; i < hidden_size_ && i < state.size(); i++) {
+            for (size_t j = 0; j < hidden_size_ && j < discriminator_weights_[i].size(); j++) {
+                sum += state[j] * discriminator_weights_[i][j];
+            }
+        }
+        return sigmoid_activation(sum);
+    }
+    
+    // Getters for training
+    std::vector<std::vector<float>>& get_weights() { return weights_; }
+    std::vector<std::vector<float>>& get_discriminator_weights() { return discriminator_weights_; }
+    const std::vector<float>& get_hidden_state() const { return hidden_state_; }
+};
+
+// CNN (Convolutional Neural Network)
+class CNN {
+private:
+    std::vector<std::vector<std::vector<float>>> filters_;
+    std::vector<std::vector<float>> feature_maps_;
+    std::vector<std::vector<std::vector<float>>> discriminator_filters_;
+    size_t num_filters_, input_rows_, input_cols_;
+    std::mt19937 rng_;
+    
+public:
+    CNN(size_t num_filters, size_t input_rows, size_t input_cols)
+        : num_filters_(num_filters), input_rows_(input_rows), input_cols_(input_cols), rng_(std::random_device{}()) {
+        
+        std::uniform_real_distribution<float> dist(-0.1f, 0.1f);
+        
+        // Initialize filters (3x3 kernels)
+        filters_.resize(num_filters_);
+        discriminator_filters_.resize(num_filters_);
+        feature_maps_.resize(num_filters_);
+        
+        for (size_t f = 0; f < num_filters_; f++) {
+            filters_[f].resize(3);
+            discriminator_filters_[f].resize(3);
+            feature_maps_[f].resize(input_rows_ * input_cols_, 0.0f);
+            
+            for (size_t i = 0; i < 3; i++) {
+                filters_[f][i].resize(3);
+                discriminator_filters_[f][i].resize(3);
+                for (size_t j = 0; j < 3; j++) {
+                    filters_[f][i][j] = dist(rng_);
+                    discriminator_filters_[f][i][j] = dist(rng_);
+                }
+            }
+        }
+    }
+    
+    std::vector<std::vector<float>> forward(const std::vector<std::vector<float>>& input) {
+        size_t rows = input.size();
+        size_t cols = rows > 0 ? input[0].size() : 0;
+        
+        std::vector<std::vector<float>> new_feature_maps(num_filters_);
+        
+        for (size_t f = 0; f < num_filters_; f++) {
+            new_feature_maps[f].resize(rows * cols, 0.0f);
+            
+            // Convolution with 3x3 filter
+            for (size_t i = 1; i < rows - 1; i++) {
+                for (size_t j = 1; j < cols - 1; j++) {
+                    float sum = 0.0f;
+                    for (size_t di = 0; di < 3; di++) {
+                        for (size_t dj = 0; dj < 3; dj++) {
+                            size_t row_idx = i + di - 1;
+                            size_t col_idx = j + dj - 1;
+                            if (row_idx < rows && col_idx < cols) {
+                                sum += input[row_idx][col_idx] * filters_[f][di][dj];
+                            }
+                        }
+                    }
+                    size_t out_idx = i * cols + j;
+                    if (out_idx < new_feature_maps[f].size()) {
+                        new_feature_maps[f][out_idx] = relu_activation(sum);
+                    }
+                }
+            }
+        }
+        
+        feature_maps_ = new_feature_maps;
+        return new_feature_maps;
+    }
+    
+    float discriminate(const std::vector<std::vector<float>>& feature_maps) const {
+        float sum = 0.0f;
+        for (size_t f = 0; f < std::min

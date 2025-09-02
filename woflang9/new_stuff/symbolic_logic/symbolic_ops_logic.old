@@ -1,0 +1,393 @@
+// symbolic_ops.c[[ - WofLang Symbolic Mathematics Plugin
+// Plugin API Version: 1.0
+// Extends woflang with mathematical logic and symbolic operations
+
+#pragma once
+#include "woflang_plugin_api.h"
+
+// ============================================================================
+// PLUGIN METADATA
+// ============================================================================
+
+PLUGIN_INFO {
+    .name = "symbolic_ops",
+    .version = "1.0.0",
+    .description = "Mathematical logic symbols and symbolic operations for woflang",
+    .author = "WofLabs Mathematical Division",
+    .dependencies = {"core_tokenizer"},
+    .exports = {
+        "parse_symbolic",
+        "evaluate_logic_expr", 
+        "symbolic_transform",
+        "proof_validator"
+    }
+};
+
+// ============================================================================
+// SYMBOLIC TOKEN TYPES
+// ============================================================================
+
+typedef enum {
+    // Core woflang tokens (inherited)
+    WOF_IDENTIFIER = 0x0000,
+    WOF_NUMBER = 0x0001,
+    WOF_STRING = 0x0002,
+    WOF_WHITESPACE = 0x0003,
+    
+    // Mathematical Logic Quantifiers
+    WOF_FORALL = 0x0100,           // ∀ (for all)
+    WOF_EXISTS = 0x0101,           // ∃ (there exists)
+    WOF_EXISTS_UNIQUE = 0x0102,    // ∃! (there exists unique)
+    
+    // Set Theory Operations
+    WOF_ELEMENT_OF = 0x0200,       // ∈ (element of)
+    WOF_NOT_ELEMENT_OF = 0x0201,   // ∉ (not element of)
+    WOF_SUBSET = 0x0202,           // ⊆ (subset)
+    WOF_PROPER_SUBSET = 0x0203,    // ⊂ (proper subset)
+    WOF_SUPERSET = 0x0204,         // ⊇ (superset)
+    WOF_UNION = 0x0205,            // ∪ (union)
+    WOF_INTERSECTION = 0x0206,     // ∩ (intersection)
+    WOF_COMPLEMENT = 0x0207,       // ∁ (complement)
+    WOF_CARTESIAN = 0x0208,        // × (cartesian product)
+    
+    // Logic Connectives
+    WOF_IMPLIES = 0x0300,          // → (implies)
+    WOF_IFF = 0x0301,              // ↔ (if and only if)
+    WOF_LOGICAL_AND = 0x0302,      // ∧ (logical and)
+    WOF_LOGICAL_OR = 0x0303,       // ∨ (logical or)
+    WOF_LOGICAL_NOT = 0x0304,      // ¬ (logical not)
+    WOF_LOGICAL_XOR = 0x0305,      // ⊕ (exclusive or)
+    
+    // Comparison and Relations
+    WOF_LESS_EQUAL = 0x0400,       // ≤ (less than or equal)
+    WOF_GREATER_EQUAL = 0x0401,    // ≥ (greater than or equal)
+    WOF_NOT_EQUAL = 0x0402,        // ≠ (not equal)
+    WOF_EQUIVALENT = 0x0403,       // ≡ (equivalent)
+    WOF_APPROXIMATELY = 0x0404,    // ≈ (approximately)
+    WOF_PRECEDES = 0x0405,         // ≺ (precedes)
+    WOF_SUCCEEDS = 0x0406,         // ≻ (succeeds)
+    WOF_CONGRUENT = 0x0407,        // ≅ (congruent)
+    
+    // Special Mathematical Constants
+    WOF_INFINITY = 0x0500,         // ∞ (infinity)
+    WOF_ALEPH_NULL = 0x0501,       // ℵ₀ (aleph null)
+    WOF_ALEPH = 0x0502,            // ℵ (general aleph)
+    WOF_EMPTYSET = 0x0503,         // ∅ (empty set)
+    
+    // Proof Theory Symbols
+    WOF_THEREFORE = 0x0600,        // ∴ (therefore)
+    WOF_BECAUSE = 0x0601,          // ∵ (because)
+    WOF_QED = 0x0602,              // ∎ (QED)
+    WOF_CONTRADICTION = 0x0603,    // ⊥ (contradiction)
+    WOF_TURNSTILE = 0x0604,        // ⊢ (proves/entails)
+    WOF_DOUBLE_TURNSTILE = 0x0605, // ⊨ (models/satisfies)
+    
+    // Lambda Calculus and Functions
+    WOF_LAMBDA = 0x0700,           // λ (lambda)
+    WOF_MAPSTO = 0x0701,           // ↦ (maps to)
+    WOF_COMPOSITION = 0x0702,      // ∘ (function composition)
+    
+    // WofLang Proof Keywords
+    WOF_AXIOM = 0x0800,
+    WOF_THEOREM = 0x0801,
+    WOF_PROOF = 0x0802,
+    WOF_LEMMA = 0x0803,
+    WOF_COROLLARY = 0x0804,
+    WOF_DEFINITION = 0x0805,
+    WOF_TYPE = 0x0806,
+    WOF_FUNCTION = 0x0807,
+    WOF_WHERE = 0x0808,
+    WOF_LET = 0x0809,
+    WOF_ASSERT = 0x080A,
+    WOF_ASSUME = 0x080B,
+    WOF_RETURN = 0x080C,
+    WOF_BY = 0x080D,
+    WOF_CASE = 0x080E,
+    WOF_INDUCTION = 0x080F
+} WofSymbolicTokenType;
+
+// ============================================================================
+// SYMBOL MAPPING TABLES
+// ============================================================================
+
+static const SymbolMapping unicode_symbols[] = {
+    // Quantifiers
+    {U"∀", WOF_FORALL, "forall"},
+    {U"∃", WOF_EXISTS, "exists"},
+    {U"∃!", WOF_EXISTS_UNIQUE, "exists_unique"},
+    
+    // Set operations
+    {U"∈", WOF_ELEMENT_OF, "in"},
+    {U"∉", WOF_NOT_ELEMENT_OF, "not_in"},
+    {U"⊆", WOF_SUBSET, "subset"},
+    {U"⊂", WOF_PROPER_SUBSET, "proper_subset"},
+    {U"⊇", WOF_SUPERSET, "superset"},
+    {U"∪", WOF_UNION, "union"},
+    {U"∩", WOF_INTERSECTION, "intersection"},
+    {U"∁", WOF_COMPLEMENT, "complement"},
+    {U"×", WOF_CARTESIAN, "cross"},
+    
+    // Logic connectives
+    {U"→", WOF_IMPLIES, "implies"},
+    {U"↔", WOF_IFF, "iff"},
+    {U"∧", WOF_LOGICAL_AND, "and"},
+    {U"∨", WOF_LOGICAL_OR, "or"},
+    {U"¬", WOF_LOGICAL_NOT, "not"},
+    {U"⊕", WOF_LOGICAL_XOR, "xor"},
+    
+    // Comparisons
+    {U"≤", WOF_LESS_EQUAL, "le"},
+    {U"≥", WOF_GREATER_EQUAL, "ge"},
+    {U"≠", WOF_NOT_EQUAL, "ne"},
+    {U"≡", WOF_EQUIVALENT, "equiv"},
+    {U"≈", WOF_APPROXIMATELY, "approx"},
+    {U"≺", WOF_PRECEDES, "precedes"},
+    {U"≻", WOF_SUCCEEDS, "succeeds"},
+    {U"≅", WOF_CONGRUENT, "congruent"},
+    
+    // Special constants
+    {U"∞", WOF_INFINITY, "infinity"},
+    {U"ℵ₀", WOF_ALEPH_NULL, "aleph_0"},
+    {U"ℵ", WOF_ALEPH, "aleph"},
+    {U"∅", WOF_EMPTYSET, "emptyset"},
+    
+    // Proof symbols
+    {U"∴", WOF_THEREFORE, "therefore"},
+    {U"∵", WOF_BECAUSE, "because"},
+    {U"∎", WOF_QED, "qed"},
+    {U"⊥", WOF_CONTRADICTION, "contradiction"},
+    {U"⊢", WOF_TURNSTILE, "proves"},
+    {U"⊨", WOF_DOUBLE_TURNSTILE, "models"},
+    
+    // Functions
+    {U"λ", WOF_LAMBDA, "lambda"},
+    {U"↦", WOF_MAPSTO, "mapsto"},
+    {U"∘", WOF_COMPOSITION, "compose"},
+    
+    // ASCII alternatives
+    {U"->", WOF_IMPLIES, "implies"},
+    {U"<->", WOF_IFF, "iff"},
+    {U"<=", WOF_LESS_EQUAL, "le"},
+    {U">=", WOF_GREATER_EQUAL, "ge"},
+    {U"!=", WOF_NOT_EQUAL, "ne"},
+    {U"==", WOF_EQUIVALENT, "equiv"},
+    {U"~=", WOF_APPROXIMATELY, "approx"},
+    {U"/\\", WOF_LOGICAL_AND, "and"},
+    {U"\\/", WOF_LOGICAL_OR, "or"},
+    {U"~", WOF_LOGICAL_NOT, "not"}
+};
+
+static const KeywordMapping woflang_keywords[] = {
+    {"axiom", WOF_AXIOM},
+    {"theorem", WOF_THEOREM},
+    {"proof", WOF_PROOF},
+    {"lemma", WOF_LEMMA},
+    {"corollary", WOF_COROLLARY},
+    {"definition", WOF_DEFINITION},
+    {"type", WOF_TYPE},
+    {"function", WOF_FUNCTION},
+    {"where", WOF_WHERE},
+    {"let", WOF_LET},
+    {"assert", WOF_ASSERT},
+    {"assume", WOF_ASSUME},
+    {"return", WOF_RETURN},
+    {"by", WOF_BY},
+    {"case", WOF_CASE},
+    {"induction", WOF_INDUCTION}
+};
+
+// ============================================================================
+// PLUGIN CORE FUNCTIONS
+// ============================================================================
+
+// Parse symbolic mathematical expressions
+PLUGIN_EXPORT WofTokenStream* parse_symbolic(const char* input, WofParseOptions* opts) {
+    WofTokenStream* stream = wof_create_token_stream();
+    
+    // Convert UTF-8 input to UTF-32 for processing
+    u32string* u32_input = utf8_to_utf32(input);
+    
+    // Enhanced tokenization with symbol awareness
+    WofToken* tokens = symbolic_tokenize_simd(u32_input);
+    
+    // Classify and annotate tokens
+    for (WofToken* tok = tokens; tok != NULL; tok = tok->next) {
+        WofSymbolicTokenType sym_type = classify_symbolic_token(tok);
+        tok->type = sym_type;
+        tok->semantic_info = get_symbol_semantics(sym_type);
+    }
+    
+    wof_append_tokens(stream, tokens);
+    return stream;
+}
+
+// Evaluate logical expressions
+PLUGIN_EXPORT WofValue* evaluate_logic_expr(WofAST* expr, WofContext* ctx) {
+    switch (expr->type) {
+        case WOF_FORALL:
+            return evaluate_quantifier_forall(expr, ctx);
+        case WOF_EXISTS:
+            return evaluate_quantifier_exists(expr, ctx);
+        case WOF_IMPLIES:
+            return evaluate_implication(expr->left, expr->right, ctx);
+        case WOF_IFF:
+            return evaluate_biconditional(expr->left, expr->right, ctx);
+        case WOF_LOGICAL_AND:
+            return evaluate_conjunction(expr->operands, ctx);
+        case WOF_LOGICAL_OR:
+            return evaluate_disjunction(expr->operands, ctx);
+        case WOF_LOGICAL_NOT:
+            return evaluate_negation(expr->operand, ctx);
+        default:
+            return wof_error("Unknown logical operator");
+    }
+}
+
+// Transform symbolic expressions
+PLUGIN_EXPORT WofAST* symbolic_transform(WofAST* expr, WofTransformRule* rule) {
+    // Apply symbolic transformations like:
+    // - De Morgan's laws: ¬(A ∧ B) ≡ (¬A ∨ ¬B)
+    // - Implication elimination: A → B ≡ ¬A ∨ B  
+    // - Double negation: ¬¬A ≡ A
+    // - Quantifier exchange: ¬∀x P(x) ≡ ∃x ¬P(x)
+    
+    switch (rule->type) {
+        case TRANSFORM_DE_MORGAN:
+            return apply_de_morgan(expr);
+        case TRANSFORM_IMPLICATION_ELIM:
+            return eliminate_implication(expr);
+        case TRANSFORM_DOUBLE_NEGATION:
+            return eliminate_double_negation(expr);
+        case TRANSFORM_QUANTIFIER_EXCHANGE:
+            return exchange_quantifiers(expr);
+        default:
+            return expr; // No transformation applied
+    }
+}
+
+// Validate proof structures
+PLUGIN_EXPORT WofProofResult* proof_validator(WofProof* proof, WofAxiomSet* axioms) {
+    WofProofResult* result = wof_create_proof_result();
+    
+    // Check each step in the proof
+    for (WofProofStep* step = proof->steps; step != NULL; step = step->next) {
+        WofValidationResult step_result = validate_proof_step(step, axioms);
+        wof_append_validation(result, step_result);
+        
+        if (!step_result.valid) {
+            result->overall_valid = false;
+            result->error_step = step;
+            break;
+        }
+    }
+    
+    return result;
+}
+
+// ============================================================================
+// SIMD-ENHANCED SYMBOLIC TOKENIZER
+// ============================================================================
+
+static inline WofToken* symbolic_tokenize_simd(const u32string* input) {
+    const size_t n = input->length;
+    const size_t stride = 8; // AVX2 stride
+    size_t i = 0;
+    
+    WofToken* token_head = NULL;
+    WofToken* current_token = NULL;
+    
+    // Multi-character symbol detection patterns
+    __m256i exists_unique = _mm256_set_epi32(0, 0, 0, 0, 0, 0, U'!', U'∃');
+    __m256i arrow_right = _mm256_set_epi32(0, 0, 0, 0, 0, 0, U'>', U'-');
+    __m256i arrow_left_right = _mm256_set_epi32(0, 0, 0, 0, 0, U'>', U'-', U'<');
+    
+    while (i + stride <= n) {
+        __m256i chars = _mm256_loadu_si256((const __m256i*)&input->data[i]);
+        
+        // Check for multi-character symbols
+        uint32_t exists_unique_mask = check_pattern_match(chars, exists_unique);
+        uint32_t arrow_mask = check_pattern_match(chars, arrow_right);
+        uint32_t biconditional_mask = check_pattern_match(chars, arrow_left_right);
+        
+        // Process detected symbols
+        if (exists_unique_mask) {
+            WofToken* tok = create_symbolic_token(U"∃!", WOF_EXISTS_UNIQUE, i);
+            append_token(&token_head, &current_token, tok);
+            i += 2;
+            continue;
+        }
+        
+        if (biconditional_mask) {
+            WofToken* tok = create_symbolic_token(U"<->", WOF_IFF, i);
+            append_token(&token_head, &current_token, tok);
+            i += 3;
+            continue;
+        }
+        
+        if (arrow_mask) {
+            WofToken* tok = create_symbolic_token(U"->", WOF_IMPLIES, i);
+            append_token(&token_head, &current_token, tok);
+            i += 2;
+            continue;
+        }
+        
+        // Single character processing
+        char32_t c = input->data[i];
+        WofSymbolicTokenType sym_type = lookup_unicode_symbol(c);
+        
+        if (sym_type != WOF_IDENTIFIER) {
+            WofToken* tok = create_symbolic_token_char(c, sym_type, i);
+            append_token(&token_head, &current_token, tok);
+            i += 1;
+        } else {
+            // Regular identifier/number tokenization
+            i += tokenize_alphanumeric(&token_head, &current_token, input, i);
+        }
+    }
+    
+    // Handle remaining characters
+    while (i < n) {
+        i += tokenize_remaining_chars(&token_head, &current_token, input, i);
+    }
+    
+    return token_head;
+}
+
+// ============================================================================
+// PLUGIN INITIALIZATION
+// ============================================================================
+
+PLUGIN_INIT {
+    // Register symbol mappings
+    wof_register_symbols(unicode_symbols, ARRAY_SIZE(unicode_symbols));
+    wof_register_keywords(woflang_keywords, ARRAY_SIZE(woflang_keywords));
+    
+    // Register transformation rules
+    wof_register_transform_rule("de_morgan", apply_de_morgan);
+    wof_register_transform_rule("impl_elim", eliminate_implication);
+    wof_register_transform_rule("double_neg", eliminate_double_negation);
+    wof_register_transform_rule("quant_exchange", exchange_quantifiers);
+    
+    // Register built-in axioms
+    wof_register_axiom("excluded_middle", "∀P: P ∨ ¬P");
+    wof_register_axiom("non_contradiction", "∀P: ¬(P ∧ ¬P)");
+    wof_register_axiom("identity", "∀P: P → P");
+    
+    wof_log_info("Symbolic operations plugin initialized successfully");
+    return WOF_PLUGIN_SUCCESS;
+}
+
+PLUGIN_CLEANUP {
+    wof_unregister_all_symbols();
+    wof_unregister_all_transforms();
+    wof_unregister_all_axioms();
+    wof_log_info("Symbolic operations plugin cleaned up");
+}
+
+// ============================================================================
+// PLUGIN METADATA FOOTER
+// ============================================================================
+
+PLUGIN_VERSION_CHECK(WOF_API_VERSION_1_0)
+PLUGIN_LICENSE("MIT")
+PLUGIN_HOMEPAGE("https://woflabs.dev/plugins/symbolic_ops")

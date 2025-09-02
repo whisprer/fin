@@ -1,0 +1,4 @@
+# Test quantum operations
+|0⟩ H measure
+drop  # Result is random, just check it works
+"PASS"

@@ -1,0 +1,81 @@
+#include "src/core/woflang.hpp
+#include <iostream>
+#include <stack>   
+
+"Welcome to Woflang!" print
+"╦ ╦┌─┐┌─┐┬  ┌─┐┌┐┌┌─┐
+║║║│ │├┤ │  ├─┤││││ ┬
+╚╩╝└─┘└  ┴─┘┴ ┴┘└┘└─┘ v1.1.0
+A Unicode-native stack language"
+print
+cr
+
+extern "C" void init_plugin(woflang::WoflangInterpreter::OpTable*);
+
+    int main() {
+        using namespace woflang;
+
+        WoflangInterpreter::OpTable ops;
+        init_plugin(&ops); // Load chess_ops
+
+        std::stack<WofValue> stack;
+
+        // Example: Check legal_move("e2e4")
+        WofValue move;
+        move.s = "e2e4";
+        stack.push(chess_move);
+
+        ops["legal_move"](stack);
+
+        WofValue result = stack.top();
+        std::cout << "legal_move('e2e4') result: " << result.d << std::endl;
+
+        // Example: FEN parsing test
+        WofValue fen;
+        fen.s = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+        stack.push(fen);
+
+        ops["fen_parse"](stack);
+
+        WofValue parsed = stack.top();
+        std::cout << "fen_parse result: " << parsed.s << std::endl;
+
+        return 0;
+    }
+
+    extern "C" void init_plugin(woflang::WoflangInterpreter::OpTable*);
+
+    int main() {
+        using namespace woflang;
+
+        WoflangInterpreter::OpTable ops;
+        init_plugin(&ops); // Load symbolic_logic_ops
+
+        std::stack<WofValue> stack;
+
+        // Example: Evaluate (true implies false)
+        WofValue a, b;
+        a.d = 1.0; // true
+        b.d = 0.0; // false
+
+        stack.push(a);
+        stack.push(b);
+
+        ops["implies"](stack);
+
+        WofValue result = stack.top();
+        std::cout << "true implies false result: " << result.d << std::endl;
+
+        // Example: Demonstrate tautology
+        ops["tautology_demo"](stack);
+        WofValue taut = stack.top();
+        std::cout << "Tautology result pushed: " << taut.d << std::endl;
+
+        return 0;
+    }
+
+# Final message
+"This has been a test of he new modules:
+wofl's NeuralChess and Symbolic Logic
+Thanks for exploring Woflang!" print
+cr

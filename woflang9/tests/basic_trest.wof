@@ -1,0 +1,6 @@
+# tests/basic_test.wof - Basic functionality test
+# Test basic arithmetic
+2 3 + 5 =
+
+# If the comparison is true, push "PASS", otherwise "FAIL"
+"PASS" "FAIL" if

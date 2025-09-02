@@ -1,0 +1,5 @@
+# Test Unicode support
+π 2 * 6.28 > 
+"PASS"
+"FAIL"
+if

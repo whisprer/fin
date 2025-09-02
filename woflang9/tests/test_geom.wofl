@@ -1,0 +1,23 @@
+# rotate (1,0) by 90° -> (0,1)
+1 0 90 rotate2d
+1 1e-6 expect_approx   # y' ~= 1
+0 1e-6 expect_approx   # x' ~= 0
+
+# translate (2,3) by (5,-2) -> (7,1)
+2 3 5 -2 translate2d
+1 1e-12 expect_approx  # y' = 1
+7 1e-12 expect_approx  # x' = 7
+
+# scale (4, -2) by (0.5, 3) -> (2, -6)
+4 -2 0.5 3 scale2d
+-6 1e-12 expect_approx
+2 1e-12 expect_approx
+
+# reflect (3, -4) across X -> (3,4) and across Y -> (-3,-4)
+3 -4 reflect_x
+4 1e-12 expect_approx
+3 1e-12 expect_approx
+
+3 -4 reflect_y
+-4 1e-12 expect_approx
+-3 1e-12 expect_approx

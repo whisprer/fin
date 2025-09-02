@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/code/woflang2/woflang9/build/cmake_install.cmake",
+		"D:/code/woflang2/woflang9/build/plugins/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

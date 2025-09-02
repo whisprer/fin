@@ -1,0 +1,5 @@
+# Test stack operations
+1 2 3 dup 3 = 
+"PASS"
+"FAIL"
+if

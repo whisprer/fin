@@ -1,0 +1,3 @@
+0 0 10 mandelbrot          10 0 expect_approx
+0 0 100 mandelbrot         100 0 expect_approx
+0 0 0 0 50 julia           50 0 expect_approx

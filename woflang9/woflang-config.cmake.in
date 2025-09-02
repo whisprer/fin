@@ -1,0 +1,38 @@
+@PACKAGE_INIT@
+
+# Woflang CMake Configuration File
+# This file helps other projects find and use Woflang
+
+# Version information
+set(woflang_VERSION @PROJECT_VERSION@)
+set(woflang_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(woflang_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(woflang_VERSION_PATCH @PROJECT_VERSION_PATCH@)
+
+# Compute installation prefix relative to this file
+get_filename_component(_IMPORT_PREFIX "${CMAKE_CURRENT_LIST_FILE}" PATH)
+get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
+get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
+get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
+if(_IMPORT_PREFIX STREQUAL "/")
+  set(_IMPORT_PREFIX "")
+endif()
+
+# Include directories
+set(woflang_INCLUDE_DIRS "${_IMPORT_PREFIX}/include")
+set(woflang_LIBRARY_DIRS "${_IMPORT_PREFIX}/lib")
+
+# Libraries
+set(woflang_LIBRARIES woflang_core)
+
+# Plugin directory
+set(woflang_PLUGIN_DIR "${_IMPORT_PREFIX}/bin/plugins")
+
+# Compiler features
+set(woflang_CXX_STANDARD 23)
+
+# Check required components
+check_required_components(woflang)
+
+# Cleanup
+set(_IMPORT_PREFIX)
