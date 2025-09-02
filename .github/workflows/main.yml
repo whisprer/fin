@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # Keep GitHub Actions up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps(actions)"
+    # Optionally require security updates only:
+    # allow:
+    #   - dependency-type: "direct"
+
+  # Uncomment or add more ecosystems as needed later
+  # - package-ecosystem: "pip"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #   open-pull-requests-limit: 10
+  #   commit-message:
+  #     prefix: "deps(python)"
