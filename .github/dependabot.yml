@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # Keep GitHub Actions dependencies up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps(actions)"
+    # Optionally require only direct security updates:
+    # allow:
+    #   - dependency-type: "direct"
+
+  # Add other ecosystems later (examples below)
+  # - package-ecosystem: "cargo"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #   open-pull-requests-limit: 10
+  #   commit-message:
+  #     prefix: "deps(rust)"
