@@ -80,7 +80,7 @@ Features Built-In:
 -Progress reporting - Colored output with status
 -Integrity verification - Multiple hash algorithms
 
-Your final output will be a single file-utils-ii_installer.exe that contains everything needed for distribution - no external dependencies required, fren!
+Your final output will be a single file-utils-ii_installer.exe that contains everything needed for distribution - no external dependencies required!
 
 
 # Master build script for complete file-utils-ii self-extracting installer
